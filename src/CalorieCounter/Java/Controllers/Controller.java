@@ -1,6 +1,6 @@
 package CalorieCounter.Java.Controllers;
 
-import CalorieCounter.Java.Model.DatabaseObjects.Food;
+import CalorieCounter.Java.Model.Food;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import javafx.fxml.FXML;

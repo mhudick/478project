@@ -1,4 +1,4 @@
-package CalorieCounter.Java.Model.WebObjects;
+package CalorieCounter.Java.Model;
 
 /**
  * Created by Philip on 9/25/2015.
