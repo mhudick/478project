@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <GridPane
-        fx:controller="CalorieCounter.Java.Controller"
+        fx:controller="CalorieCounter.Java.Controllers.Controller"
         xmlns:fx="http://javafx.com/fxml"
         alignment="center"
         hgap="10"

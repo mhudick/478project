@@ -1,5 +1,7 @@
 package CalorieCounter.Java;
 
+
+import CalorieCounter.Java.Controllers.DataManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Nutrient Assistant");
         primaryStage.setScene(scene);
         primaryStage.show();
+        DataManager dw = new DataManager();
     }
 
     public static void main(String[] args) {
