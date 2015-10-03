@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Phil on 9/28/2015.
  */
 public class DataManager {
-
+    //testing
     private final String DB_NAME = "MyData";
 
     private final String USER_TABLE =
