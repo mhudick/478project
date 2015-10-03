@@ -7,6 +7,15 @@ import java.util.List;
  */
 public class Measures {
     private String label,eqv,qty,value;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLabel() {
         return label;
@@ -41,6 +50,6 @@ public class Measures {
     }
     @Override
     public String toString(){
-        return "Label: "+getLabel()+"\neqv: "+getEqv()+"\nqty: "+getQty()+"\nValue: "+getValue();
+        return "ID: "+getId()+"\nLabel: "+getLabel()+"\neqv: "+getEqv()+"\nqty: "+getQty()+"\nValue: "+getValue();
     }
 }

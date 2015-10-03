@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Philip on 9/30/2015.
  */
 public class Nutrient {
-    private String nutrient_id,name,group,unit,value,dp,se;
+    private String nutrient_id,name,group,unit,value;
     private List<Measures> measures = new ArrayList<>();
 
     public String getNutrient_id() {
@@ -51,21 +51,6 @@ public class Nutrient {
         this.value = value;
     }
 
-    public String getDp() {
-        return dp;
-    }
-
-    public void setDp(String dp) {
-        this.dp = dp;
-    }
-
-    public String getSe() {
-        return se;
-    }
-
-    public void setSe(String se) {
-        this.se = se;
-    }
 
     public List<Measures> getMeasures() {
         return measures;
@@ -79,8 +64,8 @@ public class Nutrient {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("\nNutrient ID: "+getNutrient_id()+"\nName: "+getName()+
-            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()+
-            "\nDp: "+getDp()+"\nse: "+getSe()+"\nMeasures:\n");
+            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()
+                +"\nMeasures:\n");
         Iterator<Measures> iterator = measures.iterator();
         while(iterator.hasNext()){
             sb.append("\n"+iterator.next().toString()+"\n");
