@@ -1,8 +1,8 @@
 package CalorieCounter.Java.Controllers;
 import CalorieCounter.Java.Model.Food;
+import CalorieCounter.Java.Model.Nutrient;
 import CalorieCounter.Java.Model.Recipe;
 
-import java.beans.*;
 import java.io.File;
 import java.sql.*;
 import java.sql.Statement;
@@ -52,10 +52,10 @@ public class DataManager {
 
     private final String NUTRIENT_TABLE =
             "CREATE TABLE nutrient"+
-            "(id INT PRIMARY KEY NOT NULL,"+
+            "(id INT PRIMARY KEY,"+
             "food_id INT NOT NULL,"+//Foreign key from food table
             "name TEXT NOT NULL,"+
-            "fg TEXT NOT NULL,"+
+            "food_group TEXT NOT NULL,"+
             "unit TEXT NOT NULL,"+
             "value NUMBER NOT NULL," +
             "FOREIGN KEY(food_id) REFERENCES food(id));";
@@ -74,16 +74,40 @@ public class DataManager {
 
     public DataManager(){
         if(!new File(DB_NAME+".db").exists()){
-            createTables(DB_NAME);
+            createDatabase(DB_NAME);
             System.out.println("Created database successfully");
         }
     }
 
     public void saveFood(Food food){
-    //Food passed as param
-        //save food to db
-        //retrieve food id and nutrient list
-        //nutrient save(id, nutrient list);
+        Statement statement;
+        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(" +
+                food.getNbdno()+",\""+food.getName()+"\",\""+food.getFg()+"\");";
+        System.out.println(sql);
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
+            statement = conn.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        Iterator<Nutrient> iterator = food.getNutrients().iterator();
+        while (iterator.hasNext()){
+            saveNutrient(iterator.next(),food.getNbdno());
+        }
+    }
+    public void saveNutrient(Nutrient nutrient, int foodId){
+        Statement statement;
+        String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+nutrient.getName()+
+                "\",\""+nutrient.getGroup()+"\",\""+nutrient.getUnit()+"\",\""+nutrient.getValue()+"\");";
+        System.out.println(sql);
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
+            statement = conn.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Food loadFood(){
@@ -98,7 +122,7 @@ public class DataManager {
         return null;
     }
 
-    public void createTables(String dbName){
+    public void createDatabase(String dbName){
         Statement statement;
 
         List<String> tables = new ArrayList<>();

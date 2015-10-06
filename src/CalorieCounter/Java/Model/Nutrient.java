@@ -8,15 +8,25 @@ import java.util.List;
  * Created by Philip on 9/30/2015.
  */
 public class Nutrient {
-    private String nutrient_id,name,group,unit,value;
-    //private List<Measures> measures = new ArrayList<>();
+    private String name,group,unit,value;
+    private int id,foodId;
 
-    public String getNutrient_id() {
-        return nutrient_id;
+//private List<Measures> measures = new ArrayList<>();
+
+    public int getId() {
+        return id;
     }
 
-    public void setNutrient_id(String nutrient_id) {
-        this.nutrient_id = nutrient_id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
     }
 
     public String getName() {
@@ -63,7 +73,7 @@ public class Nutrient {
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("\nNutrient ID: "+getNutrient_id()+"\nName: "+getName()+
+        sb.append("\nNutrient ID: "+getId()+"\nName: "+getName()+
             "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()+"\n");
         /*
         Iterator<Measures> iterator = measures.iterator();

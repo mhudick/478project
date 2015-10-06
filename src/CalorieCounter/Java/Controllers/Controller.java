@@ -1,9 +1,6 @@
 package CalorieCounter.Java.Controllers;
 
 import CalorieCounter.Java.Model.Food;
-import CalorieCounter.Java.Model.SearchResponse;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -26,9 +23,9 @@ public class Controller {
     private void initialize(){
         //Takes text from field and uses it as the search term. Then it sets textArea.
         myButton.setOnAction((event) ->{
-            WebManager webManager = new WebManager();
-            Food food = webManager.webFoodDetails("18541");
-            System.out.println(food.toString());
+            Food food = new WebManager().webFoodDetails("18541");
+            DataManager dataManager = new DataManager();
+            dataManager.saveFood(food);
         });
     }
 }
