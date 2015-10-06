@@ -6,7 +6,7 @@ package CalorieCounter.Java.Model;
 public class SearchResponseItem {
     private String ndbno;
     private String name;
-    private String foodGroup;
+    private String group;
 
     public String getNdbno() {
         return ndbno;
@@ -24,16 +24,16 @@ public class SearchResponseItem {
         this.name = name;
     }
 
-    public String getFoodGroup() {
-        return foodGroup;
+    public String getGroup() {
+        return group;
     }
 
-    public void setFoodGroup(String foodGroup) {
-        this.foodGroup = foodGroup;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     @Override
     public String toString(){
-        return "NDB no: "+getNdbno()+"\nName: "+getName()+"\nFood Group: "+getFoodGroup();
+        return "NDB no: "+getNdbno()+"\nName: "+getName()+"\nFood Group: "+getGroup();
     }
 }

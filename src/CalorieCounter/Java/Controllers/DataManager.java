@@ -46,7 +46,7 @@ public class DataManager {
 
     private final String FOOD_TABLE =
             "CREATE TABLE food("+
-            "id INTEGER PRIMARY KEY,"+
+            "ndbno INTEGER PRIMARY KEY,"+
             "name TEXT NOT NULL,"+
             "food_group TEXT NOT NULL);";
 
@@ -59,7 +59,7 @@ public class DataManager {
             "unit TEXT NOT NULL,"+
             "value NUMBER NOT NULL," +
             "FOREIGN KEY(food_id) REFERENCES food(id));";
-
+/*
     private final String MEASURE_TABLE =
             "CREATE TABLE measure("+
             "id INT PRIMARY KEY NOT NULL," +
@@ -69,6 +69,7 @@ public class DataManager {
             "qty NUMBER,"+
             "value NUMBER," +
             "FOREIGN KEY(nutrient_id) REFERENCES nutrient(id));";
+*/
     Connection conn  = null;
 
     public DataManager(){
@@ -79,7 +80,10 @@ public class DataManager {
     }
 
     public void saveFood(Food food){
-
+    //Food passed as param
+        //save food to db
+        //retrieve food id and nutrient list
+        //nutrient save(id, nutrient list);
     }
 
     public Food loadFood(){
@@ -104,7 +108,6 @@ public class DataManager {
         tables.add(RECIPE_FOOD_TABLE);
         tables.add(FOOD_TABLE);
         tables.add(NUTRIENT_TABLE);
-        tables.add(MEASURE_TABLE);
 
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+dbName+".db");
@@ -119,4 +122,5 @@ public class DataManager {
             System.exit(0);
         }
     }
+
 }

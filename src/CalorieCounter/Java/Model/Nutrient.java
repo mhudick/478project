@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Nutrient {
     private String nutrient_id,name,group,unit,value;
-    private List<Measures> measures = new ArrayList<>();
+    //private List<Measures> measures = new ArrayList<>();
 
     public String getNutrient_id() {
         return nutrient_id;
@@ -51,7 +51,7 @@ public class Nutrient {
         this.value = value;
     }
 
-
+/*
     public List<Measures> getMeasures() {
         return measures;
     }
@@ -59,17 +59,17 @@ public class Nutrient {
     public void setMeasures(List<Measures> measures) {
         this.measures = measures;
     }
-
+*/
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("\nNutrient ID: "+getNutrient_id()+"\nName: "+getName()+
-            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()
-                +"\nMeasures:\n");
+            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()+"\n");
+        /*
         Iterator<Measures> iterator = measures.iterator();
         while(iterator.hasNext()){
             sb.append("\n"+iterator.next().toString()+"\n");
-        }
+        }*/
         return sb.toString();
     }
 }

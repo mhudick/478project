@@ -5,12 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by Philip on 9/24/2015.
+ * Created by Philip on 10/6/2015.
  */
 public class SearchResponse {
-    /*A Search will return a list of items. This object holds information
-    about the list and contains a LinkedList of the items as well.
-     */
     private String q,group, sort;
     private List<SearchResponseItem> item = new ArrayList<>();
 
