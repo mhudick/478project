@@ -88,6 +88,7 @@ public class DataManager {
             conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
             statement = conn.createStatement();
             statement.executeUpdate(sql);
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,6 +106,7 @@ public class DataManager {
             conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
             statement = conn.createStatement();
             statement.executeUpdate(sql);
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -140,10 +142,12 @@ public class DataManager {
 
     public void deleteFood(int ndbno){
         String sql = "DELETE FROM food WHERE ndbno = "+ndbno+";";
+        String nutrientSql = "DELETE FROM nutrient WHERE food_id = "+ndbno+";";
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
             Statement statement = conn.createStatement();
             statement.executeUpdate(sql);
+            statement.executeUpdate(nutrientSql);
             conn.close();
         } catch (SQLException e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
