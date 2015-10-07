@@ -46,7 +46,7 @@ public class DataManager {
 
     private final String FOOD_TABLE =
             "CREATE TABLE food("+
-            "ndbno INTEGER PRIMARY KEY,"+
+            "ndbno TEXT PRIMARY KEY,"+
             "name TEXT NOT NULL,"+
             "food_group TEXT NOT NULL);";
 
@@ -81,8 +81,8 @@ public class DataManager {
 
     public void saveFood(Food food){
         Statement statement;
-        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(" +
-                food.getNbdno()+",\""+food.getName()+"\",\""+food.getFg()+"\");";
+        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
+                food.getNbdno()+"\",\""+food.getName()+"\",\""+food.getFg()+"\");";
         System.out.println(sql);
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
@@ -97,7 +97,7 @@ public class DataManager {
             saveNutrient(iterator.next(),food.getNbdno());
         }
     }
-    public void saveNutrient(Nutrient nutrient, int foodId){
+    public void saveNutrient(Nutrient nutrient, String foodId){
         Statement statement;
         String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+nutrient.getName()+
                 "\",\""+nutrient.getGroup()+"\",\""+nutrient.getUnit()+"\",\""+nutrient.getValue()+"\");";
@@ -121,7 +121,7 @@ public class DataManager {
             conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
             statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            food.setNdbno(rs.getInt("ndbno"));
+            food.setNdbno(rs.getString("ndbno"));
             food.setName(rs.getString("name"));
             food.setFg(rs.getString("food_group"));
             List<Nutrient> nutrientList = new ArrayList<>();
@@ -140,14 +140,14 @@ public class DataManager {
         return food;
     }
 
-    public void deleteFood(int ndbno){
-        String sql = "DELETE FROM food WHERE ndbno = "+ndbno+";";
-        String nutrientSql = "DELETE FROM nutrient WHERE food_id = "+ndbno+";";
+    public void deleteFood(String ndbno){
+        String sql = "DELETE FROM food WHERE ndbno = \""+ndbno+"\";";
+        String nutrientSql = "DELETE FROM nutrient WHERE food_id = \""+ndbno+"\";";
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
             Statement statement = conn.createStatement();
-            statement.executeUpdate(sql);
             statement.executeUpdate(nutrientSql);
+            statement.executeUpdate(sql);
             conn.close();
         } catch (SQLException e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

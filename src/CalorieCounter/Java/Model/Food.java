@@ -8,15 +8,14 @@ import java.util.List;
  * Created by Philip on 9/30/2015.
  */
 public class Food{
-    private String name,fg;
-    private int ndbno;
+    private String ndbno, name,fg;
     private List<Nutrient> nutrients = new ArrayList<>();
 
-    public int getNbdno() {
+    public String getNbdno() {
         return ndbno;
     }
 
-    public void setNdbno(int ndbno) {
+    public void setNdbno(String ndbno) {
         this.ndbno = ndbno;
     }
 

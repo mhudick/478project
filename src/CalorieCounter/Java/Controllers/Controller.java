@@ -97,7 +97,7 @@ public class Controller {
         });
 
         deleteButton.setOnAction(event -> {
-            new DataManager().deleteFood(Integer.parseInt(deleteField.getText()));
+            new DataManager().deleteFood(deleteField.getText());
         });
     }
 }
