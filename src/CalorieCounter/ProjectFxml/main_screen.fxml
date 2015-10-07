@@ -8,7 +8,7 @@
 <GridPane
         fx:controller="CalorieCounter.Java.Controllers.Controller"
         xmlns:fx="http://javafx.com/fxml"
-        alignment="center"
+        alignment="TOP_LEFT"
         hgap="10"
         vgap="10"
         styleClass="root">
@@ -19,30 +19,66 @@
 
     <Text id="welcome-text"
           text="Calories"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnIndex="0"
+          GridPane.rowIndex="0"
           GridPane.columnSpan="2"/>
 
-    <Label text="Search:"
-           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          GridPane.columnIndex="0" GridPane.rowIndex="1"
+          GridPane.columnSpan="3">
 
-    <TextField
-            fx:id="searchField"
-            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label text="Search:"/>
+        <TextField fx:id="searchField"/>
+        <Button fx:id="myButton"
+                text="Search"/>
+    </HBox>
 
     <Label text="Results:"
            GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-    <TextArea
-            fx:id="textArea"
+    <TableView
+            fx:id="listView"
             GridPane.columnIndex="1"
-            GridPane.rowIndex="2"/>
-
-    <HBox spacing="10" alignment="bottom_right"
-          GridPane.columnIndex="1" GridPane.rowIndex="4">
-
-        <Button fx:id="myButton"
-                text="Submit"/>
+            GridPane.rowIndex="2"
+            prefHeight="250"
+            prefWidth="650"/>
+    <Button
+        fx:id="refreshButton"
+        text="Refresh"
+            GridPane.rowIndex="1"
+            GridPane.columnIndex="3"/>
+    <ListView
+        fx:id="databaseList"
+        prefWidth="400"
+        GridPane.columnIndex="3"
+        GridPane.rowIndex="2"/>
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          GridPane.columnIndex="3"
+          GridPane.rowIndex="3">
+        <Label text="NDBNO"/>
+        <TextField fx:id="deleteField"/>
+        <Button fx:id="deleteButton"
+                text="Delete"/>
     </HBox>
+
+    <HBox spacing="10" alignment="CENTER_LEFT"
+          GridPane.columnIndex="0" GridPane.rowIndex="6"
+            GridPane.columnSpan="3">
+        <Label text="Enter Ndbno"/>
+        <TextField fx:id="details"/>
+        <Button fx:id="getDetails"
+                text="Details"/>
+        <Button fx:id="saveButton"
+                text="Save"/>
+    </HBox>
+    <Label text="Details"
+           GridPane.columnIndex="0"
+           GridPane.rowIndex="7"/>
+    <TextArea fx:id="textArea"
+              GridPane.rowIndex="7"
+              GridPane.columnIndex="1"/>
+
+
 
     <stylesheets>
         <URL value="@../ProjectCss/Login.css" />

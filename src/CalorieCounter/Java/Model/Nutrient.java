@@ -11,6 +11,14 @@ public class Nutrient {
     private String name,group,unit,value;
     private int id,foodId;
 
+    public Nutrient(int id, int foodId, String name, String group, String unit , String value){
+        this.id = id;
+        this.foodId = foodId;
+        this.name = name;
+        this.group = group;
+        this.unit = unit;
+        this.value = value;
+    }
 //private List<Measures> measures = new ArrayList<>();
 
     public int getId() {

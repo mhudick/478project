@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage)throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../ProjectFxml/main_screen.fxml"));
-        Scene scene = new Scene(root, 450, 425);
+        Scene scene = new Scene(root, 1200, 800);
         primaryStage.setTitle("Nutrient Assistant");
         primaryStage.setScene(scene);
         primaryStage.show();

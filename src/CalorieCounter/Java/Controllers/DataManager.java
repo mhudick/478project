@@ -52,7 +52,7 @@ public class DataManager {
 
     private final String NUTRIENT_TABLE =
             "CREATE TABLE nutrient"+
-            "(id INT PRIMARY KEY,"+
+            "(id INTEGER PRIMARY KEY,"+
             "food_id INT NOT NULL,"+//Foreign key from food table
             "name TEXT NOT NULL,"+
             "food_group TEXT NOT NULL,"+
@@ -102,7 +102,7 @@ public class DataManager {
                 "\",\""+nutrient.getGroup()+"\",\""+nutrient.getUnit()+"\",\""+nutrient.getValue()+"\");";
         System.out.println(sql);
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
+            conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
             statement = conn.createStatement();
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -110,8 +110,45 @@ public class DataManager {
         }
     }
 
-    public Food loadFood(){
-        return null;
+    public Food loadFood(int id){
+        Statement statement;
+        Food food = new Food();
+        String sql = "SELECT * FROM food WHERE ndbno = "+id+";";
+        String nutrientSql = "SELECT * FROM nutrient WHERE food_id = "+id+";";
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+            statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            food.setNdbno(rs.getInt("ndbno"));
+            food.setName(rs.getString("name"));
+            food.setFg(rs.getString("food_group"));
+            List<Nutrient> nutrientList = new ArrayList<>();
+            rs = statement.executeQuery(nutrientSql);
+            while (!rs.isAfterLast()){
+                nutrientList.add(new Nutrient(rs.getInt("id"), rs.getInt("food_id"),rs.getString("name"),rs.getString("food_group"),rs.getString("unit"),rs.getString("value")));
+                rs.next();
+            }
+            food.setNutrients(nutrientList);
+            System.out.println();
+            rs.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return food;
+    }
+
+    public void deleteFood(int ndbno){
+        String sql = "DELETE FROM food WHERE ndbno = "+ndbno+";";
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(sql);
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
     }
 
     public void saveRecipe(Recipe recipe){
@@ -122,6 +159,27 @@ public class DataManager {
         return null;
     }
 
+    public List getFoodList(){
+        String sql = "SELECT ndbno FROM food;";
+        List<String> ls = new ArrayList<>();
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            rs.next();
+            while (!rs.isAfterLast()){
+                ls.add(rs.getString("ndbno"));
+                System.out.println(rs.getString("ndbno"));
+                rs.next();
+            }
+            rs.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return ls;
+    }
     public void createDatabase(String dbName){
         Statement statement;
 
