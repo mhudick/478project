@@ -14,9 +14,10 @@ import java.util.List;
  * Created by Phil on 9/28/2015.
  */
 public class DataManager {
-    //testing
+    //Constant for database file name.
     private final String DB_NAME = "MyData";
 
+    //Constant for sql that creates the tables.
     private final String USER_TABLE =
             "CREATE TABLE user"+
             "(id INTEGER PRIMARY KEY,"+
@@ -60,6 +61,7 @@ public class DataManager {
             "value NUMBER NOT NULL," +
             "FOREIGN KEY(food_id) REFERENCES food(id));";
 /*
+    NOT USED AT THIS POINT
     private final String MEASURE_TABLE =
             "CREATE TABLE measure("+
             "id INT PRIMARY KEY NOT NULL," +
@@ -70,17 +72,19 @@ public class DataManager {
             "value NUMBER," +
             "FOREIGN KEY(nutrient_id) REFERENCES nutrient(id));";
 */
+    //Object that handles http request
     Connection conn  = null;
 
+    //Constructor for DataManager, checks for file if it does not exist it creates it.
     public DataManager(){
         if(!new File(DB_NAME+".db").exists()){
-            createDatabase(DB_NAME);
+            createDatabase(DB_NAME);//Creates tables
             System.out.println("Created database successfully");
         }
     }
-
+    //Pass Food object to this method to save it. Nutrients in the Food's List get saved automatically.
     public void saveFood(Food food){
-        Statement statement;
+        Statement statement;//Statement objects that executes sql.
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
                 food.getNbdno()+"\",\""+food.getName()+"\",\""+food.getFg()+"\");";
         System.out.println(sql);
@@ -94,9 +98,11 @@ public class DataManager {
         }
         Iterator<Nutrient> iterator = food.getNutrients().iterator();
         while (iterator.hasNext()){
-            saveNutrient(iterator.next(),food.getNbdno());
+            saveNutrient(iterator.next(),food.getNbdno());//iterates through nutrients and calls saveNutrient
         }
     }
+    //Called from saveFood method. Saves the nutrients to a table with the food objects primary key.
+    //This enables us to easily recall the nutrient information when we load the Food object.
     public void saveNutrient(Nutrient nutrient, String foodId){
         Statement statement;
         String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+nutrient.getName()+
@@ -111,7 +117,7 @@ public class DataManager {
             e.printStackTrace();
         }
     }
-
+    //When you pass the food id it returns the food object
     public Food loadFood(int id){
         Statement statement;
         Food food = new Food();
@@ -121,25 +127,27 @@ public class DataManager {
             conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
             statement = conn.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            food.setNdbno(rs.getString("ndbno"));
+            food.setNdbno(rs.getString("ndbno"));//These methods set the attributes of the Food object
             food.setName(rs.getString("name"));
             food.setFg(rs.getString("food_group"));
             List<Nutrient> nutrientList = new ArrayList<>();
-            rs = statement.executeQuery(nutrientSql);
+            rs = statement.executeQuery(nutrientSql);//Record set holds the row of data returned by the database.
+            //This loop uses builds the Food object's nutrient list.
             while (!rs.isAfterLast()){
+                //The Nutrient class has a constructor that you can pass the records straight to the object when it is instantiated and adds it to list.
                 nutrientList.add(new Nutrient(rs.getInt("id"), rs.getInt("food_id"),rs.getString("name"),rs.getString("food_group"),rs.getString("unit"),rs.getString("value")));
-                rs.next();
+                rs.next();//Iterates to next row.
             }
-            food.setNutrients(nutrientList);
+            food.setNutrients(nutrientList);//Adds list to the food object.
             System.out.println();
             rs.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return food;
+        return food;//returns food object
     }
-
+    //Deletes food and nutrients associated with the food. Just pass the food id.
     public void deleteFood(String ndbno){
         String sql = "DELETE FROM food WHERE ndbno = \""+ndbno+"\";";
         String nutrientSql = "DELETE FROM nutrient WHERE food_id = \""+ndbno+"\";";
@@ -163,6 +171,7 @@ public class DataManager {
         return null;
     }
 
+    //This method returns a list of the ndbno we could modify this to return various information as we need.
     public List getFoodList(){
         String sql = "SELECT ndbno FROM food;";
         List<String> ls = new ArrayList<>();
@@ -184,9 +193,10 @@ public class DataManager {
         }
         return ls;
     }
+    //This is the method that is responsible for creating the database.
     public void createDatabase(String dbName){
         Statement statement;
-
+        //Creating list to iterate through SQL commands.
         List<String> tables = new ArrayList<>();
         tables.add(USER_TABLE);
         tables.add(USER_RECIPE_TABLE);
@@ -200,7 +210,7 @@ public class DataManager {
             Iterator<String> iterator = tables.iterator();
             while (iterator.hasNext()){
                 statement = conn.createStatement();
-                statement.executeUpdate(iterator.next());
+                statement.executeUpdate(iterator.next());//Executes the SQL
             }
             conn.close();
         } catch (SQLException e) {
