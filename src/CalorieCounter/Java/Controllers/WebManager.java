@@ -17,22 +17,25 @@ import java.net.URL;
 import java.util.List;
 
 public class WebManager {
-    //Key
+    //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
 
+    //This methods handles searching for the foods it returns the Search response as an object.
     public SearchResponse webSearchFoods(String term) {
         String jsonResult = null;
         try {
+            //This is where the url gets sent with the parameters to search for. It comes back as a Json string
             jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=n&max=25&offset=0&api_key=" + API_KEY);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Gson gson = new Gson();
-        JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
+        Gson gson = new Gson();//This object handles converting Json to POJOs.
+        JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);//JsonObject is easier to create the object with
         System.out.println(jsonObject.toString());
-        SearchResponse searchResponse = gson.fromJson(jsonObject.get("list"),SearchResponse.class);
+        SearchResponse searchResponse = gson.fromJson(jsonObject.get("list"),SearchResponse.class);//This is where the jsonObject gets converted to the SearchResponse and returned.
         return searchResponse;
     }
+    //This is the method used to retrieve a Food object from the webserver.
     public Food webFoodDetails(String ndbno){
         String jsonResult = null;
         try {
@@ -42,12 +45,12 @@ public class WebManager {
         }
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
-        jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);
-        Food food = gson.fromJson(jsonObject.get("food"),Food.class);
+        jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);//Get ride of outer data that we do not need.
+        Food food = gson.fromJson(jsonObject.get("food"),Food.class);//Converts JsonObject to Food object
         System.out.println(jsonObject.toString());
-        return food;
+        return food;//Returns Food Object
     }
-    // HTTP GET request
+    //This is a private method that the other methods call once the url is created. It returns the response as a string to the methods above.
     private String sendGet(String url) throws Exception {
         System.out.println("Starting http");
         URL obj = new URL(url);
