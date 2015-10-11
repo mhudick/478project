@@ -1,7 +1,6 @@
 # 478Project
-# Undecided Title for Calorie counter 
-# We can keep a running list of possible names here and decide on one later.
-#
+Undecided Title for Calorie counter 
+We can keep a running list of possible names here and decide on one later.
 
 Library Dependencies:
 
