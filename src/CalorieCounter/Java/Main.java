@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Nutrient Assistant");
         primaryStage.setScene(scene);
         primaryStage.show();
-        DataManager dw = new DataManager();
+        DataManager.checkForDatabase();
     }
 
     public static void main(String[] args) {

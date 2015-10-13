@@ -14,13 +14,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.swing.text.TabableView;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class Controller {
 
-    SearchResponse currentList;
+    SearchResponse currentSearchList;
     Food currentFood;
     @FXML
     private TextField searchField;
@@ -62,42 +64,49 @@ public class Controller {
         //Takes text from field and uses it as the search term. Then it sets textArea.
         myButton.setOnAction((event) ->{
 
-            currentList = new WebManager().webSearchFoods(searchField.getText());
-            System.out.println(currentList.toString());
+            currentSearchList = WebManager.webSearchFoods(searchField.getText());
+            System.out.println(currentSearchList.toString());
 
-            ObservableList<SearchResponseItem> data = FXCollections.observableArrayList(currentList.getItem());
-            System.out.println(data.toString());
+            TableColumn<SearchResponseItem, String> idColumn = new TableColumn<SearchResponseItem,String>("NDB no");
+            TableColumn<SearchResponseItem, String> nameColumn = new TableColumn<SearchResponseItem,String>("Name");
+            TableColumn<SearchResponseItem, String> groupColumn = new TableColumn<SearchResponseItem,String>("Food Group");
 
-            TableColumn ndbno = new TableColumn("NDBNO");
-            ndbno.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("ndbno"));
-            TableColumn name = new TableColumn("Name");
-            name.setCellValueFactory(new PropertyValueFactory<SearchResponseItem,String>("name"));
-            TableColumn fg = new TableColumn("Good Group");
-            fg.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("group"));
+            idColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("ndbno"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("name"));
+            groupColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("group"));
 
+            listView.getColumns().addAll(idColumn,nameColumn,groupColumn);
+            ObservableList<SearchResponseItem> data = FXCollections.observableArrayList(currentSearchList.getItem());
             listView.setItems(data);
-            listView.getColumns().addAll(ndbno, name, fg);
         });
+
         getDetails.setOnAction(event -> {
-
-            currentFood = new WebManager().webFoodDetails(details.getText());
+            currentFood = WebManager.webFoodDetails(details.getText());
             textArea.setText(currentFood.toString());
-
         });
 
         saveButton.setOnAction(event1 -> {
-            new DataManager().saveFood(currentFood);
+            currentFood.saveFood();
         });
 
         refreshButton.setOnAction(event -> {
-            List ls = new DataManager().getFoodList();
-            System.out.println(ls.toString());
-            ObservableList<String> data = FXCollections.observableArrayList(ls);
-            databaseList.setItems(data);
+            String sql = "SELECT name FROM food;";
+            List<String> list = new ArrayList();
+            ResultSet rs = DataManager.retrieveData(sql);
+            try {
+                while(!rs.isAfterLast()){
+                    list.add(rs.getString("name"));
+                    rs.next();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            ObservableList<String> observableList = FXCollections.observableArrayList(list);
+            databaseList.setItems(observableList);
         });
 
         deleteButton.setOnAction(event -> {
-            new DataManager().deleteFood(deleteField.getText());
+
         });
     }
 }

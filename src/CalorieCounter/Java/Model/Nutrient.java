@@ -1,5 +1,7 @@
 package CalorieCounter.Java.Model;
 
+import CalorieCounter.Java.Controllers.DataManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -78,16 +80,20 @@ public class Nutrient {
         this.measures = measures;
     }
 */
+
+    public void saveNutrient(String foodId){
+        String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+
+                getName()+ "\",\""+getGroup()+"\",\""+getUnit()+"\",\""+getValue()+"\");";
+        DataManager.updateData(sql);
+    }
+
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
+
         sb.append("\nNutrient ID: "+getId()+"\nName: "+getName()+
             "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()+"\n");
-        /*
-        Iterator<Measures> iterator = measures.iterator();
-        while(iterator.hasNext()){
-            sb.append("\n"+iterator.next().toString()+"\n");
-        }*/
+
         return sb.toString();
     }
 }

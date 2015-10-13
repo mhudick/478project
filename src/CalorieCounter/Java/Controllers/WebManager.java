@@ -6,7 +6,6 @@ package CalorieCounter.Java.Controllers;
 
 import CalorieCounter.Java.Model.Food;
 import CalorieCounter.Java.Model.SearchResponse;
-import CalorieCounter.Java.Model.SearchResponseItem;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -14,18 +13,21 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
+
 
 public class WebManager {
     //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
 
+    //private constructor prevents unnecessary instantiation
+    private WebManager(){}
+
     //This methods handles searching for the foods it returns the Search response as an object.
-    public SearchResponse webSearchFoods(String term) {
+    public static SearchResponse webSearchFoods(String term) {
         String jsonResult = null;
         try {
             //This is where the url gets sent with the parameters to search for. It comes back as a Json string
-            jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=n&max=25&offset=0&api_key=" + API_KEY);
+            jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=r&max=100&offset=0&api_key=" + API_KEY);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,8 +37,9 @@ public class WebManager {
         SearchResponse searchResponse = gson.fromJson(jsonObject.get("list"),SearchResponse.class);//This is where the jsonObject gets converted to the SearchResponse and returned.
         return searchResponse;
     }
+
     //This is the method used to retrieve a Food object from the webserver.
-    public Food webFoodDetails(String ndbno){
+    public static Food webFoodDetails(String ndbno){
         String jsonResult = null;
         try {
             jsonResult = sendGet("http://api.nal.usda.gov/ndb/reports/?ndbno="+ndbno+"&type=f&format=json&api_key=" + API_KEY);
@@ -50,8 +53,9 @@ public class WebManager {
         System.out.println(jsonObject.toString());
         return food;//Returns Food Object
     }
+
     //This is a private method that the other methods call once the url is created. It returns the response as a string to the methods above.
-    private String sendGet(String url) throws Exception {
+    private static String sendGet(String url) throws Exception {
         System.out.println("Starting http");
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
