@@ -56,10 +56,12 @@ public class Food{
         DataManager.updateData(sql);//Static method to execute update.
 
         //This iterates through nutrient list
+        List<String> nutrientsSql = new ArrayList<>();
         Iterator<Nutrient> iterator = getNutrients().iterator();
         while(iterator.hasNext()){
-            iterator.next().saveNutrient(getNbdno());
+            nutrientsSql.add(iterator.next().getNutrientSql(getNbdno()));
         }
+        DataManager.executeSqlList(nutrientsSql);
     }
 
     //STILL WORKING ON THIS ONE!!!

@@ -81,10 +81,10 @@ public class Nutrient {
     }
 */
 
-    public void saveNutrient(String foodId){
+    public String getNutrientSql(String foodId){
         String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+
                 getName()+ "\",\""+getGroup()+"\",\""+getUnit()+"\",\""+getValue()+"\");";
-        DataManager.updateData(sql);
+        return sql;
     }
 
     @Override
