@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.*?>
+
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+    <HBox>
+        <TextField fx:id="searchTextField"></TextField>
+        <Button fx:id="searchButton" text="Search" onAction="#handleSearchButtonAction"></Button>
+        <ChoiceBox fx:id="menuChoiceBox" value="Home" onAction="#handleMenuChoiceBoxAction">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Home"/>
+                    <String fx:value="Foods"/>
+                    <String fx:value="Recipes"/>
+                    <String fx:value="Daily Tracker"/>
+                    <String fx:value="Weigh-in"/>
+                    <String fx:value="Exercise"/>
+                    <String fx:value="Change User"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+    </HBox>
+    <StackPane fx:id="contentStackPane">
+
+    </StackPane>
+</fx:root>

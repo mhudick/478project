@@ -1,24 +1,28 @@
-import util.DataManager;
+import controllers.*;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import util.DataManager;
 
 public class Main extends Application {
 
+    private static final int APP_WIDTH = 400; //pixels
+    private static final int APP_HEIGHT = 600; //pixels
+
     @Override
     public void start(Stage primaryStage)throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/main_screen.fxml"));
-
-        Scene scene = new Scene(root, 1200, 800);
-        primaryStage.setTitle("Nutrient Assistant");
+        //load user interface
+        Home root = new Home();
+        Scene scene = new Scene(root, APP_WIDTH, APP_HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.show();
-        DataManager.checkForDatabase();
     }
 
     public static void main(String[] args) {
+        //load application database
+        DataManager.checkForDatabase();
+
+        //load user interface
         launch(args);
     }
 }
