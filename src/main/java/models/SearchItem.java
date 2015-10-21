@@ -3,7 +3,7 @@ package models;
 /**
  * Created by Philip on 9/25/2015.
  */
-public class SearchResponseItem {
+public class SearchItem {
     private String ndbno;
     private String name;
     private String group;

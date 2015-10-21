@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class SearchResponse {
     private String q,group, sort;
-    private List<SearchResponseItem> item = new ArrayList<>();
+    private List<SearchItem> item = new ArrayList<>();
 
     public String getQ() {
         return q;
@@ -35,11 +35,11 @@ public class SearchResponse {
         this.sort = sort;
     }
 
-    public List<SearchResponseItem> getItem() {
+    public List<SearchItem> getItem() {
         return item;
     }
 
-    public void setItem(List<SearchResponseItem> item) {
+    public void setItem(List<SearchItem> item) {
         this.item = item;
     }
 
@@ -47,7 +47,7 @@ public class SearchResponse {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Search Term: "+getQ()+"\nGroup: "+getGroup()+"\nSort: "+getSort()+"\nItems Returned:\n");
-        Iterator<SearchResponseItem> iterator = getItem().iterator();
+        Iterator<SearchItem> iterator = getItem().iterator();
         while(iterator.hasNext()){
             sb.append(iterator.next().toString()+"\n");
         }

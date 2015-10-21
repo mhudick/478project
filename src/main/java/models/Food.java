@@ -1,6 +1,6 @@
 package models;
 
-import util.DataManager;
+import util.database.DatabaseManager;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +14,12 @@ import java.util.List;
 public class Food{
     private String ndbno, name,fg;
     private List<Nutrient> nutrients = new ArrayList<>();
+
+    public Food(String ndbno, String name, String fg){
+        this.ndbno = ndbno;
+        this.name = name;
+        this.fg = fg;
+    }
 
     public String getNbdno() {
         return ndbno;
@@ -45,51 +51,6 @@ public class Food{
 
     public void setNutrients(List<Nutrient> nutrients) {
         this.nutrients = nutrients;
-    }
-
-    public void saveFood(){
-
-        //String created from attributes of the object
-        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
-                getNbdno()+"\",\""+getName()+"\",\""+getFg()+"\");";
-
-        //This iterates through nutrient list
-        List<String> nutrientsSql = new ArrayList<>();
-        Iterator<Nutrient> iterator = getNutrients().iterator();
-        while(iterator.hasNext()){
-            nutrientsSql.add(iterator.next().getNutrientSql(getNbdno()));//Passes food id to the nutrient as foreign key
-        }
-        
-        //Executes sql as background thread so the GUI is unaffected.
-        new Thread() {
-            // runnable for that thread
-            public void run() {
-                DataManager.updateData(sql);//Static method to execute update.
-                DataManager.executeSqlList(nutrientsSql);
-            }
-        }.start();
-    }
-
-    //STILL WORKING ON THIS ONE!!!
-    public void loadFood(){
-        String sql = "SELECT * FROM food WHERE ndbno = "+getNbdno()+";";
-        String nutrientSql = "SELECT * FROM nutrient WHERE food_id = "+getNbdno()+";";
-        List<Nutrient> nutrientList = new ArrayList<>();
-        ResultSet resultSet = DataManager.retrieveData(sql);
-        try {
-            setNdbno(resultSet.getString("ndbno"));//These methods set the attributes of the Food object
-            setName(resultSet.getString("name"));
-            setFg(resultSet.getString("food_group"));
-            resultSet = DataManager.retrieveData(nutrientSql);
-            while (!resultSet.isAfterLast()){
-                //The Nutrient class has a constructor that you can pass the records straight to the object when it is instantiated and adds it to list.
-                nutrientList.add(new Nutrient(resultSet.getInt("id"), resultSet.getInt("food_id"),resultSet.getString("name"),resultSet.getString("food_group"),resultSet.getString("unit"),resultSet.getString("value")));
-                resultSet.next();//Iterates to next row.
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        setNutrients(nutrientList);
     }
 
     @Override

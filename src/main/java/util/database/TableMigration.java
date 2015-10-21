@@ -1,4 +1,4 @@
-package util;
+package util.database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Philip on 10/11/2015.
  */
-public class TableHelper {
+public class TableMigration {
     //Constant for sql that creates the tables.
     private static final String USER_TABLE =
             "CREATE TABLE user"+
@@ -16,7 +16,7 @@ public class TableHelper {
 
     private static final String USER_RECIPE_TABLE =
             "CREATE TABLE user_recipe("+
-                    "id INT PRIMARY KEY NOT NULL,"+
+                    "id INTEGER PRIMARY KEY NOT NULL,"+
                     "user_id INT NOT NULL,"+
                     "recipe_id INT NOT NULL,"+
                     "FOREIGN KEY(user_id) REFERENCES user(id)," +
@@ -52,7 +52,7 @@ public class TableHelper {
                     "FOREIGN KEY(food_id) REFERENCES food(id));";
 
     //private constructor prevents unnecessary instantiation
-    private TableHelper(){
+    private TableMigration(){
 
     }
 

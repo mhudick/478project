@@ -1,4 +1,4 @@
-package util;
+package util.database;
 
 import java.io.File;
 import java.sql.*;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by Phil on 9/28/2015.
  */
-public class DataManager {
+public class DatabaseManager {
     //Constant for database file name.
     private static final String DB_NAME = "MyData";
 
@@ -17,19 +17,19 @@ public class DataManager {
     private static Connection conn  = null;
 
     //private constructor prevents unnecessary instantiation
-    private DataManager(){
+    private DatabaseManager(){
     }
 
     //Checks for database and creates one if it does not exist
     public static void checkForDatabase(){
         if(!new File(DB_NAME+".db").exists()){
-            executeSqlList(TableHelper.getTables());
+            executeBatch(TableMigration.getTables());
             System.out.println("Created database successfully");
         }
     }
 
     //Executes a sql update string
-    public static void updateData(String sql){
+    public static void executeStatment(String sql){
         Statement statement;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
@@ -42,7 +42,7 @@ public class DataManager {
     }
 
     //Executes a List of sql statements
-    public static void executeSqlList(List sqlList){
+    public static void executeBatch(List<String> sqlList){
         Statement statement;
         Iterator<String> iterator = sqlList.iterator();
         try {
@@ -59,7 +59,7 @@ public class DataManager {
     }
 
     //Returns the result set of a sql query
-    public static ResultSet retrieveData(String sql){
+    public static ResultSet getResultSet(String sql){
         ResultSet rs = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");

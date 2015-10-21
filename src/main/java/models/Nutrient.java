@@ -4,10 +4,10 @@ package models;
  * Created by Philip on 9/30/2015.
  */
 public class Nutrient {
-    private String name,group,unit,value;
-    private int id,foodId;
+    private String foodId, name,group,unit,value;
+    private int id;
 
-    public Nutrient(int id, int foodId, String name, String group, String unit , String value){
+    public Nutrient(int id, String foodId, String name, String group, String unit , String value){
         this.id = id;
         this.foodId = foodId;
         this.name = name;
@@ -15,7 +15,6 @@ public class Nutrient {
         this.unit = unit;
         this.value = value;//Equivalent of 100 grams.
     }
-//private List<Measures> measures = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -25,11 +24,11 @@ public class Nutrient {
         this.id = id;
     }
 
-    public int getFoodId() {
+    public String getFoodId() {
         return foodId;
     }
 
-    public void setFoodId(int foodId) {
+    public void setFoodId(String foodId) {
         this.foodId = foodId;
     }
 
@@ -63,12 +62,6 @@ public class Nutrient {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public String getNutrientSql(String foodId){
-        String sql = "INSERT OR REPLACE INTO nutrient(food_id,name, food_group, unit, value) values("+foodId+",\""+
-                getName()+ "\",\""+getGroup()+"\",\""+getUnit()+"\",\""+getValue()+"\");";
-        return sql;
     }
 
     @Override

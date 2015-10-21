@@ -1,8 +1,7 @@
 package controllers;
 
 import models.Food;
-import models.SearchResponse;
-import models.SearchResponseItem;
+import models.SearchItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,17 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import util.DataManager;
-import util.WebManager;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import util.web.WebAccess;
+import util.web.WebAccessImpl;
 import java.util.List;
 
 public class Controller {
-
-    SearchResponse currentSearchList;
+    WebAccess webAccess = new WebAccessImpl();
+    List<SearchItem> searchList;
     Food currentFood;
     @FXML
     private TextField searchField;
@@ -30,7 +25,7 @@ public class Controller {
     private Button myButton;
 
     @FXML
-    private TableView<SearchResponseItem> listView;
+    private TableView<SearchItem> listView;
 
     @FXML
     private TextArea textArea;
@@ -62,46 +57,32 @@ public class Controller {
     private void initialize(){
         //Takes text from field and uses it as the search term. Then it sets textArea.
         myButton.setOnAction((event) ->{
+            List<SearchItem> searchItemList = webAccess.searchForFood(searchField.getText());
+            System.out.println(searchItemList.toString());
 
-            currentSearchList = WebManager.webSearchFoods(searchField.getText());
-            System.out.println(currentSearchList.toString());
+            TableColumn<SearchItem, String> idColumn = new TableColumn<SearchItem,String>("NDB no");
+            TableColumn<SearchItem, String> nameColumn = new TableColumn<SearchItem,String>("Name");
+            TableColumn<SearchItem, String> groupColumn = new TableColumn<SearchItem,String>("Food Group");
 
-            TableColumn<SearchResponseItem, String> idColumn = new TableColumn<SearchResponseItem,String>("NDB no");
-            TableColumn<SearchResponseItem, String> nameColumn = new TableColumn<SearchResponseItem,String>("Name");
-            TableColumn<SearchResponseItem, String> groupColumn = new TableColumn<SearchResponseItem,String>("Food Group");
-
-            idColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("ndbno"));
-            nameColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("name"));
-            groupColumn.setCellValueFactory(new PropertyValueFactory<SearchResponseItem, String>("group"));
+            idColumn.setCellValueFactory(new PropertyValueFactory<SearchItem, String>("ndbno"));
+            nameColumn.setCellValueFactory(new PropertyValueFactory<SearchItem, String>("name"));
+            groupColumn.setCellValueFactory(new PropertyValueFactory<SearchItem, String>("group"));
 
             listView.getColumns().addAll(idColumn, nameColumn, groupColumn);
-            ObservableList<SearchResponseItem> data = FXCollections.observableArrayList(currentSearchList.getItem());
+            ObservableList<SearchItem> data = FXCollections.observableArrayList(searchItemList);
             listView.setItems(data);
         });
 
         getDetails.setOnAction(event -> {
-            currentFood = WebManager.webFoodDetails(details.getText());
-            textArea.setText(currentFood.toString());
+
         });
 
         saveButton.setOnAction(event1 -> {
-            currentFood.saveFood();
+
         });
 
         refreshButton.setOnAction(event -> {
-            String sql = "SELECT name FROM food;";
-            List<String> list = new ArrayList();
-            ResultSet rs = DataManager.retrieveData(sql);
-            try {
-                while(!rs.isAfterLast()){
-                    list.add(rs.getString("name"));
-                    rs.next();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            ObservableList<String> observableList = FXCollections.observableArrayList(list);
-            databaseList.setItems(observableList);
+
         });
 
         deleteButton.setOnAction(event -> {
