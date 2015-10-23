@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by Philip on 10/17/2015.
  */
-public class NutrientManager{
+public class NutrientData {
 
     public List<Nutrient> getNutrientList(String ndbno) {
         String sql = "SELECT * FROM nutrient WHERE ndbno = \'"+ndbno+"\';";
@@ -39,9 +39,10 @@ public class NutrientManager{
         Iterator<Nutrient> iterator = list.iterator();
         while(iterator.hasNext()){
             currentNutrient = iterator.next();
-            sql = "INSERT OR REPLACE INTO nutrient(id, food_id, name, food_group, unit, value) " +
-                    "VALUES("+currentNutrient.getId()+","+currentNutrient.getFoodId()+","+currentNutrient.getName()+","
-                    +currentNutrient.getGroup()+","+currentNutrient.getUnit()+","+currentNutrient.getValue()+");";
+            sql = "INSERT OR REPLACE INTO nutrient(food_id, name, food_group, unit, value) " +
+                    "VALUES(\'"+currentNutrient.getFoodId()+"\',\'"+currentNutrient.getName()+"\',\'"
+                    +currentNutrient.getGroup()+"\',\'"+currentNutrient.getUnit()+"\',"+currentNutrient.getValue()+");";
+            System.out.println(sql);
             sqlList.add(sql);
         }
         DatabaseManager.executeBatch(sqlList);

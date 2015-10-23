@@ -6,6 +6,7 @@ package util.web;
 
 import controllers.MessageBox;
 import models.Food;
+import models.Nutrient;
 import models.SearchItem;
 import models.SearchResponse;
 import com.google.gson.Gson;
@@ -14,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -56,6 +58,13 @@ public class WebAccessImpl implements WebAccess{
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
         jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);//Get ride of outer data that we do not need.
         Food food = gson.fromJson(jsonObject.get("food"),Food.class);//Converts JsonObject to Food object
+
+        //Set food id for nutrient objects
+        Iterator<Nutrient> iterator = food.getNutrients().iterator();
+        while(iterator.hasNext()){
+            iterator.next().setFoodId(food.getNbdno());
+        }
+
         System.out.println(jsonObject.toString());
         return food;//Returns Food Object
     }

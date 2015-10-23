@@ -10,12 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import util.database.DataAccess;
+import util.database.DataAccessImpl;
 import util.web.WebAccess;
 import util.web.WebAccessImpl;
 import java.util.List;
 
 public class Controller {
     WebAccess webAccess = new WebAccessImpl();
+    DataAccess dataAccess = new DataAccessImpl();
     List<SearchItem> searchList;
     Food currentFood;
     @FXML
@@ -74,11 +77,12 @@ public class Controller {
         });
 
         getDetails.setOnAction(event -> {
-
+            currentFood = webAccess.getFood(details.getText());
+            textArea.setText(currentFood.toString());
         });
 
         saveButton.setOnAction(event1 -> {
-
+            dataAccess.saveFood(currentFood);
         });
 
         refreshButton.setOnAction(event -> {

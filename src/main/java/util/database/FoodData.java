@@ -10,10 +10,11 @@ import java.util.List;
 /**
  * Created by Philip on 10/17/2015.
  */
-public class FoodManager {
+public class FoodData {
 
-    public Food getFood(String ndbno) {
+    public static Food getFood(String ndbno) {
         String sql = "SELECT * FROM food WHERE ndbno = "+ndbno+";";
+        NutrientData nutrientData = new NutrientData();
         Food food = null;
 
         ResultSet resultSet = DatabaseManager.getResultSet(sql);
@@ -25,18 +26,19 @@ public class FoodManager {
             e.printStackTrace();
         }
 
+        food.setNutrients(nutrientData.getNutrientList(ndbno));
         return food;
     }
 
 
-    public List<Food> getAllFoods() {
+    public static List<Food> getAllFoods() {
         String sql = "SELECT * FROM food;";
         List<Food> list = new ArrayList<>();
         ResultSet resultSet = DatabaseManager.getResultSet(sql);
         try {
             while(!resultSet.isAfterLast()){
                 System.out.println(resultSet.getString("ndbno"));
-                list.add(new Food(resultSet.getString("ndbno"),resultSet.getString("name"),resultSet.getString("food_group")));
+                list.add(getFood(resultSet.getString("ndbno")));
                 resultSet.next();
             }
         } catch (SQLException e) {
@@ -47,28 +49,31 @@ public class FoodManager {
     }
 
 
-    public void saveFood(Food food) {
+    public static void saveFood(Food food) {
         //String created from attributes of the object
+        NutrientData nutrientData = new NutrientData();
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
                 food.getNbdno()+"\",\""+food.getName()+"\",\""+food.getFg()+"\");";
         //This iterates through nutrient list
 
+        DatabaseManager.executeStatment(sql);
+        nutrientData.saveNutrientList(food.getNutrients());
         //Executes sql as background thread so the GUI is unaffected.
+        /*
         new Thread() {
             // runnable for that thread
             public void run() {
-                DatabaseManager.executeStatment(sql);//Static method to execute update.
+                //Static method to execute update.
             }
         }.start();
+        */
     }
 
 
-    public void deleteFood(String ndbno) {
+    public static void deleteFood(String ndbno) {
         String foodSql = "DELETE FROM food WHERE ndbno = \'"+ndbno+"\';";
-        String nutrientSql = "DELETE FROM nutrient WHERE food_id = \'"+ndbno+"\';";
-        List<String> list = new ArrayList<>();
-        list.add(foodSql);
-        list.add(nutrientSql);
-        DatabaseManager.executeBatch(list);
+        NutrientData nutrientData = new NutrientData();
+        nutrientData.deleteNutrientList(ndbno);
+        DatabaseManager.executeStatment(foodSql);
     }
 }
