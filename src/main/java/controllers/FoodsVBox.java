@@ -5,6 +5,7 @@
 
 package controllers;
 
+import models.Food;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
@@ -22,4 +23,23 @@ public class FoodsVBox extends VBox {
             System.out.println(e.toString());
         }
     }
+
+    public void addFoods(){
+        //this method was created for testing
+        getChildren().add(new FoodCard());
+    }
+
+    public void addFoods(Food[] foodArray){
+        removeFoods();
+        for(Food food : foodArray){
+            FoodCard foodCard = new FoodCard();
+            foodCard.setFoodName(food.getName());
+            getChildren().add(new FoodCard());
+        }
+    }
+
+    public void removeFoods(){
+        getChildren().removeAll();
+    }
+
 }

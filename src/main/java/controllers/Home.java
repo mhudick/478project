@@ -64,7 +64,9 @@ public class Home extends VBox {
                 contentStackPane.getChildren().add(new UserSummary());
                 break;
             case FOODS:
-                contentStackPane.getChildren().add(new FoodsVBox());
+                FoodsVBox foodsVBox = new FoodsVBox();
+                foodsVBox.addFoods();
+                contentStackPane.getChildren().add(foodsVBox);
                 break;
             case RECIPES:
                 contentStackPane.getChildren().add(new RecipesVBox());
