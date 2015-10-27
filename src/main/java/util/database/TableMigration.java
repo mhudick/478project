@@ -50,6 +50,12 @@ public class TableMigration {
                     "unit TEXT NOT NULL,"+
                     "value NUMBER NOT NULL," +
                     "FOREIGN KEY(food_id) REFERENCES food(id));";
+    private static final String DAILY_COUNTER_TABLE =
+            "CREATE TABLE daily_counter"+
+                    "(id INTEGER PRIMARY KEY,"+
+                    "runningTotal NUMBER ,"+
+                    "overBudget BOOLEAN ,"+
+                    "daysNotOverBudget INT);";
 
     //private constructor prevents unnecessary instantiation
     private TableMigration(){
@@ -65,6 +71,7 @@ public class TableMigration {
         tables.add(RECIPE_FOOD_TABLE);
         tables.add(FOOD_TABLE);
         tables.add(NUTRIENT_TABLE);
+        tables.add(DAILY_COUNTER_TABLE);
 
         return tables;
     }

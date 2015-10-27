@@ -1,16 +1,28 @@
 package models;
 
+import util.database.DataAccess;
+import util.database.DataAccessImpl;
+
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
 /**
  * Created by Mike on 10/3/2015.
  */
 public class DailyCounter {
-    private double dailyTotal, runningTotal, goal;
+    private double dailyTotal, runningTotal;
     private boolean overBudget;
     private int daysNotOverBudget, totalDaysLogged;
+    private String creation_date;
+    List<Day> listDays = new ArrayList();
+    DataAccess dailyAccess = new DataAccessImpl();
 
-    public double getDailyTotal() {
-        //will need SQL logic to SUM(calories) from how we are saving foods
-        return dailyTotal;
+    public DailyCounter() {
+
+        listDays = dailyAccess.getAllDays();
     }
 
     public double getRunningTotal() {
@@ -18,23 +30,20 @@ public class DailyCounter {
         return runningTotal;
     }
 
-    public double getGoal(){
-        return goal;
-    }
-
-    public boolean overBudgetChecker(double dailyTotal, double goal){
+    public boolean overBudgetChecker(double dailyTotal, double goal) {
         return dailyTotal > goal;
     }
 
-    public int setDaysNotOverBudget(int daysNotOverBudget, double dailyTotal, double goal){
+    public int setDaysNotOverBudget(int daysNotOverBudget, double dailyTotal, double goal) {
         //daysNotOverBudget = SQL statement to COUNT database records where dailyTotal <= goal
         //SELECT COUNT dailyTotal, goal FROM DailyCounter where dailyTotal <= goal;
         return daysNotOverBudget;
     }
 
-    public int setTotalDays(int totalDaysLogged){
+    public int setTotalDays(int totalDaysLogged) {
         //totalDaysLogged = SQL statement to COUNT database records where record != NULL
         //SELECT COUNT dailyTotal from DailyCounter;
         return totalDaysLogged;
     }
 }
+
