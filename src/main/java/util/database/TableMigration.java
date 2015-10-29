@@ -11,8 +11,8 @@ public class TableMigration {
     private static final String USER_TABLE =
             "CREATE TABLE user"+
                     "(id INTEGER PRIMARY KEY,"+
-                    "name TEXT NOT NULL,"+
-                    "age INT NOT NULL);";
+                    "name TEXT NOT NULL UNIQUE,"+
+                    "age INT NULL);";
 
     private static final String USER_RECIPE_TABLE =
             "CREATE TABLE user_recipe("+

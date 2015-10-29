@@ -2,6 +2,7 @@ package util.database;
 
 import models.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ public interface DataAccess {
 
     //User Methods
     User getUser(int id);
-    List<User> getAllUser();
+    HashMap<String,User> getAllUser();
     void saveUser(User user);
     void deleteUser(int id);
 

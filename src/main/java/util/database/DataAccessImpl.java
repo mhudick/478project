@@ -2,12 +2,14 @@ package util.database;
 
 import models.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by Philip on 10/18/2015.
  */
 public class DataAccessImpl implements DataAccess {
+    UserData userData = new UserData();
     /*
         USER METHODS
      */
@@ -17,13 +19,14 @@ public class DataAccessImpl implements DataAccess {
     }
 
     @Override
-    public List<User> getAllUser() {
-        return null;
+    public HashMap<String,User> getAllUser() {
+        return userData.getAllUsers();
     }
 
     @Override
     public void saveUser(User user) {
 
+        userData.saveUser(user);
     }
 
     @Override
