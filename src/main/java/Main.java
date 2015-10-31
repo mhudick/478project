@@ -1,9 +1,9 @@
 import controllers.*;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import util.database.DatabaseManager;
+import util.database.UserData;
 
 public class Main extends Application {
 
@@ -13,8 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage)throws Exception {
-
-        //loadScreens
+        //load app screens
         ScreenManager appScreenManager = new ScreenManager();
         appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         appScreenManager.show(Screen.HOME);
@@ -32,4 +31,9 @@ public class Main extends Application {
         //load user interface
         launch(args);
     }
+
+    private int getUserCount(){
+
+    }
+
 }
