@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:id="gridpane" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.HomeController">
+    <TextArea text="home.fxml"></TextArea>
+</GridPane>

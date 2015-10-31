@@ -4,7 +4,6 @@ package util.web;
  * Created by Philip on 9/24/2015.
  */
 
-import controllers.MessageBox;
 import models.Food;
 import models.Nutrient;
 import models.SearchItem;
@@ -35,7 +34,7 @@ public class WebAccessImpl implements WebAccess{
             jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=r&max=100&offset=0&api_key=" + API_KEY);
         } catch (Exception e) {
             System.out.println("CAUGHT!!!");
-            new MessageBox("Could not find file");
+            //new MessageBox("Could not find file");
             e.printStackTrace();
         }
         Gson gson = new Gson();//This object handles converting Json to POJOs.

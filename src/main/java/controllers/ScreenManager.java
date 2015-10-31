@@ -1,80 +1,65 @@
+/* Developer: Mark Donile
+** Date: 2015.10.31
+** Configuration Version: 1.0.0
+*/
+
 package controllers;
 
-
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
-import models.User;
-
+import javafx.fxml.FXMLLoader;
 
 import java.util.HashMap;
 
-/**
- * Created by Philip on 10/27/2015.
- */
-public class ScreenManager extends StackPane {
+public class ScreenManager extends StackPane{
 
-    private HashMap<String,Node> screens = new HashMap<>();
+    //fields
+    private HashMap<Screen, Node> screens = new HashMap<>();
 
-    private User user;
     public ScreenManager(){
         super();
     }
 
-    public User getUser() {
-        return user;
+    //methods
+    public void addScreen(Screen screen, Node node){
+        screens.put(screen, node);
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void removeScreen(Screen screen){
+        screens.remove(screen);
     }
 
-    public void addScreen(String name, Node screen){
-        screens.put(name,screen);
-    }
-
-    public boolean loadScreen(String name, String resource) {
-        try {
-            FXMLLoader myLoader = new FXMLLoader(getClass().getResource(resource));
-            Parent loadScreen = (Parent)myLoader.load();
-            ScreenControl myScreenController = myLoader.getController();
-            myScreenController.setScreenParent(this);
-            myScreenController.setComponents();
-            addScreen(name, loadScreen);
+    public boolean loadScreen(Screen screen, String resourcePath){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourcePath));
+            Parent loadedScreen = (Parent) fxmlLoader.load();
+            ManagedScreen loadedScreenController = (ManagedScreen) fxmlLoader.getController();
+            loadedScreenController.setScreenManager(this);
+            addScreen(screen, loadedScreen);
             return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        }
+        catch(Exception exception){
+            System.out.println(exception.getMessage());
             return false;
         }
     }
-    public boolean setScreen(final String name) {
-        if (screens.get(name) != null) {   //screen loaded
-            if (!getChildren().isEmpty()) {    //if there is more than one screen
-                getChildren().remove(0);                    //remove the displayed screen
-                getChildren().add(0, screens.get(name));     //add the screen
-            } else {
-                getChildren().add(screens.get(name));       //no one else been displayed, then just show
-                System.out.println(screens.get(name));
+
+    public boolean show(Screen screen){
+        if(screens.get(screen) != null){
+            //screen was previously loaded and found in screens HashMap
+            if(!getChildren().isEmpty()){
+                //if a screen is presently shown
+                getChildren().remove(0); //remove present screen
             }
+            //show new screen
+            getChildren().add(0, screens.get(screen));
             return true;
-        } else {
-            System.out.println("screen hasn't been loaded!!! \n");
+        }
+        else{
+            System.out.println(screen.toString() + " was not found in ScreenManager screens HashMap.\n");
             return false;
         }
     }
-    public boolean unloadScreen(String name) {
-        if(screens.remove(name) == null) {
-            System.out.println("Screen didn't exist");
-            return false;
-        } else {
-            return true;
-        }
-    }
-    public void reloadScreen(String name){
-        unloadScreen(name);
-        loadScreen(name,"/views/"+name+".fxml");
-        setScreen(name);
-    }
+
 }
