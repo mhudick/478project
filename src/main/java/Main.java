@@ -5,6 +5,8 @@ import javafx.stage.Stage;
 import util.database.DatabaseManager;
 import util.database.UserData;
 
+import java.util.HashMap;
+
 public class Main extends Application {
 
     //CONSTANTS
@@ -16,7 +18,14 @@ public class Main extends Application {
         //load app screens
         ScreenManager appScreenManager = new ScreenManager();
         appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
-        appScreenManager.show(Screen.HOME);
+        appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
+        appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
+        if(getUserCount() == 0){
+            appScreenManager.show(Screen.CREATE_USER);
+        }
+        else{
+            appScreenManager.show(Screen.USER_LOG_IN);
+        }
 
         //load user interface
         Scene scene = new Scene(appScreenManager,APP_WIDTH,APP_HEIGHT);
@@ -33,7 +42,8 @@ public class Main extends Application {
     }
 
     private int getUserCount(){
-
+        UserData userData = new UserData();
+        return userData.getAllUsers().size();
     }
 
 }
