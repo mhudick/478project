@@ -4,14 +4,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.geometry.Insets?>
-
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<VBox   xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.UserSummary"
+<VBox   xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.UserSummaryController"
         spacing="12"
         BorderPane.alignment="CENTER">
     <GridPane

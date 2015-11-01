@@ -9,7 +9,9 @@ public enum Screen {
 
     CREATE_USER("/views/create_user.fxml"),
     HOME("/views/home.fxml"),
-    USER_LOG_IN("/views/user_log_in.fxml");
+    FOODS("/views/foods.fxml"),
+    USER_LOG_IN("/views/user_log_in.fxml"),
+    USER_SUMMARY("/views/user_summary.fxml");
 
     private String resourcePath;
 

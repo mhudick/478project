@@ -32,10 +32,12 @@ public class UserLogInController implements ManagedScreen {
     //methods
     public void handleCreateUserButton(ActionEvent actionEvent){
         System.out.println("Create User button clicked!");
+        screenManager.show(Screen.CREATE_USER);
     }
 
     public void handleSelectUserButton(ActionEvent actionEvent){
         System.out.println("Select button clicked!");
+        screenManager.show(Screen.HOME);
     }
 
     public void setScreenManager(ScreenManager screenManager){
@@ -43,6 +45,8 @@ public class UserLogInController implements ManagedScreen {
     }
 
     public void loadUserListView(){
+        //TODO UserData provide getUserDataArrayList() method?
+        /*
         List<User> userArrayList = new ArrayList<>();
         HashMap userDataHashMap = userData.getAllUsers();
         Iterator iterator = userDataHashMap.entrySet().iterator();
@@ -51,6 +55,7 @@ public class UserLogInController implements ManagedScreen {
         }
         ObservableList<User> userObsvList = FXCollections.observableArrayList(userArrayList);
         userListView = new ListView<User>(userArrayList);
+        */
     }
 
 }

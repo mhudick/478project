@@ -16,6 +16,7 @@ public class ScreenManager extends StackPane{
 
     //fields
     private HashMap<Screen, Node> screens = new HashMap<>();
+    private Node previousScreen;
 
     public ScreenManager(){
         super();
@@ -50,7 +51,7 @@ public class ScreenManager extends StackPane{
             //screen was previously loaded and found in screens HashMap
             if(!getChildren().isEmpty()){
                 //if a screen is presently shown
-                getChildren().remove(0); //remove present screen
+                setPreviousScreen(getChildren().remove(0)); //remove current screen and set previousScreen
             }
             //show new screen
             getChildren().add(0, screens.get(screen));
@@ -60,6 +61,19 @@ public class ScreenManager extends StackPane{
             System.out.println(screen.toString() + " was not found in ScreenManager screens HashMap.\n");
             return false;
         }
+    }
+
+    public void showPreviousScreen(){
+        getChildren().remove(0);
+        getChildren().add(0, getPreviousScreen());
+    }
+
+    public void setPreviousScreen(Node previousScreen){
+        this.previousScreen = previousScreen;
+    }
+
+    public Node getPreviousScreen(){
+        return previousScreen;
     }
 
 }
