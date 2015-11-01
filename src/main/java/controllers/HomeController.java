@@ -55,7 +55,10 @@ public class HomeController extends GridPane implements ManagedScreen{
 
     public void loadMenuChoiceBox(){
         //TODO create contentView enum and use it to populate the menuChoiceBox
-        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods");
+        ObservableList<String> list = FXCollections.observableArrayList("Home",
+                                                                        "Foods",
+                                                                        "Recipes",
+                                                                        "Change User");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
     }
