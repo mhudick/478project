@@ -3,6 +3,6 @@
 <?import javafx.scene.layout.GridPane?>
 
 <?import javafx.scene.control.TextArea?>
-<GridPane fx:id="gridpane" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.FoodsController">
+<GridPane fx:id="gridpane" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.FoodsVBox">
     <TextArea text="foods.fxml"></TextArea>
 </GridPane>
