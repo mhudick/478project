@@ -27,10 +27,6 @@ public class ScreenManager extends StackPane{
         screens.put(screen, node);
     }
 
-    public void removeScreen(Screen screen){
-        screens.remove(screen);
-    }
-
     public boolean loadScreen(Screen screen, String resourcePath){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourcePath));
@@ -76,8 +72,17 @@ public class ScreenManager extends StackPane{
         return previousScreen;
     }
 
-    public HashMap<Screen, Node> getScreens(){
-        return screens;
+    public boolean hasScreen(Screen screen){
+        if(screens.get(screen) != null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public void unloadScreen(Screen screen){
+        screens.remove(screen);
     }
 
 }

@@ -37,6 +37,10 @@ public class UserLogInController implements ManagedScreen {
 
     public void handleSelectUserButton(ActionEvent actionEvent){
         System.out.println("Select button clicked!");
+        if(screenManager.hasScreen(Screen.HOME)){
+            screenManager.unloadScreen(Screen.HOME);
+            screenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
+        }
         screenManager.show(Screen.HOME);
     }
 
