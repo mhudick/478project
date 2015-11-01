@@ -8,7 +8,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 
-<VBox   xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.UserSummaryController"
+<fx:root type="javafx.scene.layout.VBox"
+        xmlns:fx="http://javafx.com/fxml"
         spacing="12"
         BorderPane.alignment="CENTER">
     <GridPane
@@ -38,9 +39,9 @@
                GridPane.columnIndex="1"/>
     </GridPane>
     <HBox spacing="12">
-        <Button fx:id="searchButton" text="Go Search" onAction="#handleSearchButton"/>
-        <Button fx:id="recipeButton" text="Go Recipes" onAction="#handleRecipeButton"/>
+        <Button fx:id="searchButton" text="Go Search"/>
+        <Button fx:id="recipeButton" text="Go Recipes"/>
     </HBox>
-</VBox>
+</fx:root>
 
 

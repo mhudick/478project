@@ -23,13 +23,14 @@ import java.util.HashMap;
 public class HomeController extends GridPane implements ManagedScreen{
 
     private ScreenManager screenManager;
-    private HashMap<String, Node> Views = new HashMap<>();
+    private Node previousContent;
     //private ScreenManager homeViewManager;
     @FXML private ChoiceBox menuChoiceBox;
     @FXML private TextField searchTextField;
     @FXML private Button searchButton;
     @FXML private StackPane contentStackPane;
-
+    private FoodsVBox foodsVBox = new FoodsVBox();
+    private UserSummaryVBox userSummaryVBox = new UserSummaryVBox();
 
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
@@ -41,11 +42,14 @@ public class HomeController extends GridPane implements ManagedScreen{
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
         System.out.println(menuChoiceBox.getValue().toString() + " was selected.");
+        removeContent();
         String selectedContent = menuChoiceBox.getValue().toString();
         switch(selectedContent){
             case "Home":
-                //homeViewManager.show(Screen.USER_SUMMARY);
+                contentStackPane.getChildren().add(0, userSummaryVBox);
                 break;
+            case "Foods":
+                contentStackPane.getChildren().add(0, foodsVBox);
         }
     }
 
@@ -71,6 +75,16 @@ public class HomeController extends GridPane implements ManagedScreen{
         */
         loadMenuChoiceBox();
         //TODO show user_summary.fxml in contentStackPane
+    }
+
+    public void removeContent(){
+        if(contentStackPane.getChildren().size() != 0){
+            setPreviousContent((Node) contentStackPane.getChildren().remove(0));
+        }
+    }
+
+    public void setPreviousContent(Node previousContent){
+        this.previousContent = previousContent;
     }
 
 }

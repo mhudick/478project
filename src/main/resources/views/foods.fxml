@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
-
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
-<GridPane fx:id="gridpane" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.FoodsVBox">
+
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <TextArea text="foods.fxml"></TextArea>
-</GridPane>
+</fx:root>

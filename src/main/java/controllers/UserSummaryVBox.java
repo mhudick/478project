@@ -7,10 +7,25 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
 
-public class UserSummaryController implements ManagedScreen{
+public class UserSummaryVBox extends VBox implements ManagedScreen{
 
     private ScreenManager screenManager;
+
+    public UserSummaryVBox(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/user_summary.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try{
+            fxmlLoader.load();
+        }
+        catch(Exception e){
+            System.out.println(e.toString());
+        }
+    }
 
     @FXML
     public void handleSearchButton(ActionEvent actionEvent){
