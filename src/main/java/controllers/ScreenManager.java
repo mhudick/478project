@@ -76,4 +76,8 @@ public class ScreenManager extends StackPane{
         return previousScreen;
     }
 
+    public HashMap<Screen, Node> getScreens(){
+        return screens;
+    }
+
 }

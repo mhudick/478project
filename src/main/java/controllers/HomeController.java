@@ -31,6 +31,8 @@ public class HomeController extends GridPane implements ManagedScreen{
     @FXML private StackPane contentStackPane;
     private FoodsVBox foodsVBox = new FoodsVBox();
     private UserSummaryVBox userSummaryVBox = new UserSummaryVBox();
+    private RecipesVBox recipesVBox = new RecipesVBox();
+    private DailyTrackerVBox dailyTrackerVBox = new DailyTrackerVBox();
 
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
@@ -50,6 +52,20 @@ public class HomeController extends GridPane implements ManagedScreen{
                 break;
             case "Foods":
                 contentStackPane.getChildren().add(0, foodsVBox);
+                break;
+            case "Recipes":
+                contentStackPane.getChildren().add(0, recipesVBox);
+                break;
+            case "Daily Tracker":
+                contentStackPane.getChildren().add(0, dailyTrackerVBox);
+                break;
+            case "Change User":
+                screenManager.show(Screen.USER_LOG_IN);
+                break;
+            default:
+                System.out.println("default case executed in handleMenuChoiceBox method of HomeController");
+                contentStackPane.getChildren().add(0, userSummaryVBox);
+                break;
         }
     }
 
@@ -58,6 +74,9 @@ public class HomeController extends GridPane implements ManagedScreen{
         ObservableList<String> list = FXCollections.observableArrayList("Home",
                                                                         "Foods",
                                                                         "Recipes",
+                                                                        "Daily Tracker",
+                                                                        "Weigh-In",
+                                                                        "Exercise",
                                                                         "Change User");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
@@ -89,5 +108,4 @@ public class HomeController extends GridPane implements ManagedScreen{
     public void setPreviousContent(Node previousContent){
         this.previousContent = previousContent;
     }
-
 }
