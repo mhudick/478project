@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -27,6 +28,7 @@ public class HomeController extends GridPane implements ManagedScreen{
     @FXML private ChoiceBox menuChoiceBox;
     @FXML private TextField searchTextField;
     @FXML private Button searchButton;
+    @FXML private StackPane contentStackPane;
 
 
     public void setScreenManager(ScreenManager screenManager){
@@ -71,9 +73,4 @@ public class HomeController extends GridPane implements ManagedScreen{
         //TODO show user_summary.fxml in contentStackPane
     }
 
-    /*
-    private void loadViews(){
-        Views
-    }
-    */
 }

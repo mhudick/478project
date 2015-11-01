@@ -4,6 +4,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TextArea?>
 
 <GridPane fx:id="gridpane" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.HomeController">
     <TextField
@@ -14,10 +16,18 @@
         fx:id="searchButton"
         onAction="#handleSearchButton"
         GridPane.rowIndex="0"
-        GridPane.columnIndex="1"/>
+        GridPane.columnIndex="1"
+        text="Search"/>
     <ChoiceBox
         fx:id="menuChoiceBox"
         onAction="#handleMenuChoiceBox"
         GridPane.rowIndex="0"
         GridPane.columnIndex="2"/>
+    <StackPane
+        fx:id="contentStackPane"
+        GridPane.rowIndex="1"
+        GridPane.columnIndex="0"
+        GridPane.columnSpan="3">
+        <TextArea text="contentStackPane"></TextArea>
+    </StackPane>
 </GridPane>
