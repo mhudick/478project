@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,5 +95,11 @@ public class WebAccessImpl implements WebAccess{
     private Boolean validateString(String userInput){
 
         return true;
+    }
+
+    //TODO implement method that returns an ArrayList of Strings that state the foods found by the searchForFood()
+    public ArrayList<String> getFoods(){
+        ArrayList<String> theList = new ArrayList<>();
+        return theList;
     }
 }

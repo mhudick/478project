@@ -9,16 +9,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
-
-import java.util.HashMap;
 
 public class HomeController extends GridPane implements ManagedScreen{
 
@@ -29,10 +25,10 @@ public class HomeController extends GridPane implements ManagedScreen{
     @FXML private TextField searchTextField;
     @FXML private Button searchButton;
     @FXML private StackPane contentStackPane;
-    private FoodsVBox foodsVBox = new FoodsVBox();
-    private UserSummaryVBox userSummaryVBox = new UserSummaryVBox();
-    private RecipesVBox recipesVBox = new RecipesVBox();
-    private DailyTrackerVBox dailyTrackerVBox = new DailyTrackerVBox();
+    private FoodsVBox foodsVBox;
+    private UserSummaryVBox userSummaryVBox;
+    private RecipesVBox recipesVBox;
+    private DailyTrackerVBox dailyTrackerVBox;
 
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
@@ -40,6 +36,7 @@ public class HomeController extends GridPane implements ManagedScreen{
 
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
+
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
@@ -95,6 +92,7 @@ public class HomeController extends GridPane implements ManagedScreen{
         homeViewManager.loadScreen(Screen.USER_SUMMARY, Screen.USER_SUMMARY.getResourcePath());
         homeViewManager.show(Screen.USER_SUMMARY);
         */
+        loadContent();
         loadMenuChoiceBox();
         //TODO show user_summary.fxml in contentStackPane
     }
@@ -107,5 +105,16 @@ public class HomeController extends GridPane implements ManagedScreen{
 
     public void setPreviousContent(Node previousContent){
         this.previousContent = previousContent;
+    }
+
+    public void loadContent(){
+        foodsVBox = new FoodsVBox();
+        userSummaryVBox = new UserSummaryVBox();
+        recipesVBox = new RecipesVBox();
+        dailyTrackerVBox = new DailyTrackerVBox();
+    }
+
+    public void search(){
+        String searchString = searchTextField.getText();
     }
 }

@@ -5,8 +5,6 @@
 
 package controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,20 +12,16 @@ import javafx.scene.control.ListView;
 import models.User;
 import util.database.UserData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-
 public class UserLogInController implements ManagedScreen {
 
     //fields
+    private User user;
+    //private List userList;
     private ScreenManager screenManager;
     @FXML private ListView<User> userListView;
     @FXML private Button createUserButton;
     @FXML private Button selectUserButton;
-    private UserData userData = new UserData();
+    //private UserData userData = new UserData();
 
     //methods
     public void handleCreateUserButton(ActionEvent actionEvent){

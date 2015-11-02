@@ -5,8 +5,6 @@ import javafx.stage.Stage;
 import util.database.DatabaseManager;
 import util.database.UserData;
 
-import java.util.HashMap;
-
 public class Main extends Application {
 
     //CONSTANTS
@@ -20,7 +18,7 @@ public class Main extends Application {
         appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
         appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
-        if(getUserCount() == 0){
+        if(getUserCount() == 0){//there are no users, show the create_user screen
             appScreenManager.show(Screen.CREATE_USER);
         }
         else{
@@ -45,5 +43,4 @@ public class Main extends Application {
         UserData userData = new UserData();
         return userData.getAllUsers().size();
     }
-
 }
