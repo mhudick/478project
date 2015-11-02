@@ -3,6 +3,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TextArea?>
 
+<?import javafx.scene.control.Button?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
-    <TextArea text="recipes.fxml"></TextArea>
+    <TextArea fx:id="textArea" text="recipes.fxml"/>
+    <Button id="button" text="press" onAction="#handleButton"/>
 </fx:root>

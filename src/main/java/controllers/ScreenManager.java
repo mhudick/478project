@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.fxml.FXMLLoader;
+import models.User;
 
 import java.util.HashMap;
 
@@ -17,6 +18,7 @@ public class ScreenManager extends StackPane{
     //fields
     private HashMap<Screen, Node> screens = new HashMap<>();
     private Node previousScreen;
+    private User user;
 
     public ScreenManager(){
         super();
@@ -85,4 +87,10 @@ public class ScreenManager extends StackPane{
         screens.remove(screen);
     }
 
+    public User getUser(){
+        return user;
+    }
+    public void setUser(User user){
+        this.user = user;
+    }
 }

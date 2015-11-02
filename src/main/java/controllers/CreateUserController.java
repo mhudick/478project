@@ -9,9 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
+import models.User;
+import util.database.DataAccess;
+import util.database.DataAccessImpl;
 
 public class CreateUserController implements ManagedScreen{
-
+    DataAccess dataAccess = new DataAccessImpl();
     //fields
     private ScreenManager screenManager;
     @FXML private TextField nameTextField;
@@ -22,12 +25,18 @@ public class CreateUserController implements ManagedScreen{
     //methods
     public void handleCreateButton(ActionEvent actionEvent){
         System.out.println("Create button clicked!");
+        User user = new User();
+        user.setName(nameTextField.getText());
+        user.setAge(ageTextField.getText());
+        dataAccess.saveUser(user);
+        screenManager.unloadScreen(Screen.USER_LOG_IN);
+        screenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
         screenManager.show(Screen.USER_LOG_IN);
     }
 
     public void handleBackButton(ActionEvent actionEvent){
         System.out.println("Back button clicked!");
-        screenManager.showPreviousScreen();
+        screenManager.show(Screen.USER_LOG_IN);
     }
 
     public void setScreenManager(ScreenManager screenManager){
