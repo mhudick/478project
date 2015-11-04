@@ -11,9 +11,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 
-public class RecipesVBox extends VBox implements ManagedScreen{
+public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
     private ScreenManager screenManager;
-
+    private UserManager userManager;
 
     @FXML TextArea textArea;
 
@@ -42,11 +42,16 @@ public class RecipesVBox extends VBox implements ManagedScreen{
 
     public void handleButton(){
         System.out.println("Pressed");
-        textArea.setText("Pressed");
+        textArea.setText(userManager.getUser().getName());
     }
 
     @Override
     public void setScreenManager(ScreenManager screenManager) {
         this.screenManager = screenManager;
+    }
+
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 }

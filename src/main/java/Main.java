@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import util.database.DatabaseManager;
 import util.database.UserData;
+import util.database.UserDataImpl;
 
 public class Main extends Application {
 
@@ -14,7 +15,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage)throws Exception {
         //load app screens
+        UserManager userManager = new UserManager();
         ScreenManager appScreenManager = new ScreenManager();
+        appScreenManager.setUserManager(userManager);
         appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
         appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
@@ -40,7 +43,7 @@ public class Main extends Application {
     }
 
     private int getUserCount(){
-        UserData userData = new UserData();
+        UserData userData = new UserDataImpl();
         return userData.getAllUsers().size();
     }
 }

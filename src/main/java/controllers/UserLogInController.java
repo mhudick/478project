@@ -11,17 +11,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import models.User;
 import util.database.UserData;
+import util.database.UserDataImpl;
 
-public class UserLogInController implements ManagedScreen {
+public class UserLogInController implements ManagedScreen, UserControl{
 
     //fields
-    private User user;
+
     //private List userList;
     private ScreenManager screenManager;
-    @FXML private ListView<User> userListView;
+    private UserManager userManager;
+    UserData userData = new UserDataImpl();
+
+    @FXML private ListView<String> userListView;
     @FXML private Button createUserButton;
     @FXML private Button selectUserButton;
-    //private UserData userData = new UserData();
+    //private UserDataImpl userData = new UserDataImpl();
 
     //methods
     public void handleCreateUserButton(ActionEvent actionEvent){
@@ -31,10 +35,17 @@ public class UserLogInController implements ManagedScreen {
 
     public void handleSelectUserButton(ActionEvent actionEvent){
         System.out.println("Select button clicked!");
+        System.out.println(userData.getAllUsers().get(userListView.getSelectionModel().getSelectedItem()));
+        int userID = userData.getAllUsers().get(userListView.getSelectionModel().getSelectedItem());
+        User user = userData.getUser(userID);
+        System.out.println(user.getName());
+
+
         if(screenManager.hasScreen(Screen.HOME)){
             screenManager.unloadScreen(Screen.HOME);
             screenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         }
+
         screenManager.show(Screen.HOME);
     }
 
@@ -42,18 +53,17 @@ public class UserLogInController implements ManagedScreen {
         this.screenManager = screenManager;
     }
 
-    public void loadUserListView(){
-        //TODO UserData provide getUserDataArrayList() method?
-        /*
-        List<User> userArrayList = new ArrayList<>();
-        HashMap userDataHashMap = userData.getAllUsers();
-        Iterator iterator = userDataHashMap.entrySet().iterator();
-        while(iterator.hasNext()){
-            userArrayList.add((User) iterator.next());
-        }
-        ObservableList<User> userObsvList = FXCollections.observableArrayList(userArrayList);
-        userListView = new ListView<User>(userArrayList);
-        */
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 
+    @FXML
+    public void initialize(){
+        loadUserListView();
+    }
+    public void loadUserListView(){
+        //TODO UserDataImpl provide getUserDataArrayList() method?
+        userListView.setItems(userData.getUserNames());
+    }
 }

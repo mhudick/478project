@@ -1,12 +1,6 @@
 package models;
 
-import util.database.DataAccess;
-import util.database.DataAccessImpl;
-
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -18,11 +12,11 @@ public class DailyCounter {
     private int daysNotOverBudget, totalDaysLogged;
     private String creation_date;
     List<Day> listDays = new ArrayList();
-    DataAccess dailyAccess = new DataAccessImpl();
+
 
     public DailyCounter() {
 
-        listDays = dailyAccess.getAllDays();
+
     }
 
     public double getRunningTotal() {

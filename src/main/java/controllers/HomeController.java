@@ -16,9 +16,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 
-public class HomeController extends GridPane implements ManagedScreen{
+public class HomeController extends GridPane implements ManagedScreen, UserControl{
 
     private ScreenManager screenManager;
+    private UserManager userManager;
+
     private Node previousContent;
     //private ScreenManager homeViewManager;
     @FXML private ChoiceBox menuChoiceBox;
@@ -30,8 +32,14 @@ public class HomeController extends GridPane implements ManagedScreen{
     private RecipesVBox recipesVBox;
     private DailyTrackerVBox dailyTrackerVBox;
 
+    @Override
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
+    }
+
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
 
     public void handleSearchButton(ActionEvent actionEvent){
@@ -82,6 +90,7 @@ public class HomeController extends GridPane implements ManagedScreen{
     @FXML
     private void initialize(){
         System.out.println("HomeController initialized.");
+        userManager = screenManager.getUserManager();
         /*
         ScreenManager homeViewManager = new ScreenManager();
         GridPane.setRowIndex(homeViewManager, 1);
@@ -111,10 +120,13 @@ public class HomeController extends GridPane implements ManagedScreen{
         foodsVBox = new FoodsVBox();
         userSummaryVBox = new UserSummaryVBox();
         recipesVBox = new RecipesVBox();
+        recipesVBox.setUserManager(userManager);
         dailyTrackerVBox = new DailyTrackerVBox();
     }
 
     public void search(){
         String searchString = searchTextField.getText();
     }
+
+
 }

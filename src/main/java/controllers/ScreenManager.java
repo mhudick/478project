@@ -13,12 +13,12 @@ import models.User;
 
 import java.util.HashMap;
 
-public class ScreenManager extends StackPane{
+public class ScreenManager extends StackPane implements UserControl{
 
     //fields
     private HashMap<Screen, Node> screens = new HashMap<>();
     private Node previousScreen;
-    private User user;
+    private UserManager userManager;
 
     public ScreenManager(){
         super();
@@ -87,10 +87,11 @@ public class ScreenManager extends StackPane{
         screens.remove(screen);
     }
 
-    public User getUser(){
-        return user;
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
     }
-    public void setUser(User user){
-        this.user = user;
+    public  UserManager getUserManager(){
+        return userManager;
     }
 }
