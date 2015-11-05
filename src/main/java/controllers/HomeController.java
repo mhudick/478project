@@ -5,6 +5,7 @@
 
 package controllers;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,6 +33,9 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     private RecipesVBox recipesVBox;
     private DailyTrackerVBox dailyTrackerVBox;
 
+    public HomeController(){
+        System.out.println("HomeController Constructor");
+    }
     @Override
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
@@ -44,7 +48,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
 
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
-
+        System.out.println(userManager.getUser().getAge());
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
@@ -90,7 +94,6 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     @FXML
     private void initialize(){
         System.out.println("HomeController initialized.");
-        userManager = screenManager.getUserManager();
         /*
         ScreenManager homeViewManager = new ScreenManager();
         GridPane.setRowIndex(homeViewManager, 1);
@@ -103,8 +106,20 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         */
         loadContent();
         loadMenuChoiceBox();
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Run later");
+                userManager = screenManager.getUserManager();
+                System.out.println(userManager.getUser().getName());
+                recipesVBox.setUserManager(userManager);
+            }
+        });
         //TODO show user_summary.fxml in contentStackPane
     }
+
+
 
     public void removeContent(){
         if(contentStackPane.getChildren().size() != 0){
@@ -120,7 +135,6 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         foodsVBox = new FoodsVBox();
         userSummaryVBox = new UserSummaryVBox();
         recipesVBox = new RecipesVBox();
-        recipesVBox.setUserManager(userManager);
         dailyTrackerVBox = new DailyTrackerVBox();
     }
 

@@ -18,7 +18,8 @@ public class Main extends Application {
         UserManager userManager = new UserManager();
         ScreenManager appScreenManager = new ScreenManager();
         appScreenManager.setUserManager(userManager);
-        appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
+
+        //appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
         appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
         if(getUserCount() == 0){//there are no users, show the create_user screen

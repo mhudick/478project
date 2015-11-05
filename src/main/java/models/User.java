@@ -7,15 +7,15 @@ public class User {
     private int id;
     private String name;
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    private String age;
+    private int age;
     private int dailyCalorieCount;
     private int dailyCalorieGoal;
     private int lbs;

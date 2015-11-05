@@ -14,7 +14,7 @@ import models.User;
 import java.util.HashMap;
 
 public class ScreenManager extends StackPane implements UserControl{
-
+    public String test ="TESTING!!!";
     //fields
     private HashMap<Screen, Node> screens = new HashMap<>();
     private Node previousScreen;
@@ -33,7 +33,7 @@ public class ScreenManager extends StackPane implements UserControl{
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourcePath));
             Parent loadedScreen = (Parent) fxmlLoader.load();
-            ManagedScreen loadedScreenController = (ManagedScreen) fxmlLoader.getController();
+            ManagedScreen loadedScreenController = fxmlLoader.getController();
             loadedScreenController.setScreenManager(this);
             addScreen(screen, loadedScreen);
             return true;
@@ -91,7 +91,7 @@ public class ScreenManager extends StackPane implements UserControl{
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
-    public  UserManager getUserManager(){
+    public UserManager getUserManager(){
         return userManager;
     }
 }

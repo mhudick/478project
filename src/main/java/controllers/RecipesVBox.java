@@ -31,7 +31,6 @@ public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/recipes.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try{
             fxmlLoader.load();
         }
@@ -42,6 +41,7 @@ public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
 
     public void handleButton(){
         System.out.println("Pressed");
+        userManager.getUser().setAge(userManager.getUser().getAge()+1);
         textArea.setText(userManager.getUser().getName());
     }
 

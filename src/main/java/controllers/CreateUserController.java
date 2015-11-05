@@ -28,7 +28,7 @@ public class CreateUserController implements ManagedScreen{
         System.out.println("Create button clicked!");
         User user = new User();
         user.setName(nameTextField.getText());
-        user.setAge(ageTextField.getText());
+        user.setAge(Integer.parseInt(ageTextField.getText()));
         userData.saveUser(user);
         screenManager.unloadScreen(Screen.USER_LOG_IN);
         screenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
@@ -43,4 +43,6 @@ public class CreateUserController implements ManagedScreen{
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
     }
+
+
 }

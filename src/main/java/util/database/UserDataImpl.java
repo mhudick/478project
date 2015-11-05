@@ -26,6 +26,7 @@ public class UserDataImpl implements UserData{
             rs.next();
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
+            user.setAge(rs.getInt("age"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
