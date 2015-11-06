@@ -11,9 +11,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import models.Food;
 
-public class FoodCard extends GridPane{
+public class FoodCard extends VBox{
 
     //fields
     private Food food;
@@ -22,7 +23,7 @@ public class FoodCard extends GridPane{
 
     //constructor(s)
     public FoodCard(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_card.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_details.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 

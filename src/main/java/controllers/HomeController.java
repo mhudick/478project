@@ -16,26 +16,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
+import util.web.WebAccess;
+import util.web.WebAccessImpl;
 
 public class HomeController extends GridPane implements ManagedScreen, UserControl{
 
     private ScreenManager screenManager;
     private UserManager userManager;
 
+    private WebAccess webAccess = new WebAccessImpl();
+
     private Node previousContent;
     //private ScreenManager homeViewManager;
     @FXML private ChoiceBox menuChoiceBox;
     @FXML private TextField searchTextField;
-    @FXML private Button searchButton;
     @FXML private StackPane contentStackPane;
     private FoodsVBox foodsVBox;
     private UserSummaryVBox userSummaryVBox;
     private RecipesVBox recipesVBox;
     private DailyTrackerVBox dailyTrackerVBox;
+    private SearchController searchController;
 
     public HomeController(){
         System.out.println("HomeController Constructor");
     }
+
     @Override
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
@@ -48,7 +53,11 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
 
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
-        System.out.println(userManager.getUser().getAge());
+        removeContent();
+        contentStackPane.getChildren().add(0, searchController);
+        ObservableList<String> data = FXCollections.observableArrayList(webAccess.searchForFood(searchTextField.getText()));
+        System.out.println(data.toString());
+        //searchController.searchListView.setItems(data);
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
@@ -94,16 +103,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     @FXML
     private void initialize(){
         System.out.println("HomeController initialized.");
-        /*
-        ScreenManager homeViewManager = new ScreenManager();
-        GridPane.setRowIndex(homeViewManager, 1);
-        GridPane.setColumnIndex(homeViewManager, 0);
-        GridPane.setColumnSpan(homeViewManager, 3);
-        getChildren().add(homeViewManager);
-        homeViewManager.loadScreen(Screen.FOODS, Screen.FOODS.getResourcePath());
-        homeViewManager.loadScreen(Screen.USER_SUMMARY, Screen.USER_SUMMARY.getResourcePath());
-        homeViewManager.show(Screen.USER_SUMMARY);
-        */
+
         loadContent();
         loadMenuChoiceBox();
 
@@ -132,6 +132,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     }
 
     public void loadContent(){
+        searchController = new SearchController();
         foodsVBox = new FoodsVBox();
         userSummaryVBox = new UserSummaryVBox();
         recipesVBox = new RecipesVBox();

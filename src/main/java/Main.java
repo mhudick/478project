@@ -32,6 +32,7 @@ public class Main extends Application {
         //load user interface
         Scene scene = new Scene(appScreenManager,APP_WIDTH,APP_HEIGHT);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Calorie Counter");
         primaryStage.show();
     }
 
