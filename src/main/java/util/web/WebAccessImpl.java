@@ -4,6 +4,7 @@ package util.web;
  * Created by Philip on 9/24/2015.
  */
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import models.Food;
@@ -30,6 +31,7 @@ public class WebAccessImpl implements WebAccess{
     @Override
     public ObservableList<String> searchForFood(String term) {
         term = term.replaceAll(" ","+");
+        nameList = FXCollections.observableArrayList();
         System.out.println(term);
         String jsonResult = null;
         try {
@@ -48,10 +50,8 @@ public class WebAccessImpl implements WebAccess{
         Iterator<SearchItem> iterator = searchResponse.getItem().iterator();
         while (iterator.hasNext()){
             SearchItem searchItem = iterator.next();
-            //System.out.println(searchItem.getName());
             //itemMap.put(searchItem.getName().hashCode(),searchItem.getNdbno());
             nameList.add(searchItem.getName());
-
         }
         return nameList;
     }

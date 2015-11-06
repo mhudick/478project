@@ -55,9 +55,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         System.out.println("Search button clicked!");
         removeContent();
         contentStackPane.getChildren().add(0, searchController);
-        ObservableList<String> data = FXCollections.observableArrayList(webAccess.searchForFood(searchTextField.getText()));
-        System.out.println(data.toString());
-        //searchController.searchListView.setItems(data);
+        searchController.searchListView.setItems(webAccess.searchForFood(searchTextField.getText()));
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
