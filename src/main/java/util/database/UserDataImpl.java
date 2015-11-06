@@ -18,6 +18,7 @@ public class UserDataImpl implements UserData{
     public UserDataImpl(){
 
     }
+
     public User getUser(int id) {
         String sql = "SELECT * FROM user WHERE id = "+id;
         User user = new User();
@@ -27,10 +28,10 @@ public class UserDataImpl implements UserData{
             user.setId(rs.getInt("id"));
             user.setName(rs.getString("name"));
             user.setAge(rs.getInt("age"));
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return user;
     }
 
@@ -44,6 +45,7 @@ public class UserDataImpl implements UserData{
                 userList.put(rs.getString("name"),rs.getInt("id"));
                 rs.next();
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,6 +64,7 @@ public class UserDataImpl implements UserData{
                 userNames.add(rs.getString("name"));
                 rs.next();
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

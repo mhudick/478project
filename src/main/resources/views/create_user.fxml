@@ -21,8 +21,8 @@
         <GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="12.0">
             <children>
                 <Label text="Name" />
-                <TextField GridPane.columnIndex="1" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
+                <TextField fx:id="ageTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label text="Age" GridPane.rowIndex="1" />
                 <Label text="Weight" GridPane.rowIndex="2" />
                 <Label text="Height" GridPane.rowIndex="3" />

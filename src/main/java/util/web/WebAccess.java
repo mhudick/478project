@@ -14,6 +14,6 @@ import java.util.List;
  * Created by Philip on 10/18/2015.
  */
 public interface WebAccess {
-    ObservableList<String> searchForFood(String term);
+    HashMap<String,String> searchForFood(String term);
     Food getFood(String ndbno);
 }

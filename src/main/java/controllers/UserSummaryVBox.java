@@ -5,20 +5,24 @@
 
 package controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class UserSummaryVBox extends VBox implements ManagedScreen{
+public class UserSummaryVBox extends VBox implements UserControl{
 
-    private ScreenManager screenManager;
+    UserManager userManager;
+
+    @FXML
+    private Label nameLabel;
 
     public UserSummaryVBox(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/user_summary.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try{
             fxmlLoader.load();
         }
@@ -28,16 +32,21 @@ public class UserSummaryVBox extends VBox implements ManagedScreen{
     }
 
     @FXML
-    public void handleSearchButton(ActionEvent actionEvent){
-        System.out.println("Search button pressed!");
+    public void initialize(){
+
     }
 
     @FXML
-    public void handleRecipeButton(ActionEvent actionEvent){
-        System.out.println("Recipe button pressed!");
+    public void handleEditButton(ActionEvent event){
+        System.out.println(userManager.getUser().getName());
+        nameLabel.setText(userManager.getUser().getName());
     }
 
-    public void setScreenManager(ScreenManager screenManager){
-        this.screenManager = screenManager;
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+    }
+    public void setLabels(){
+        nameLabel.setText(userManager.getUser().getName());
     }
 }

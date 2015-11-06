@@ -14,7 +14,7 @@
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="CENTER_LEFT"  spacing="10.0">
         <children>
-            <Label text="Name Target">
+            <Label fx:id="nameLabel" text="Name Target">
                 <font>
                     <Font size="24.0" />
                 </font>
@@ -82,7 +82,7 @@
             </GridPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="60.0">
                 <children>
-                    <Button mnemonicParsing="false" text="Edit Profile" />
+                    <Button fx:id="editButton" text="Edit Profile" onAction="#handleEditButton"/>
                 </children>
             </HBox>
         </children>

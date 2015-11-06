@@ -39,6 +39,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn = null;
     }
 
     //Executes a List of sql statements
@@ -56,6 +57,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn = null;
     }
 
     //Returns the result set of a sql query
@@ -68,6 +70,7 @@ public class DatabaseManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return rs;
     }
 }

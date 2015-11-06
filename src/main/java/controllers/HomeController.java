@@ -19,12 +19,12 @@ import javafx.scene.Node;
 import util.web.WebAccess;
 import util.web.WebAccessImpl;
 
+import java.util.HashMap;
+
 public class HomeController extends GridPane implements ManagedScreen, UserControl{
 
     private ScreenManager screenManager;
     private UserManager userManager;
-
-    private WebAccess webAccess = new WebAccessImpl();
 
     private Node previousContent;
     //private ScreenManager homeViewManager;
@@ -53,18 +53,22 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
 
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
-        removeContent();
-        contentStackPane.getChildren().add(0, searchController);
-        searchController.searchListView.setItems(webAccess.searchForFood(searchTextField.getText()));
+        menuChoiceBox.setValue("Search");
+        searchController.getSearchResults(searchTextField.getText());
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
         System.out.println(menuChoiceBox.getValue().toString() + " was selected.");
         removeContent();
+        contentStackPane.getChildren().removeAll();
         String selectedContent = menuChoiceBox.getValue().toString();
         switch(selectedContent){
             case "Home":
                 contentStackPane.getChildren().add(0, userSummaryVBox);
+
+                break;
+            case "Search":
+                contentStackPane.getChildren().add(0, searchController);
                 break;
             case "Foods":
                 contentStackPane.getChildren().add(0, foodsVBox);
@@ -93,7 +97,8 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
                                                                         "Daily Tracker",
                                                                         "Weigh-In",
                                                                         "Exercise",
-                                                                        "Change User");
+                                                                        "Change User",
+                                                                        "Search");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
     }
@@ -105,6 +110,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         loadContent();
         loadMenuChoiceBox();
 
+        //This is needed
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -112,6 +118,9 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
                 userManager = screenManager.getUserManager();
                 System.out.println(userManager.getUser().getName());
                 recipesVBox.setUserManager(userManager);
+
+                userSummaryVBox.setUserManager(userManager);
+                userSummaryVBox.setLabels();//call label setup here.
             }
         });
         //TODO show user_summary.fxml in contentStackPane
@@ -136,10 +145,5 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         recipesVBox = new RecipesVBox();
         dailyTrackerVBox = new DailyTrackerVBox();
     }
-
-    public void search(){
-        String searchString = searchTextField.getText();
-    }
-
 
 }

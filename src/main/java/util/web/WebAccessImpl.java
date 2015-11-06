@@ -24,14 +24,13 @@ public class WebAccessImpl implements WebAccess{
     //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
 
-    private HashMap<Integer,String> itemMap;
-    private ObservableList<String> nameList;
+    private HashMap<String,String> itemMap = new HashMap<>();
+
 
     //This methods handles searching for the foods it returns the Search response as an object.
     @Override
-    public ObservableList<String> searchForFood(String term) {
+    public HashMap<String,String> searchForFood(String term) {
         term = term.replaceAll(" ","+");
-        nameList = FXCollections.observableArrayList();
         System.out.println(term);
         String jsonResult = null;
         try {
@@ -50,10 +49,10 @@ public class WebAccessImpl implements WebAccess{
         Iterator<SearchItem> iterator = searchResponse.getItem().iterator();
         while (iterator.hasNext()){
             SearchItem searchItem = iterator.next();
-            //itemMap.put(searchItem.getName().hashCode(),searchItem.getNdbno());
-            nameList.add(searchItem.getName());
+            System.out.println(searchItem.getName() + " " + searchItem.getNdbno());
+            itemMap.put(searchItem.getName(),searchItem.getNdbno());
         }
-        return nameList;
+        return itemMap;
     }
 
     //This is the method used to retrieve a Food object from the webserver.
@@ -106,11 +105,5 @@ public class WebAccessImpl implements WebAccess{
     private Boolean validateString(String userInput){
 
         return true;
-    }
-
-    //TODO implement method that returns an ArrayList of Strings that state the foods found by the searchForFood()
-    public ArrayList<String> getFoods(){
-        ArrayList<String> theList = new ArrayList<>();
-        return theList;
     }
 }
