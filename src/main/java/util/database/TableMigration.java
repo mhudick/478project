@@ -56,6 +56,12 @@ public class TableMigration {
                     "runningTotal NUMBER ,"+
                     "overBudget BOOLEAN ,"+
                     "daysNotOverBudget INT);";
+    private static final String DAY_TABLE =
+            "CREATE TABLE day"+
+                    "(id INTEGER PRIMARY KEY,"+
+                    "creation_date date,"+
+                    "user_id INTEGER,"+
+                    "FOREIGN KEY (user_id) references USER(id);";
 
     //private constructor prevents unnecessary instantiation
     private TableMigration(){
