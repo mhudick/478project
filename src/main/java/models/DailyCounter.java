@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by Mike on 10/3/2015.
  */
-public class DailyCounter {
+public class DailyCounter extends Day{
     private double dailyTotal, runningTotal;
     private boolean overBudget;
     private int daysNotOverBudget, totalDaysLogged;

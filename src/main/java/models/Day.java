@@ -8,10 +8,10 @@ import java.util.Calendar;
  */
 public class Day {
 
-    private String creation_date;
+        private String creation_date;
 
-    public String setDate(String creation_date){
-        creation_date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
-        return creation_date;
-    }
+        public String setDate(String creation_date){
+            creation_date = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+            return creation_date;
+        }
 }
