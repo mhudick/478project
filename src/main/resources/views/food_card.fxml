@@ -9,7 +9,7 @@
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="CENTER_LEFT" spacing="6.0" xmlns="http://javafx.com/javafx/8">
         <children>
-            <Label fx:id="nameLabel" text="Name Target">
+            <Label fx:id="foodNameLabel" text="Name Target">
                 <font>
                     <Font size="18.0" />
                 </font>
@@ -18,9 +18,9 @@
                 <children>
                     <Label text="kCal:" GridPane.rowIndex="1" />
                     <Label text="Measure:" GridPane.rowIndex="2" />
-                    <Label text="cal_target" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label text="measure_target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <Button mnemonicParsing="false" prefWidth="60.0" text="Save" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+                    <Label fx:id="kCalValueLabel" text="cal_target" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <Label fx:id="measureValueLabel" text="measure_target" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <Button fx:id="saveButton" mnemonicParsing="false" prefWidth="60.0" text="Save" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
                 </children>
             </GridPane>
         </children>

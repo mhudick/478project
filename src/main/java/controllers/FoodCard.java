@@ -17,8 +17,11 @@ public class FoodCard extends VBox{
 
     //fields
     private Food food;
-    @FXML private Label nameLabel;
+    @FXML private Label foodNameLabel;
     @FXML private Button viewButton;
+    @FXML private Label kCalMeasureLabel;
+    @FXML private Label measureValueLabel;
+    @FXML private Button saveButton;
 
     //constructor(s)
     public FoodCard(Food food){
@@ -34,6 +37,7 @@ public class FoodCard extends VBox{
         }
         this.food = food;
     }
+
     @FXML
     public void initialize(){
         System.out.println("FoodCard initialized");
@@ -41,8 +45,33 @@ public class FoodCard extends VBox{
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                nameLabel.setText(food.getName());
+                foodNameLabel.setText(food.getName());
             }
         });
     }
+
+    public void setFoodName(){
+        foodNameLabel.setText(food.getName());
+    }
+
+    public void setFoodName(String foodName){
+        foodNameLabel.setText(foodName);
+    }
+
+    public void setkCalMeasure(String kCalMeasure){
+        kCalMeasureLabel.setText(kCalMeasure);
+    }
+
+    public void setKCalMeasure(){
+        kCalMeasureLabel.setText(food.getKCalMeasure());
+    }
+
+    public void setMeasureValue(String measure){
+        measureValueLabel.setText(measure);
+    }
+
+    public void setMeasureValue(){
+        measureValueLabel.setText(food.getMeasure());
+    }
+
 }

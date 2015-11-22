@@ -9,10 +9,13 @@ import models.Food;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
+import java.util.ArrayList;
+
 public class FoodsVBox extends VBox implements ManagedScreen{
 
     //fields
     private ScreenManager screenManager;
+    private ArrayList<Food> foodArrayList = new ArrayList<>();
 
     public FoodsVBox(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/foods.fxml"));
@@ -27,30 +30,28 @@ public class FoodsVBox extends VBox implements ManagedScreen{
         }
     }
 
-    /*
-    public void addFoods(){
-        //this method was created for testing
-        getChildren().add(new FoodCard());
-    }
-    */
-
-    /*
     public void addFoods(Food[] foodArray){
         removeFoods();
         for(Food food : foodArray){
-            FoodCard foodCard = new FoodCard();
+            FoodCard foodCard = new FoodCard(food);
             foodCard.setFoodName(food.getName());
-            getChildren().add(new FoodCard());
+            foodCard.setkCalMeasure(food.getKCalMeasure());
+            foodCard.setMeasureValue(food.getMeasure());
+            getChildren().add(foodCard);
         }
     }
-    */
 
     public void removeFoods(){
-        //TODO clear all food cards from the FoodsVBox
+        this.getChildren().clear();
+        foodArrayList.clear();
     }
 
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
+    }
+
+    public void setFoodArrayList(){
+
     }
 
 }
