@@ -10,6 +10,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Food;
+import util.database.FoodData;
+import util.database.FoodDataImpl;
 import util.web.WebAccess;
 import util.web.WebAccessImpl;
 
@@ -23,6 +25,7 @@ import java.util.Map;
 public class SearchScreen extends VBox{
 
     WebAccess webAccess = new WebAccessImpl();
+    FoodData foodData = new FoodDataImpl();
     HashMap<String,String> listMap;
 
     @FXML
@@ -57,6 +60,11 @@ public class SearchScreen extends VBox{
         searchListView.setItems(listData);
     }
 
+    @FXML
+    public void handleBackButton(ActionEvent event){
+        Food food = foodData.getFood("01038");
+        System.out.println(food.toString());
+    }
     @FXML
     public void handleDetailButton(ActionEvent event){
         System.out.println("Detail Button Pressed.");

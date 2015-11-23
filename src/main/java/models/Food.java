@@ -15,10 +15,8 @@ public class Food{
     private String ndbno, name, fg, kCalMeasure, measure;
     private List<Nutrient> nutrients = new ArrayList<>();
 
-    public Food(String ndbno, String name, String fg){
-        this.ndbno = ndbno;
-        this.name = name;
-        this.fg = fg;
+    public Food(){
+
     }
 
     //TODO implement getKCalMeasure method (used in FoodDetailSubScreen controller)

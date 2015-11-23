@@ -44,12 +44,12 @@ public class TableMigration {
     private static String NUTRIENT_TABLE =
             "CREATE TABLE nutrient"+
                     "(id INTEGER PRIMARY KEY,"+
-                    "food_id INT NOT NULL,"+//Foreign key from food table
+                    "ndbno TEXT NOT NULL,"+//Foreign key from food table
                     "name TEXT NOT NULL,"+
                     "food_group TEXT NOT NULL,"+
                     "unit TEXT NOT NULL,"+
                     "value NUMBER NOT NULL," +
-                    "FOREIGN KEY(food_id) REFERENCES food(id));";
+                    "FOREIGN KEY(ndbno) REFERENCES food(ndbno));";
     private static final String DAILY_COUNTER_TABLE =
             "CREATE TABLE daily_counter"+
                     "(id INTEGER PRIMARY KEY,"+

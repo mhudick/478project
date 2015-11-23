@@ -4,12 +4,12 @@ package models;
  * Created by Philip on 9/30/2015.
  */
 public class Nutrient {
-    private String foodId, name,group,unit,value;
+    private String ndbno, name,group,unit,value;
     private int id;
 
     public Nutrient(int id, String foodId, String name, String group, String unit , String value){
         this.id = id;
-        this.foodId = foodId;
+        this.ndbno = foodId;
         this.name = name;
         this.group = group;
         this.unit = unit;
@@ -24,12 +24,12 @@ public class Nutrient {
         this.id = id;
     }
 
-    public String getFoodId() {
-        return foodId;
+    public String getNdbno() {
+        return ndbno;
     }
 
-    public void setFoodId(String foodId) {
-        this.foodId = foodId;
+    public void setFoodId(String ndbno) {
+        this.ndbno = ndbno;
     }
 
     public String getName() {
@@ -68,8 +68,8 @@ public class Nutrient {
     public String toString(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("\nNutrient ID: "+getId()+"\nName: "+getName()+
-            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue()+"\n");
+        sb.append("Nutrient ID: "+getId()+"\nName: "+getName()+
+            "\nGroup: "+getGroup()+"\nUnit: "+getUnit()+"\nValue: "+getValue());
 
         return sb.toString();
     }

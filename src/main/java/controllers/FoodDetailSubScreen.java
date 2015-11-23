@@ -6,15 +6,18 @@
 package controllers;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.Food;
+import util.database.FoodData;
+import util.database.FoodDataImpl;
 
 public class FoodDetailSubScreen extends VBox{
-
+    FoodData foodData = new FoodDataImpl();
     //fields
     private Food food;
     @FXML private Label foodNameLabel;
@@ -48,6 +51,11 @@ public class FoodDetailSubScreen extends VBox{
                 foodNameLabel.setText(food.getName());
             }
         });
+    }
+
+    @FXML
+    public void handleSaveButton(ActionEvent event){
+        foodData.saveFood(food);
     }
 
     public void setFoodName(){

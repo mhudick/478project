@@ -17,7 +17,7 @@
             <ListView fx:id="searchListView" prefHeight="300.0" prefWidth="350.0" />
             <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="0.0" spacing="12.0">
                 <children>
-                    <Button fx:id="backButton" prefWidth="75.0" text="Back" />
+                    <Button fx:id="backButton" prefWidth="75.0" text="Test getFoods" onAction="#handleBackButton"/>
                     <Button fx:id="detailButton" prefWidth="75.0" text="Get Details" onAction="#handleDetailButton"/>
                 </children>
                 <VBox.margin>
