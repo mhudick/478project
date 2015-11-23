@@ -12,14 +12,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class UserSummaryVBox extends VBox implements UserControl{
+public class UserSummaryScreen extends VBox implements UserControl{
 
     UserManager userManager;
 
     @FXML
     private Label nameLabel;
 
-    public UserSummaryVBox(){
+    public UserSummaryScreen(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/user_summary.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);

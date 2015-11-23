@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * Created by Philip on 11/5/2015.
  */
-public class SearchController extends VBox{
+public class SearchScreen extends VBox{
 
     WebAccess webAccess = new WebAccessImpl();
     HashMap<String,String> listMap;
@@ -32,7 +32,7 @@ public class SearchController extends VBox{
     @FXML
     Button detailButton;
 
-    public SearchController(){
+    public SearchScreen(){
         System.out.println("Recipe Constructor");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/search_results.fxml"));
         fxmlLoader.setRoot(this);
@@ -64,6 +64,6 @@ public class SearchController extends VBox{
             detailPane.getChildren().remove(0);
         }
         Food food = webAccess.getFood(listMap.get(searchListView.getSelectionModel().getSelectedItem()));
-        detailPane.getChildren().add(0,new FoodCard(food));
+        detailPane.getChildren().add(0,new FoodDetailSubScreen(food));
     }
 }

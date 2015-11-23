@@ -14,7 +14,7 @@ import models.User;
 import java.util.HashMap;
 
 public class ScreenManager extends StackPane implements UserControl{
-    public String test ="TESTING!!!";
+
     //fields
     private HashMap<Screen, Node> screens = new HashMap<>();
     private Node previousScreen;

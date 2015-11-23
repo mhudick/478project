@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.Food;
 
-public class FoodCard extends VBox{
+public class FoodDetailSubScreen extends VBox{
 
     //fields
     private Food food;
@@ -24,7 +24,7 @@ public class FoodCard extends VBox{
     @FXML private Button saveButton;
 
     //constructor(s)
-    public FoodCard(Food food){
+    public FoodDetailSubScreen(Food food){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -40,7 +40,7 @@ public class FoodCard extends VBox{
 
     @FXML
     public void initialize(){
-        System.out.println("FoodCard initialized");
+        System.out.println("FoodDetailSubScreen initialized");
 
         Platform.runLater(new Runnable() {
             @Override

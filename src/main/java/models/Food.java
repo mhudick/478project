@@ -21,12 +21,12 @@ public class Food{
         this.fg = fg;
     }
 
-    //TODO implement getKCalMeasure method (used in FoodCard controller)
+    //TODO implement getKCalMeasure method (used in FoodDetailSubScreen controller)
     public String getKCalMeasure(){
         return kCalMeasure;
     }
 
-    //TODO implement getMeasure method (used in FoodCard controller)
+    //TODO implement getMeasure method (used in FoodDetailSubScreen controller)
     public String getMeasure(){
         return measure;
     }

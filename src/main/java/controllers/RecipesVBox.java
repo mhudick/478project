@@ -18,9 +18,6 @@ public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
     @FXML TextArea textArea;
 
     @FXML
-    Button button;
-
-    @FXML
     public void initialize(){
         System.out.println("Recipe initialize");
 

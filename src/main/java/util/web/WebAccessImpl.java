@@ -26,7 +26,6 @@ public class WebAccessImpl implements WebAccess{
 
     private HashMap<String,String> itemMap = new HashMap<>();
 
-
     //This methods handles searching for the foods it returns the Search response as an object.
     @Override
     public HashMap<String,String> searchForFood(String term) {
@@ -101,9 +100,5 @@ public class WebAccessImpl implements WebAccess{
         in.close();
         //return result
         return response.toString();
-    }
-    private Boolean validateString(String userInput){
-
-        return true;
     }
 }

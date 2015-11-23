@@ -33,7 +33,7 @@ public class FoodsVBox extends VBox implements ManagedScreen{
     public void addFoods(Food[] foodArray){
         removeFoods();
         for(Food food : foodArray){
-            FoodCard foodCard = new FoodCard(food);
+            FoodDetailSubScreen foodCard = new FoodDetailSubScreen(food);
             foodCard.setFoodName(food.getName());
             foodCard.setkCalMeasure(food.getKCalMeasure());
             foodCard.setMeasureValue(food.getMeasure());

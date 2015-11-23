@@ -8,10 +8,6 @@ import models.User;
 public class UserManager {
      User user;
 
-    public UserManager(){
-
-    }
-
     public User getUser() {
         return user;
     }

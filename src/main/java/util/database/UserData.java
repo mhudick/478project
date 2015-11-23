@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public interface UserData {
     User getUser(int id);
-    HashMap<String,Integer> getAllUsers();
+    HashMap<String,Integer> getUserMap();
     ObservableList<String> getUserNames();
     Boolean saveUser(User user);
     Boolean deleteUser(int id);

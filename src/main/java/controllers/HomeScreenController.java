@@ -10,18 +10,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
-import util.web.WebAccess;
-import util.web.WebAccessImpl;
 
-import java.util.HashMap;
-
-public class HomeController extends GridPane implements ManagedScreen, UserControl{
+public class HomeScreenController extends GridPane implements ManagedScreen, UserControl{
 
     private ScreenManager screenManager;
     private UserManager userManager;
@@ -32,13 +27,13 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     @FXML private TextField searchTextField;
     @FXML private StackPane contentStackPane;
     private FoodsVBox foodsVBox;
-    private UserSummaryVBox userSummaryVBox;
+    private UserSummaryScreen userSummaryVBox;
     private RecipesVBox recipesVBox;
     private DailyTrackerVBox dailyTrackerVBox;
-    private SearchController searchController;
+    private SearchScreen searchController;
 
-    public HomeController(){
-        System.out.println("HomeController Constructor");
+    public HomeScreenController(){
+        System.out.println("HomeScreenController Constructor");
     }
 
     @Override
@@ -65,7 +60,6 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         switch(selectedContent){
             case "Home":
                 contentStackPane.getChildren().add(0, userSummaryVBox);
-
                 break;
             case "Search":
                 contentStackPane.getChildren().add(0, searchController);
@@ -83,7 +77,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
                 screenManager.show(Screen.USER_LOG_IN);
                 break;
             default:
-                System.out.println("default case executed in handleMenuChoiceBox method of HomeController");
+                System.out.println("default case executed in handleMenuChoiceBox method of HomeScreenController");
                 contentStackPane.getChildren().add(0, userSummaryVBox);
                 break;
         }
@@ -91,11 +85,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
 
     public void loadMenuChoiceBox(){
         //TODO create contentView enum and use it to populate the menuChoiceBox
-        ObservableList<String> list = FXCollections.observableArrayList("Home",
-                                                                        "Foods",
-                                                                        "Recipes",
-                                                                        "Daily Tracker",
-                                                                        "Weigh-In",
+        ObservableList<String> list = FXCollections.observableArrayList("Home","Foods","Recipes", "Daily Tracker", "Weigh-In",
                                                                         "Exercise",
                                                                         "Change User",
                                                                         "Search");
@@ -105,7 +95,7 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
 
     @FXML
     private void initialize(){
-        System.out.println("HomeController initialized.");
+        System.out.println("HomeScreenController initialized.");
 
         loadContent();
         loadMenuChoiceBox();
@@ -139,9 +129,9 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
     }
 
     public void loadContent(){
-        searchController = new SearchController();
+        searchController = new SearchScreen();
         foodsVBox = new FoodsVBox();
-        userSummaryVBox = new UserSummaryVBox();
+        userSummaryVBox = new UserSummaryScreen();
         recipesVBox = new RecipesVBox();
         dailyTrackerVBox = new DailyTrackerVBox();
     }

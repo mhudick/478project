@@ -35,7 +35,7 @@ public class UserDataImpl implements UserData{
         return user;
     }
 
-    public HashMap<String,Integer> getAllUsers(){
+    public HashMap<String,Integer> getUserMap(){
         String sql = "SELECT id, name FROM user";
         HashMap<String,Integer> userList = new HashMap<>();
         ResultSet rs = DatabaseManager.getResultSet(sql);

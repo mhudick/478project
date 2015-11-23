@@ -14,6 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage)throws Exception {
+
         //load app screens
         UserManager userManager = new UserManager();
         ScreenManager appScreenManager = new ScreenManager();
@@ -22,14 +23,18 @@ public class Main extends Application {
         //appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
         appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
         appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
-        if(getUserCount() == 0){//there are no users, show the create_user screen
+
+
+
+        //Check if user already exist
+        if(getUserCount() == 0){
             appScreenManager.show(Screen.CREATE_USER);
         }
         else{
             appScreenManager.show(Screen.USER_LOG_IN);
         }
 
-        //load user interface
+        //Setup application stage
         Scene scene = new Scene(appScreenManager,APP_WIDTH,APP_HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Calorie Counter");
@@ -37,15 +42,14 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //load application database
+        //If database does not exist it get created.
         DatabaseManager.checkForDatabase();
 
-        //load user interface
         launch(args);
     }
 
     private int getUserCount(){
         UserData userData = new UserDataImpl();
-        return userData.getAllUsers().size();
+        return userData.getUserMap().size();
     }
 }

@@ -7,6 +7,6 @@ package controllers;
 
 public interface ManagedScreen {
 
-    public void setScreenManager(ScreenManager screenManager);
+    void setScreenManager(ScreenManager screenManager);
 
 }
