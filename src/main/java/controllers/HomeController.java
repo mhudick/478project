@@ -65,12 +65,13 @@ public class HomeController extends GridPane implements ManagedScreen, UserContr
         switch(selectedContent){
             case "Home":
                 contentStackPane.getChildren().add(0, userSummaryVBox);
-
                 break;
             case "Search":
                 contentStackPane.getChildren().add(0, searchController);
                 break;
             case "Foods":
+                foodsVBox.setFoodArrayList();
+                foodsVBox.loadFoods();
                 contentStackPane.getChildren().add(0, foodsVBox);
                 break;
             case "Recipes":

@@ -64,6 +64,7 @@ public class SearchController extends VBox{
             detailPane.getChildren().remove(0);
         }
         Food food = webAccess.getFood(listMap.get(searchListView.getSelectionModel().getSelectedItem()));
-        detailPane.getChildren().add(0,new FoodCard(food));
+        detailPane.getChildren().add(0, new FoodCard(food));
     }
+
 }

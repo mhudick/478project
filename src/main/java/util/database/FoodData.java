@@ -13,24 +13,25 @@ import java.util.List;
 public class FoodData {
 
     public static Food getFood(String ndbno) {
-        String sql = "SELECT * FROM food WHERE ndbno = "+ndbno+";";
-        NutrientData nutrientData = new NutrientData();
+        String sql = "SELECT ndbno, name, food_group FROM food WHERE ndbno = "+ndbno+";";
         Food food = null;
-
+        NutrientData nutrientData = new NutrientData();
         ResultSet resultSet = DatabaseManager.getResultSet(sql);
+
         try {
-            food.setNdbno(resultSet.getString("ndbno"));//These methods set the attributes of the Food object
-            food.setName(resultSet.getString("name"));
-            food.setFg(resultSet.getString("food_group"));
+            resultSet.next();
+            //These methods set the attributes of the Food object
+            String foodName = resultSet.getString("name");
+            String foodGroup = resultSet.getString("food_group");
+            food = new Food(ndbno, foodName, foodGroup);
+            food.setNutrients(nutrientData.getNutrientList(ndbno));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        food.setNutrients(nutrientData.getNutrientList(ndbno));
         return food;
     }
 
-
+    /*
     public static List<Food> getAllFoods() {
         String sql = "SELECT * FROM food;";
         List<Food> list = new ArrayList<>();
@@ -47,15 +48,37 @@ public class FoodData {
         System.out.println(list.toString());
         return list;
     }
+    */
 
+    public static ArrayList<Food> getAllFoods() {
+        String sql = "SELECT * FROM food;";
+        ArrayList<Food> foodArraylist = new ArrayList<>();
+        ResultSet resultSet = DatabaseManager.getResultSet(sql);
+        try {
+            while(!resultSet.isAfterLast()){
+                System.out.println(resultSet.getString("ndbno"));
+                String ndbno = resultSet.getString("ndbno");
+                Food food = getFood(ndbno);
+                foodArraylist.add(food);
+                resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(foodArraylist.toString());
+        return foodArraylist;
+    }
 
     public static void saveFood(Food food) {
         //String created from attributes of the object
         NutrientData nutrientData = new NutrientData();
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
                 food.getNbdno()+"\",\""+food.getName()+"\",\""+food.getFg()+"\");";
-        //This iterates through nutrient list
-
+        //TODO can the sql statement below be used instead of the one above?
+        /*
+        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values" +
+                food.getNbdno() + ", " + food.getName() + ", " + food.getFg();
+        */
         DatabaseManager.executeStatment(sql);
         nutrientData.saveNutrientList(food.getNutrients());
         //Executes sql as background thread so the GUI is unaffected.

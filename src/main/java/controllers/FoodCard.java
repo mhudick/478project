@@ -6,12 +6,14 @@
 package controllers;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.Food;
+import util.database.FoodData;
 
 public class FoodCard extends VBox{
 
@@ -38,6 +40,7 @@ public class FoodCard extends VBox{
         this.food = food;
     }
 
+    //TODO Phil, can you explain this method?
     @FXML
     public void initialize(){
         System.out.println("FoodCard initialized");
@@ -72,6 +75,10 @@ public class FoodCard extends VBox{
 
     public void setMeasureValue(){
         measureValueLabel.setText(food.getMeasure());
+    }
+
+    public void handleSaveButton(ActionEvent actionEvent){
+        FoodData.saveFood(food);
     }
 
 }
