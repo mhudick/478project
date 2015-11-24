@@ -15,8 +15,6 @@ public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
     private ScreenManager screenManager;
     private UserManager userManager;
 
-    @FXML TextArea textArea;
-
     @FXML
     public void initialize(){
         System.out.println("Recipe initialize");
@@ -34,12 +32,6 @@ public class RecipesVBox extends VBox implements ManagedScreen, UserControl{
         catch(Exception e){
             System.out.println(e.toString());
         }
-    }
-
-    public void handleButton(){
-        System.out.println("Pressed");
-        userManager.getUser().setAge(userManager.getUser().getAge()+1);
-        textArea.setText(userManager.getUser().getName());
     }
 
     @Override

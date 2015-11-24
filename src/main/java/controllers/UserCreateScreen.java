@@ -17,12 +17,11 @@ import util.database.UserDataImpl;
 
 public class UserCreateScreen implements ManagedScreen{
 
-    private UserData userData = new UserDataImpl();
-    private ScreenManager screenManager;
-    @FXML private TextField nameTextField;
-    @FXML private TextField ageTextField;
+    private UserData userData = new UserDataImpl();//User data access object
+    private ScreenManager screenManager;//Used for reference of parent screen manager
 
-    @FXML
+    @FXML private TextField nameTextField,ageTextField,weightTextField,heightFtTextField,heightInTextField;
+
     public void handleCreateButton(ActionEvent actionEvent){
         System.out.println("Create button clicked!");
         setUserData();
@@ -38,10 +37,12 @@ public class UserCreateScreen implements ManagedScreen{
     public void setScreenManager(ScreenManager screenManager){
         this.screenManager = screenManager;
     }
+
     public void setUserData(){
         User user = new User();
         user.setName(nameTextField.getText());
         user.setAge(Integer.parseInt(ageTextField.getText()));
+
         userData.saveUser(user);
     }
 }

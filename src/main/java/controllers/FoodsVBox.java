@@ -32,7 +32,7 @@ public class FoodsVBox extends VBox implements ManagedScreen{
             System.out.println(e.toString());
         }
     }
-
+    /*
     public void loadFoods(){
         removeFoods();
         for(Food food : foodArrayList){
@@ -42,7 +42,7 @@ public class FoodsVBox extends VBox implements ManagedScreen{
             foodCard.setMeasureValue(food.getMeasure());
             getChildren().add(foodCard);
         }
-    }
+    }*/
 
     public void removeFoods(){
         this.getChildren().clear();
@@ -54,7 +54,7 @@ public class FoodsVBox extends VBox implements ManagedScreen{
     }
 
     public void setFoodArrayList(){
-        foodArrayList = FoodData.getAllFoods();
+        //foodArrayList = FoodData.getAllFoods();
     }
 
 }
