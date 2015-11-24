@@ -5,11 +5,14 @@
 
 package controllers;
 
-import models.Food;
+import java.util.ArrayList;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
+import models.Food;
+import util.database.FoodData;
 
-import java.util.ArrayList;
+
 
 public class FoodsVBox extends VBox implements ManagedScreen{
 
@@ -30,10 +33,10 @@ public class FoodsVBox extends VBox implements ManagedScreen{
         }
     }
 
-    public void addFoods(Food[] foodArray){
+    public void loadFoods(){
         removeFoods();
-        for(Food food : foodArray){
-            FoodDetailSubScreen foodCard = new FoodDetailSubScreen(food);
+        for(Food food : foodArrayList){
+            FoodCard foodCard = new FoodCard(food);
             foodCard.setFoodName(food.getName());
             foodCard.setkCalMeasure(food.getKCalMeasure());
             foodCard.setMeasureValue(food.getMeasure());
@@ -51,7 +54,7 @@ public class FoodsVBox extends VBox implements ManagedScreen{
     }
 
     public void setFoodArrayList(){
-
+        foodArrayList = FoodData.getAllFoods();
     }
 
 }

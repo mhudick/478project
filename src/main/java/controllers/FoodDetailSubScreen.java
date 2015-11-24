@@ -41,6 +41,7 @@ public class FoodDetailSubScreen extends VBox{
         this.food = food;
     }
 
+    //TODO Phil, can you explain this method?
     @FXML
     public void initialize(){
         System.out.println("FoodDetailSubScreen initialized");
