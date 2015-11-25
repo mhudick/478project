@@ -1,73 +1,76 @@
 package models;
 
+import javax.jws.soap.SOAPBinding;
+
 /**
  * Created by Phil on 9/28/2015.
  */
 public class User {
-    private int id;
+    private int UserId, dailyCalorieLimit;
     private String name;
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    private int age;
-    private int dailyCalorieCount;
-    private int dailyCalorieGoal;
-    private int lbs;
-    private int lbsGoal;
+    double weightCurrent, weightStart, weightGoal;
 
     public User(){
-
+        dailyCalorieLimit = 2000;
     }
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getDailyCalorieCount() {
-        return dailyCalorieCount;
+    public int getUserId() {
+        return UserId;
     }
 
-    public void setDailyCalorieCount(int dailyCalorieCount) {
-        this.dailyCalorieCount = dailyCalorieCount;
+    public void setUserId(int userId) {
+        this.UserId = userId;
     }
 
-    public int getLbsGoal() {
-        return lbsGoal;
+    public int getDailyCalorieLimit() {
+        return dailyCalorieLimit;
     }
 
-    public void setLbsGoal(int lbsGoal) {
-        this.lbsGoal = lbsGoal;
+    public void setDailyCalorieLimit(int dailyCalorieLimit) {
+        this.dailyCalorieLimit = dailyCalorieLimit;
     }
 
-    public int getLbs() {
-        return lbs;
-    }
-
-    public void setLbs(int lbs) {
-        this.lbs = lbs;
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getDailyCalorieGoal() {
-        return dailyCalorieGoal;
+    public double getWeightCurrent() {
+        return weightCurrent;
     }
 
-    public void setDailyCalorieGoal(int dailyCalorieGoal) {
-        this.dailyCalorieGoal = dailyCalorieGoal;
+    public void setWeightCurrent(double weightCurrent) {
+        this.weightCurrent = weightCurrent;
     }
 
-    public String getName() {
-        return name;
+    public double getWeightStart() {
+        return weightStart;
+    }
+
+    public void setWeightStart(double weightStart) {
+        this.weightStart = weightStart;
+    }
+
+    public double getWeightGoal() {
+        return weightGoal;
+    }
+
+    public void setWeightGoal(double weightGoal) {
+        this.weightGoal = weightGoal;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "UserId=" + UserId +
+                ", dailyCalorieLimit=" + dailyCalorieLimit +
+                ", name='" + name + '\'' +
+                ", weightCurrent=" + weightCurrent +
+                ", weightStart=" + weightStart +
+                ", weightGoal=" + weightGoal +
+                '}';
     }
 }

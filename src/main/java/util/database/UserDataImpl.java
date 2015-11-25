@@ -20,14 +20,17 @@ public class UserDataImpl implements UserData{
     }
 
     public User getUser(int id) {
-        String sql = "SELECT * FROM user WHERE id = "+id;
+        String sql = "SELECT * FROM user WHERE userId = "+id;
         User user = new User();
         ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
             rs.next();
-            user.setId(rs.getInt("id"));
+            user.setUserId(rs.getInt("userID"));
             user.setName(rs.getString("name"));
-            user.setAge(rs.getInt("age"));
+            user.setDailyCalorieLimit(rs.getInt("dailyCalorieLimit"));
+            user.setWeightCurrent(rs.getDouble("weightCurrent"));
+            user.setWeightStart(rs.getDouble("weightStart"));
+            user.setWeightGoal(rs.getDouble("weightGoal"));
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,13 +39,13 @@ public class UserDataImpl implements UserData{
     }
 
     public HashMap<String,Integer> getUserMap(){
-        String sql = "SELECT id, name FROM user";
+        String sql = "SELECT UserId, name FROM user";
         HashMap<String,Integer> userList = new HashMap<>();
         ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
             rs.next();
             while(!rs.isAfterLast()){
-                userList.put(rs.getString("name"),rs.getInt("id"));
+                userList.put(rs.getString("name"),rs.getInt("userId"));
                 rs.next();
             }
             rs.close();
@@ -72,7 +75,9 @@ public class UserDataImpl implements UserData{
     }
 
     public Boolean saveUser(User user) {
-        String sql = "INSERT OR REPLACE INTO user(name, age) VALUES(\'"+user.getName()+"\', "+user.getAge()+")";
+        String sql = "INSERT OR REPLACE INTO user(name, dailyCalorieLimit, weightCurrent, weightStart, weightGoal)"+
+                    "VALUES(\'"+user.getName()+"\', "+user.getDailyCalorieLimit()+", "+user.getWeightCurrent()+", "+
+                    user.getWeightStart()+", "+user.getWeightGoal()+");";
         DatabaseManager.executeStatment(sql);
         return true;
     }

@@ -16,10 +16,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 
-public class HomeScreenController extends GridPane implements ManagedScreen, UserControl{
+public class HomeScreen extends GridPane implements ManagedScreen, UserControl{
 
     private ScreenManager screenManager;
     private UserManager userManager;
+    private HomeScreen homeScreen;
+
 
     private Node previousContent;
     //private ScreenManager homeViewManager;
@@ -28,12 +30,13 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
     @FXML private StackPane contentStackPane;
     private FoodsVBox foodsVBox;
     private UserSummaryScreen userSummaryVBox;
-    private RecipesVBox recipesVBox;
-    private DailyTrackerVBox dailyTrackerVBox;
-    private SearchScreen searchController;
+    private SearchScreen searchScreen;
+    private UserWeighIn weighInScreen;
+    private UserEditScreen userEditScreen;
 
-    public HomeScreenController(){
-        System.out.println("HomeScreenController Constructor");
+    public HomeScreen(){
+        System.out.println("HomeScreen Constructor");
+        this.homeScreen = this;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
         menuChoiceBox.setValue("Search");
-        searchController.getSearchResults(searchTextField.getText());
+        searchScreen.getSearchResults(searchTextField.getText());
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){
@@ -60,29 +63,26 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
         switch(selectedContent){
             case "Home":
                 contentStackPane.getChildren().add(0, userSummaryVBox);
+                userSummaryVBox.setLabels();
                 break;
             case "Search":
-                contentStackPane.getChildren().add(0, searchController);
+                contentStackPane.getChildren().add(0, searchScreen);
                 break;
             case "Foods":
-                //TODO uncomment these lines of code to verify FoodData.getData() is working
-                /*
-                foodsVBox.setFoodArrayList();
-                foodsVBox.loadFoods();
+                foodsVBox.setFoodListView();
                 contentStackPane.getChildren().add(0, foodsVBox);
-                */
                 break;
-            case "Recipes":
-                contentStackPane.getChildren().add(0, recipesVBox);
+            case "Weigh-In":
+                contentStackPane.getChildren().add(0, weighInScreen);
                 break;
-            case "Daily Tracker":
-                contentStackPane.getChildren().add(0, dailyTrackerVBox);
+            case "Edit Profile":
+                contentStackPane.getChildren().add(0, userEditScreen);
                 break;
             case "Change User":
                 screenManager.show(Screen.USER_LOG_IN);
                 break;
             default:
-                System.out.println("default case executed in handleMenuChoiceBox method of HomeScreenController");
+                System.out.println("default case executed in handleMenuChoiceBox method of HomeScreen");
                 contentStackPane.getChildren().add(0, userSummaryVBox);
                 break;
         }
@@ -90,20 +90,17 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
 
     public void loadMenuChoiceBox(){
         //TODO create contentView enum and use it to populate the menuChoiceBox
-        ObservableList<String> list = FXCollections.observableArrayList("Home","Foods","Recipes", "Daily Tracker", "Weigh-In",
-                                                                        "Exercise",
-                                                                        "Change User",
-                                                                        "Search");
+        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search", "Edit Profile","Change User");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
     }
 
     @FXML
     private void initialize(){
-        System.out.println("HomeScreenController initialized.");
+        System.out.println("HomeScreen initialized.");
 
         loadContent();
-        loadMenuChoiceBox();
+
 
         //This is needed
         Platform.runLater(new Runnable() {
@@ -112,16 +109,21 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
                 System.out.println("Run later");
                 userManager = screenManager.getUserManager();
                 System.out.println(userManager.getUser().getName());
-                recipesVBox.setUserManager(userManager);
-
+                foodsVBox.setUserManager(userManager);
                 userSummaryVBox.setUserManager(userManager);
-                userSummaryVBox.setLabels();//call label setup here.
+                //userSummaryVBox.setLabels();//call label setup here.
+                weighInScreen.sethomeScreen(homeScreen);
+                userSummaryVBox.sethomeScreen(homeScreen);
+                userEditScreen.sethomeScreen(homeScreen);
+                userEditScreen.setUserManager(userManager);
+                loadMenuChoiceBox();
             }
         });
-        //TODO show user_summary.fxml in contentStackPane
     }
 
-
+    public ChoiceBox getMenuChoiceBox(){
+        return menuChoiceBox;
+    }
 
     public void removeContent(){
         if(contentStackPane.getChildren().size() != 0){
@@ -134,11 +136,12 @@ public class HomeScreenController extends GridPane implements ManagedScreen, Use
     }
 
     public void loadContent(){
-        searchController = new SearchScreen();
+        searchScreen = new SearchScreen();
         foodsVBox = new FoodsVBox();
         userSummaryVBox = new UserSummaryScreen();
-        recipesVBox = new RecipesVBox();
-        dailyTrackerVBox = new DailyTrackerVBox();
+        weighInScreen = new UserWeighIn();
+        userEditScreen = new UserEditScreen();
     }
+
 
 }

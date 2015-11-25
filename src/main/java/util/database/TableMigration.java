@@ -10,58 +10,35 @@ public class TableMigration {
     //Constant for sql that creates the tables.
     private static final String USER_TABLE =
             "CREATE TABLE user"+
-                    "(id INTEGER PRIMARY KEY,"+
+                    "(userId INTEGER PRIMARY KEY,"+
                     "name TEXT NOT NULL UNIQUE,"+
-                    "age INT NULL);";
-
-    private static final String USER_RECIPE_TABLE =
-            "CREATE TABLE user_recipe("+
-                    "id INTEGER PRIMARY KEY NOT NULL,"+
-                    "user_id INT NOT NULL,"+
-                    "recipe_id INT NOT NULL,"+
-                    "FOREIGN KEY(user_id) REFERENCES user(id)," +
-                    "FOREIGN KEY(recipe_id) REFERENCES recipe(id))";
-
-    private static final String RECIPE_TABLE =
-            "CREATE TABLE recipe"+
-                    "(id INT PRIMARY KEY NOT NULL,"+
-                    "title TEXT NOT NULL);";
-
-    private static final String RECIPE_FOOD_TABLE =
-            "CREATE TABLE recipe_food("+
-                    "id INT PRIMARY KEY NOT NULL,"+
-                    "recipe_id INT NOT NULL,"+
-                    "food_id INT NOT NULL," +
-                    "FOREIGN KEY(recipe_id) REFERENCES recipe(id)," +
-                    "FOREIGN KEY(food_id) REFERENCES food(id));";
+                    "dailyCalorieLimit INTEGER,"+
+                    "weightCurrent NUMBER,"+
+                    "weightStart NUMBER,"+
+                    "weightGoal NUMBER);";
 
     private static String FOOD_TABLE =
             "CREATE TABLE food("+
                     "ndbno TEXT PRIMARY KEY,"+
                     "name TEXT NOT NULL,"+
-                    "food_group TEXT NOT NULL);";
+                    "fg TEXT NOT NULL,"+
+                    "kCal NUMBER);";
 
-    private static String NUTRIENT_TABLE =
-            "CREATE TABLE nutrient"+
-                    "(id INTEGER PRIMARY KEY,"+
-                    "ndbno TEXT NOT NULL,"+//Foreign key from food table
-                    "name TEXT NOT NULL,"+
-                    "food_group TEXT NOT NULL,"+
-                    "unit TEXT NOT NULL,"+
-                    "value NUMBER NOT NULL," +
-                    "FOREIGN KEY(ndbno) REFERENCES food(ndbno));";
-    private static final String DAILY_COUNTER_TABLE =
-            "CREATE TABLE daily_counter"+
-                    "(id INTEGER PRIMARY KEY,"+
-                    "runningTotal NUMBER ,"+
-                    "overBudget BOOLEAN ,"+
-                    "daysNotOverBudget INT);";
     private static final String DAY_TABLE =
             "CREATE TABLE day"+
-                    "(id INTEGER PRIMARY KEY,"+
-                    "creation_date date,"+
-                    "user_id INTEGER,"+
-                    "FOREIGN KEY (user_id) references USER(id);";
+                    "(dayId INTEGER PRIMARY KEY,"+
+                    "userId INTEGER,"+
+                    "creation_date TEXT,"+
+                    "totalCal INTEGER,"+
+                    "FOREIGN KEY (userId) references USER(userId));";
+
+    private static final String WEIGH_IN_TABLE =
+            "CREATE TABLE weigh_in"+
+                    "(weighId INTEGER PRIMARY KEY,"+
+                    "userId INTEGER,"+
+                    "date DATE,"+
+                    "weight NUMBER,"+
+                    "FOREIGN KEY(userId) REFERENCES day(userId));";
 
     //private constructor prevents unnecessary instantiation
     private TableMigration(){
@@ -72,12 +49,9 @@ public class TableMigration {
     public static List<String> getTables(){
         List<String> tables = new ArrayList<>();
         tables.add(USER_TABLE);
-        tables.add(USER_RECIPE_TABLE);
-        tables.add(RECIPE_TABLE);
-        tables.add(RECIPE_FOOD_TABLE);
         tables.add(FOOD_TABLE);
-        tables.add(NUTRIENT_TABLE);
-        tables.add(DAILY_COUNTER_TABLE);
+        tables.add(DAY_TABLE);
+        tables.add(WEIGH_IN_TABLE);
 
         return tables;
     }

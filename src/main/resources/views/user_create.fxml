@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" spacing="50.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserCreateScreen">
+    <children>
+        <Label text="User Info">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <GridPane alignment="CENTER" hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="12.0">
+            <children>
+                <Label text="Name:" />
+                <TextField fx:id="nameTextField" GridPane.columnIndex="1" />
+                <Label text="Current Weight:" GridPane.rowIndex="1" />
+                <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <TextField fx:id="currentTextField" prefWidth="50.0" />
+                        <Label text="lbs." />
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="goalTextField" prefWidth="50.0" />
+                  <Label text="Lbs." />
+               </children>
+                </HBox>
+                <HBox alignment="CENTER_RIGHT" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <children>
+                        <Button fx:id="createButton" onAction="#handleCreateButton" prefWidth="60.0" text="Create" />
+                        <Button fx:id="backButton" onAction="#handleBackButton" prefWidth="60.0" text="Cancel" />
+                    </children>
+                </HBox>
+            <Label text="Goal Weight:" GridPane.rowIndex="2" />
+            </children>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+    </children>
+</VBox>

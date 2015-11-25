@@ -2,11 +2,10 @@ package controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Food;
@@ -31,9 +30,8 @@ public class SearchScreen extends VBox{
     @FXML
     ListView<String> searchListView;
     @FXML
-    Pane detailPane;
-    @FXML
-    Button detailButton;
+    Pane foodPane;
+
 
     public SearchScreen(){
         System.out.println("Recipe Constructor");
@@ -61,17 +59,12 @@ public class SearchScreen extends VBox{
     }
 
     @FXML
-    public void handleBackButton(ActionEvent event){
-        Food food = foodData.getFood("01038");
-        System.out.println(food.toString());
-    }
-    @FXML
-    public void handleDetailButton(ActionEvent event){
-        System.out.println("Detail Button Pressed.");
-        if(!detailPane.getChildren().isEmpty()){
-            detailPane.getChildren().remove(0);
-        }
+    public void handleMouseClick(MouseEvent arg0){
+        System.out.println("clicked on " + searchListView.getSelectionModel().getSelectedItem().toString());
         Food food = webAccess.getFood(listMap.get(searchListView.getSelectionModel().getSelectedItem()));
-        detailPane.getChildren().add(0,new FoodDetailSubScreen(food));
+        if(!foodPane.getChildren().isEmpty()){
+            foodPane.getChildren().remove(0);
+        }
+        foodPane.getChildren().add(0, new FoodSearchSubScreen(food));
     }
 }

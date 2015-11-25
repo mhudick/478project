@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import util.NumFieldFx?>
+<fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <children>
+            <Label fx:id="nameLabel" layoutX="50.0" layoutY="21.0" maxWidth="250.0" text="Food Name">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+            <Label layoutX="52.0" layoutY="122.0" text="kCal:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label fx:id="calLabel" layoutX="114.0" layoutY="122.0" text="0">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Label layoutX="50.0" layoutY="79.0" text="Mass:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <NumFieldFx fx:id="gramTextField" layoutX="118.0" layoutY="80.0" prefWidth="50.0" />
+            <Label layoutX="184.0" layoutY="79.0" text="grams">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <Button layoutX="208.0" layoutY="149.0" prefWidth="80" text="Eat" onAction="#handleEatButton"/>
+        </children>
+    </AnchorPane>
+</fx:root>
+
+

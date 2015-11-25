@@ -1,5 +1,6 @@
 package util.database;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Food;
 
@@ -15,84 +16,58 @@ import java.util.List;
 public class FoodDataImpl implements FoodData{
 
     @Override
-    public Food getFood(String ndbno) {
-        String sql = "SELECT * FROM food WHERE ndbno = \'"+ndbno+"\';";
-        NutrientDataImpl nutrientData = new NutrientDataImpl();
-        Food food = new Food();
-
-        ResultSet resultSet = DatabaseManager.getResultSet(sql);
-        try {
-            resultSet.next();
-            System.out.println(resultSet.getString("ndbno"));
-            food.setNdbno(resultSet.getString("ndbno"));//These methods set the attributes of the Food object
-            food.setName(resultSet.getString("name"));
-            food.setFg(resultSet.getString("food_group"));
-            resultSet.close();
-            System.out.println(food.getName() + "loaded");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        food.setNutrients(nutrientData.getNutrientList(ndbno));
-        return food;
-    }
-
-
-    public List<Food> getAllFoods() {
-        String sql = "SELECT * FROM food;";
-        List<Food> list = new ArrayList<>();
-        ResultSet resultSet = DatabaseManager.getResultSet(sql);
-        try {
-            while(!resultSet.isAfterLast()){
-                System.out.println(resultSet.getString("ndbno"));
-                list.add(getFood(resultSet.getString("ndbno")));
-                resultSet.next();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        System.out.println(list.toString());
-        return list;
-    }
-
-    @Override
     public Boolean saveFood(Food food) {
-        //String created from attributes of the object
-        NutrientDataImpl nutrientData = new NutrientDataImpl();
-        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, food_group) values(\"" +
-                food.getNbdno()+"\",\""+food.getName()+"\",\""+food.getFg()+"\");";
-        //This iterates through nutrient list
-
+        String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, fg, kCal) values(\'" +
+                food.getNdbno()+"\',\'"+food.getName()+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
         DatabaseManager.executeStatment(sql);
-        nutrientData.saveNutrientList(food.getNutrients());
-        //Executes sql as background thread so the GUI is unaffected.
-        /*
-        new Thread() {
-            // runnable for that thread
-            public void run() {
-                //Static method to execute update.
-            }
-        }.start();
-        */
         return true;
     }
 
     @Override
     public Boolean deleteFood(String ndbno) {
         String foodSql = "DELETE FROM food WHERE ndbno = \'"+ndbno+"\';";
-        NutrientDataImpl nutrientData = new NutrientDataImpl();
-        nutrientData.deleteNutrientList(ndbno);
         DatabaseManager.executeStatment(foodSql);
         return true;
     }
 
     @Override
-    public HashMap<String, String> getFoodMap() {
-        return null;
+    public HashMap<String, Food> getFoodMap() {
+        String sql = "SELECT * FROM food;";
+        HashMap<String, Food> foodMap = new HashMap<>();
+        ResultSet resultSet = DatabaseManager.getResultSet(sql);
+        try {
+            resultSet.next();
+            while(!resultSet.isAfterLast()){
+                Food food = new Food();
+                food.setNdbno(resultSet.getString("ndbno"));
+                food.setName(resultSet.getString("name"));
+                food.setFg(resultSet.getString("fg"));
+                food.setkCal(resultSet.getDouble("kCal"));
+                foodMap.put(food.getName(), food);
+                resultSet.next();
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foodMap;
     }
 
     @Override
     public ObservableList<String> getFoodNameList() {
-        return null;
+        String sql = "SELECT name FROM food";
+        ObservableList<String> foodNames = FXCollections.observableArrayList();
+        ResultSet rs = DatabaseManager.getResultSet(sql);
+        try {
+            rs.next();
+            while (!rs.isAfterLast()){
+                foodNames.add(rs.getString("name"));
+                rs.next();
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foodNames;
     }
 }

@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextArea?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
-    <TextArea text="foods.fxml"></TextArea>
+    <VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+        <children>
+            <Label text="Stored Food">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Label>
+            <ListView fx:id="foodListView" prefHeight="250.0" prefWidth="200.0" onMouseClicked="#handleMouseClick"/>
+            <Pane fx:id="foodPane" minHeight="225.0" minWidth="200.0" prefHeight="225.0" prefWidth="200.0" />
+        </children>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        </padding>
+    </VBox>
 </fx:root>

@@ -1,10 +1,7 @@
 package models;
 
-import util.database.DatabaseManager;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,34 +9,12 @@ import java.util.List;
  * Created by Philip on 9/30/2015.
  */
 public class Food{
-    private String ndbno, name, fg, kCalMeasure, measure;
-    private List<Nutrient> nutrients = new ArrayList<>();
+    private String ndbno, name, fg;
+    private double kCal;//Per 100 grams
 
-    public Food(){
+    List<Nutrient> nutrients = new ArrayList<>();
 
-    }
-
-    //TODO implement getKCalMeasure method (used in FoodDetailSubScreen controller)
-    public String getKCalMeasure(){
-        return kCalMeasure;
-    }
-
-    //TODO implement getMeasure method (used in FoodDetailSubScreen controller)
-    public String getMeasure(){
-        return measure;
-    }
-
-    //TODO implement setMeasure method
-    public void setMeasure(String measure){
-        this.measure = measure;
-    }
-
-    //TODO implement setKCalMeasure method
-    public void setkCalMeasure(String kCalMeasure){
-        this.kCalMeasure = kCalMeasure;
-    }
-
-    public String getNbdno() {
+    public String getNdbno() {
         return ndbno;
     }
 
@@ -63,25 +38,34 @@ public class Food{
         this.fg = fg;
     }
 
-    public List<Nutrient> getNutrients() {
+    public double getkCal() {
+        return kCal;
+    }
+
+    public void setkCal(double kCal){
+        this.kCal = kCal;
+    }
+    public void setkCalFromList() {
+        Iterator<Nutrient> iterator = nutrients.iterator();
+        while (iterator.hasNext()){
+            Nutrient nutrient = iterator.next();
+            if (nutrient.getUnit().equalsIgnoreCase("kcal")){
+                this.kCal = nutrient.getValue();
+            }
+        }
+    }
+
+    public List<Nutrient> getNutrientList() {
         return nutrients;
     }
 
-    public void setNutrients(List<Nutrient> nutrients) {
+    public void setNutrientList(List<Nutrient> nutrients) {
         this.nutrients = nutrients;
     }
 
     @Override
     public String toString(){
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nNdbno: "+getNbdno()+"\nName: "+getName()+"\nFood Group: "+getFg()+"\nNutrient List:\n");
-
-        Iterator<Nutrient> iterator = nutrients.iterator();
-        while (iterator.hasNext()){
-            sb.append("\n"+iterator.next().toString()+"\n");
-        }
-
-        return sb.toString();
+        String str = "Ndbno: "+getNdbno()+"\n"+"Name: "+getName()+"\n"+"Group: "+getFg()+"\n"+"kCal: "+getkCal()+"/100g\n";
+        return str;
     }
 }

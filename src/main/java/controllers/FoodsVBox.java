@@ -5,56 +5,70 @@
 
 package controllers;
 
-import java.util.ArrayList;
-import javafx.application.Platform;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Food;
 import util.database.FoodData;
+import util.database.FoodDataImpl;
+
+import java.util.HashMap;
 
 
+public class FoodsVBox extends VBox implements UserControl{
 
-public class FoodsVBox extends VBox implements ManagedScreen{
-
-    //fields
-    private ScreenManager screenManager;
-    private ArrayList<Food> foodArrayList = new ArrayList<>();
+    UserManager userManager;
+    FoodData foodData = new FoodDataImpl();
+    HashMap<String, Food> foodMap = new HashMap<>();
+    @FXML
+    ListView<String> foodListView;
+    @FXML
+    Pane foodPane;
 
     public FoodsVBox(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/foods.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
-
         try{
             fxmlLoader.load();
         }
         catch(Exception e){
             System.out.println(e.toString());
         }
+        foodMap = foodData.getFoodMap();
     }
-    /*
-    public void loadFoods(){
-        removeFoods();
-        for(Food food : foodArrayList){
-            FoodCard foodCard = new FoodCard(food);
-            foodCard.setFoodName(food.getName());
-            foodCard.setkCalMeasure(food.getKCalMeasure());
-            foodCard.setMeasureValue(food.getMeasure());
-            getChildren().add(foodCard);
+
+    @FXML
+    public void handleMouseClick(MouseEvent arg0){
+        System.out.println("clicked on " + foodListView.getSelectionModel().getSelectedItem().toString());
+        Food food = foodMap.get(foodListView.getSelectionModel().getSelectedItem().toString());
+        FoodDataSubScreen foodDataSubScreen = new FoodDataSubScreen(food);
+        foodDataSubScreen.setUserManager(userManager);
+        if(!foodPane.getChildren().isEmpty()){
+            foodPane.getChildren().remove(0);
         }
-    }*/
-
-    public void removeFoods(){
-        this.getChildren().clear();
-        foodArrayList.clear();
+        foodPane.getChildren().add(0, foodDataSubScreen);
     }
 
-    public void setScreenManager(ScreenManager screenManager){
-        this.screenManager = screenManager;
+    public void setFoodListView(){
+        foodListView.setItems(foodData.getFoodNameList());
+        foodMap = foodData.getFoodMap();
     }
 
-    public void setFoodArrayList(){
-        //foodArrayList = FoodData.getAllFoods();
+    @FXML
+    public void initialize(){
+        setFoodListView();
     }
 
+
+    @Override
+    public void setUserManager(UserManager userManager) {
+        this.userManager = userManager;
+        System.out.println(userManager.getCurrentDay().getDate());
+    }
 }

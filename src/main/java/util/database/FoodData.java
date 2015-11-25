@@ -9,9 +9,8 @@ import java.util.HashMap;
  * Created by Phil on 11/23/2015.
  */
 public interface FoodData {
-    Food getFood(String ndbno);
     Boolean saveFood(Food food);
     Boolean deleteFood(String ndbno);
-    HashMap<String, String> getFoodMap();
+    HashMap<String, Food> getFoodMap();
     ObservableList<String> getFoodNameList();
 }

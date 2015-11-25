@@ -4,11 +4,7 @@ package util.web;
  * Created by Philip on 9/24/2015.
  */
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
 import models.Food;
-import models.Nutrient;
 import models.SearchItem;
 import models.SearchResponse;
 import com.google.gson.Gson;
@@ -66,16 +62,10 @@ public class WebAccessImpl implements WebAccess{
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
         jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);//Get ride of outer data that we do not need.
+
         Food food = gson.fromJson(jsonObject.get("food"),Food.class);//Converts JsonObject to Food object
-
-        //Set food id for nutrient objects
-        Iterator<Nutrient> iterator = food.getNutrients().iterator();
-        while(iterator.hasNext()){
-            iterator.next().setFoodId(food.getNbdno());
-        }
-
-        System.out.println(jsonObject.toString());
-        return food;//Returns Food Object
+        food.setkCalFromList();
+        return food;
     }
 
     //This is a private method that the other methods call once the url is created. It returns the response as a string to the methods above.

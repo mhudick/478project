@@ -7,7 +7,7 @@ package controllers;
 
 public enum Screen {
 
-    CREATE_USER("/views/create_user.fxml"),
+    CREATE_USER("/views/user_create.fxml"),
     HOME("/views/home.fxml"),
     FOODS("/views/foods.fxml"),
     USER_LOG_IN("/views/user_log_in.fxml"),

@@ -20,7 +20,7 @@ public class UserCreateScreen implements ManagedScreen{
     private UserData userData = new UserDataImpl();//User data access object
     private ScreenManager screenManager;//Used for reference of parent screen manager
 
-    @FXML private TextField nameTextField,ageTextField,weightTextField,heightFtTextField,heightInTextField;
+    @FXML private TextField nameTextField, goalTextField, currentTextField;
 
     public void handleCreateButton(ActionEvent actionEvent){
         System.out.println("Create button clicked!");
@@ -41,8 +41,9 @@ public class UserCreateScreen implements ManagedScreen{
     public void setUserData(){
         User user = new User();
         user.setName(nameTextField.getText());
-        user.setAge(Integer.parseInt(ageTextField.getText()));
-
+        user.setWeightGoal(Double.parseDouble(goalTextField.getText()));
+        user.setWeightCurrent(Double.parseDouble(currentTextField.getText()));
+        user.setWeightStart(user.getWeightCurrent());
         userData.saveUser(user);
     }
 }
