@@ -1,7 +1,13 @@
-/* Developer: Mark Donile
-** Date: 2015.10.31
-** Configuration Version: 1.0.0
+/** Developer: Mark Donile
+*   Date: 2015.10.31
+*   Configuration Version: 1.0.0
 */
+
+/*
+This class is the home screen that contains a stackPane. The other screen are
+then switched in and out of view by this Controller. Each sub-screen will maintain
+a reference to the Home screen.
+ */
 
 package controllers;
 
@@ -16,37 +22,46 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.Node;
 
-public class HomeScreen extends GridPane implements ManagedScreen, UserControl{
+public class HomeScreen extends GridPane implements AppControl {
 
-    private ScreenManager screenManager;
-    private UserManager userManager;
+    private AppManager appManager;
+    private SessionManager sessionManager;
     private HomeScreen homeScreen;
 
 
     private Node previousContent;
-    //private ScreenManager homeViewManager;
+    //private AppManager homeViewManager;
     @FXML private ChoiceBox menuChoiceBox;
     @FXML private TextField searchTextField;
     @FXML private StackPane contentStackPane;
-    private FoodsVBox foodsVBox;
-    private UserSummaryScreen userSummaryVBox;
+
+    //These are the controllers for each screen in the contentStackPane.
+    private SummaryScreen summaryScreen;
     private SearchScreen searchScreen;
-    private UserWeighIn weighInScreen;
-    private UserEditScreen userEditScreen;
+    private FoodScreen foodScreen;
+    private WeighInScreen weighInScreen;
+    private ProfileScreen profileScreen;
+
 
     public HomeScreen(){
         System.out.println("HomeScreen Constructor");
         this.homeScreen = this;
     }
 
-    @Override
-    public void setScreenManager(ScreenManager screenManager){
-        this.screenManager = screenManager;
-    }
-
-    @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
+    @FXML
+    private void initialize(){
+        System.out.println("HomeScreen initialized.");
+        //This is needed
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Run later");
+                sessionManager = appManager.getSessionManager();
+                loadScreenControllers();
+                setupHomeSession();
+                loadMenuChoiceBox();
+            }
+        });
     }
 
     public void handleSearchButton(ActionEvent actionEvent){
@@ -62,28 +77,28 @@ public class HomeScreen extends GridPane implements ManagedScreen, UserControl{
         String selectedContent = menuChoiceBox.getValue().toString();
         switch(selectedContent){
             case "Home":
-                contentStackPane.getChildren().add(0, userSummaryVBox);
-                userSummaryVBox.setLabels();
+                summaryScreen.setLabels();
+                contentStackPane.getChildren().add(0, summaryScreen);
                 break;
             case "Search":
                 contentStackPane.getChildren().add(0, searchScreen);
                 break;
             case "Foods":
-                foodsVBox.setFoodListView();
-                contentStackPane.getChildren().add(0, foodsVBox);
+                foodScreen.setFoodListView();
+                contentStackPane.getChildren().add(0, foodScreen);
                 break;
             case "Weigh-In":
                 contentStackPane.getChildren().add(0, weighInScreen);
                 break;
             case "Edit Profile":
-                contentStackPane.getChildren().add(0, userEditScreen);
+                contentStackPane.getChildren().add(0, profileScreen);
                 break;
             case "Change User":
-                screenManager.show(Screen.USER_LOG_IN);
+                appManager.show(Screen.USER_LOG_IN);
                 break;
             default:
                 System.out.println("default case executed in handleMenuChoiceBox method of HomeScreen");
-                contentStackPane.getChildren().add(0, userSummaryVBox);
+                contentStackPane.getChildren().add(0, summaryScreen);
                 break;
         }
     }
@@ -93,36 +108,6 @@ public class HomeScreen extends GridPane implements ManagedScreen, UserControl{
         ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search", "Edit Profile","Change User");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
-    }
-
-    @FXML
-    private void initialize(){
-        System.out.println("HomeScreen initialized.");
-
-        loadContent();
-
-
-        //This is needed
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("Run later");
-                userManager = screenManager.getUserManager();
-                System.out.println(userManager.getUser().getName());
-                foodsVBox.setUserManager(userManager);
-                userSummaryVBox.setUserManager(userManager);
-                //userSummaryVBox.setLabels();//call label setup here.
-                weighInScreen.sethomeScreen(homeScreen);
-                userSummaryVBox.sethomeScreen(homeScreen);
-                userEditScreen.sethomeScreen(homeScreen);
-                userEditScreen.setUserManager(userManager);
-                loadMenuChoiceBox();
-            }
-        });
-    }
-
-    public ChoiceBox getMenuChoiceBox(){
-        return menuChoiceBox;
     }
 
     public void removeContent(){
@@ -135,13 +120,30 @@ public class HomeScreen extends GridPane implements ManagedScreen, UserControl{
         this.previousContent = previousContent;
     }
 
-    public void loadContent(){
-        searchScreen = new SearchScreen();
-        foodsVBox = new FoodsVBox();
-        userSummaryVBox = new UserSummaryScreen();
-        weighInScreen = new UserWeighIn();
-        userEditScreen = new UserEditScreen();
+    public ChoiceBox getMenuChoiceBox(){
+        return menuChoiceBox;
     }
 
+    public void loadScreenControllers(){
+        summaryScreen = new SummaryScreen();
+        searchScreen = new SearchScreen();
+        foodScreen = new FoodScreen();
+        weighInScreen = new WeighInScreen();
+        profileScreen = new ProfileScreen();
+    }
+    public void setupHomeSession(){
+        summaryScreen.setHomeScreen(homeScreen);
+        summaryScreen.setSessionManager(sessionManager);
+        searchScreen.setHomeScreen(homeScreen);
+        searchScreen.setSessionManager(sessionManager);
+        foodScreen.setSessionManager(sessionManager);
+        weighInScreen.setHomeScreen(homeScreen);
+        profileScreen.setSessionManager(sessionManager);
+        profileScreen.setHomeScreen(homeScreen);
+    }
+    @Override
+    public void setAppManager(AppManager appManager){
+        this.appManager = appManager;
+    }
 
 }

@@ -5,8 +5,8 @@
 
 package controllers;
 
-public interface ManagedScreen {
+public interface AppControl {
 
-    void setScreenManager(ScreenManager screenManager);
+    void setAppManager(AppManager appManager);
 
 }

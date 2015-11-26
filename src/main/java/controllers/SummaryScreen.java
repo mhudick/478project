@@ -11,15 +11,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class UserSummaryScreen extends VBox implements UserControl,HomeScreenControl{
+public class SummaryScreen extends VBox implements SessionControl, HomeControl {
 
-    UserManager userManager;
-    HomeScreen homeScreen;
+    private SessionManager sessionManager;
+    private HomeScreen homeScreen;
     @FXML
     private Label nameLabel,currentLabel, goalLabel,startLabel, dateLabel, limitLabel, availableLabel, totalLabel;
 
-    public UserSummaryScreen(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/user_summary.fxml"));
+    public SummaryScreen(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/summary_screen.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try{
@@ -51,22 +51,22 @@ public class UserSummaryScreen extends VBox implements UserControl,HomeScreenCon
     }
 
     @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
     }
 
     public void setLabels(){
-        nameLabel.setText(userManager.getUser().getName());
-        currentLabel.setText(String.valueOf(userManager.getUser().getWeightCurrent())+" lbs.");
-        goalLabel.setText(String.valueOf(userManager.getUser().getWeightGoal())+" lbs.");
-        startLabel.setText(String.valueOf(userManager.getUser().getWeightStart())+" lbs.");
-        limitLabel.setText(String.valueOf(userManager.getUser().getDailyCalorieLimit()));
-        availableLabel.setText(userManager.getCaloriesAvailable());
-        totalLabel.setText(String.valueOf(userManager.getCurrentDay().getTotalCal()));
+        nameLabel.setText(sessionManager.getUser().getName());
+        currentLabel.setText(String.valueOf(sessionManager.getUser().getWeightCurrent())+" lbs.");
+        goalLabel.setText(String.valueOf(sessionManager.getUser().getWeightGoal())+" lbs.");
+        startLabel.setText(String.valueOf(sessionManager.getUser().getWeightStart())+" lbs.");
+        limitLabel.setText(String.valueOf(sessionManager.getUser().getDailyCalorieLimit()));
+        availableLabel.setText(sessionManager.getCaloriesAvailable());
+        totalLabel.setText(String.valueOf(sessionManager.getCurrentDay().getTotalCal()));
     }
 
     @Override
-    public void sethomeScreen(HomeScreen homeScreen) {
+    public void setHomeScreen(HomeScreen homeScreen) {
         this.homeScreen = homeScreen;
     }
 }

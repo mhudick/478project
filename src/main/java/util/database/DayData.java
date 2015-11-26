@@ -8,7 +8,8 @@ import models.User;
  */
 public interface DayData {
     boolean saveDay(Day day);
+    boolean saveNewDay(Day day);
     boolean deleteDay(int id);
-    Day getCurrentDay(User user);
-
+    boolean isNewDay(int userId);
+    Day getCurrentDay(int userId, String today);
 }

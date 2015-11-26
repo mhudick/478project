@@ -5,25 +5,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import models.User;
 import util.database.UserData;
 import util.database.UserDataImpl;
 
 /**
  * Created by Philip on 11/24/2015.
  */
-public class UserEditScreen extends VBox implements UserControl, HomeScreenControl {
+public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
-    UserManager userManager;
-    HomeScreen  homeScreen;
-    UserData userData = new UserDataImpl();
+    private SessionManager sessionManager;
+    private HomeScreen  homeScreen;
+    private UserData userData = new UserDataImpl();
 
 
     @FXML
     TextField nameTextField, startTextField, limitTextField, goalTextField;
 
-    public UserEditScreen(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/edit_screen.fxml"));
+    public ProfileScreen(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/profile_screen.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try{
@@ -44,12 +43,12 @@ public class UserEditScreen extends VBox implements UserControl, HomeScreenContr
         homeScreen.getMenuChoiceBox().setValue("Home");
     }
     @Override
-    public void sethomeScreen(HomeScreen homeScreen) {
+    public void setHomeScreen(HomeScreen homeScreen) {
         this.homeScreen=homeScreen;
     }
 
     @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
     }
 }

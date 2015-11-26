@@ -9,23 +9,22 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.Food;
 import util.database.FoodData;
 import util.database.FoodDataImpl;
 
-public class FoodSearchSubScreen extends VBox{
-    FoodData foodData = new FoodDataImpl();
+public class SearchScreenCard extends VBox{
+    private FoodData foodData = new FoodDataImpl();
     //fields
     private Food food;
     @FXML
     private Label nameLabel, calLabel;
 
     //constructor(s)
-    public FoodSearchSubScreen(Food food){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_search_card.fxml"));
+    public SearchScreenCard(Food food){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/search_screen_card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -41,7 +40,7 @@ public class FoodSearchSubScreen extends VBox{
 
     @FXML
     public void initialize(){
-        System.out.println("FoodSearchSubScreen initialized");
+        System.out.println("SearchScreenCard initialized");
 
         Platform.runLater(new Runnable() {
             @Override

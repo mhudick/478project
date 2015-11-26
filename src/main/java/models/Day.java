@@ -14,8 +14,6 @@ public class Day {
 
     private int id, totalCal, userId;
 
-    private Boolean isNew = false;
-
     private String date;
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -24,14 +22,6 @@ public class Day {
     public Day(){
         System.out.println("Day Constructor.");
 
-    }
-
-    public Boolean isNew() {
-        return isNew;
-    }
-
-    public void setIsNew(Boolean isNew) {
-        this.isNew = isNew;
     }
 
     public String getDate(){
