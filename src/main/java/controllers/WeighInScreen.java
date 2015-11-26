@@ -8,11 +8,11 @@ import javafx.scene.layout.VBox;
 /**
  * Created by Phil on 11/24/2015.
  */
-public class UserWeighIn extends VBox implements HomeScreenControl{
+public class WeighInScreen extends VBox implements HomeControl {
 
     private HomeScreen homeScreen;
 
-    public UserWeighIn(){
+    public WeighInScreen(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/weigh_in_screen.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -31,7 +31,7 @@ public class UserWeighIn extends VBox implements HomeScreenControl{
     }
 
     @Override
-    public void sethomeScreen(HomeScreen homeScreen) {
+    public void setHomeScreen(HomeScreen homeScreen) {
         this.homeScreen = homeScreen;
     }
 }

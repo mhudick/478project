@@ -6,7 +6,6 @@
 package controllers;
 
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
@@ -20,18 +19,18 @@ import util.database.FoodDataImpl;
 import java.util.HashMap;
 
 
-public class FoodsVBox extends VBox implements UserControl{
+public class FoodScreen extends VBox implements SessionControl {
 
-    UserManager userManager;
-    FoodData foodData = new FoodDataImpl();
-    HashMap<String, Food> foodMap = new HashMap<>();
+    private SessionManager sessionManager;
+    private FoodData foodData = new FoodDataImpl();
+    private HashMap<String, Food> foodMap = new HashMap<>();
     @FXML
-    ListView<String> foodListView;
+    private ListView<String> foodListView;
     @FXML
-    Pane foodPane;
+    private Pane foodPane;
 
-    public FoodsVBox(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/foods.fxml"));
+    public FoodScreen(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_screen.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         try{
@@ -47,12 +46,12 @@ public class FoodsVBox extends VBox implements UserControl{
     public void handleMouseClick(MouseEvent arg0){
         System.out.println("clicked on " + foodListView.getSelectionModel().getSelectedItem().toString());
         Food food = foodMap.get(foodListView.getSelectionModel().getSelectedItem().toString());
-        FoodDataSubScreen foodDataSubScreen = new FoodDataSubScreen(food);
-        foodDataSubScreen.setUserManager(userManager);
+        FoodScreenCard foodScreenCard = new FoodScreenCard(food);
+        foodScreenCard.setSessionManager(sessionManager);
         if(!foodPane.getChildren().isEmpty()){
             foodPane.getChildren().remove(0);
         }
-        foodPane.getChildren().add(0, foodDataSubScreen);
+        foodPane.getChildren().add(0, foodScreenCard);
     }
 
     public void setFoodListView(){
@@ -67,8 +66,8 @@ public class FoodsVBox extends VBox implements UserControl{
 
 
     @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-        System.out.println(userManager.getCurrentDay().getDate());
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+        System.out.println(sessionManager.getCurrentDay().getDate());
     }
 }

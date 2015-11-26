@@ -16,18 +16,18 @@ import java.util.Calendar;
 public class DayDataImpl implements DayData {
     @Override
     public boolean saveDay(Day day) {
-        String sql;
-        if(day.isNew()){
-            System.out.println("isNew");
-            sql = "INSERT INTO day(userId, creation_date, totalCal) "+
-                    "VALUES("+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";
-        }else{
-            sql = "INSERT OR REPLACE INTO day(dayId, userId, creation_date, totalCal) "+
-                    "VALUES("+day.getId()+","+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";
-        }
-
+        String sql = "INSERT OR REPLACE INTO day(dayId, userId, date, totalCal) "+
+                "VALUES("+day.getId()+","+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";;
         DatabaseManager.executeStatment(sql);
         return true;
+    }
+
+    @Override
+    public boolean saveNewDay(Day day) {
+        String sql = "INSERT INTO day(userId, date, totalCal) "+
+                "VALUES("+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";
+        DatabaseManager.executeStatment(sql);
+        return false;
     }
 
     @Override
@@ -38,27 +38,37 @@ public class DayDataImpl implements DayData {
     }
 
     @Override
-    public Day getCurrentDay(User user) {
+    public boolean isNewDay(int userId) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String today = simpleDateFormat.format(Calendar.getInstance().getTime());
-        String sql = "SELECT * From day WHERE userId = "+user.getUserId()+" AND creation_date = \'"+today+"\';";
-        System.out.println(sql);
-        Day day = new Day();
-        ResultSet rs = DatabaseManager.getResultSet(sql);
+        String sql = "SELECT * From day WHERE userId = "+userId+" AND date = \'"+today+"\';";
+        ResultSet resultSet = DatabaseManager.getResultSet(sql);
         try {
-            rs.next();
-            if(rs.isAfterLast()){
-                day.setUserId(user.getUserId());
-                day.setDate(today);
-                day.setIsNew(true);
-            }else{
-                System.out.println("Retrieving");
-                day.setId(rs.getInt("dayId"));
-                day.setUserId(rs.getInt("userId"));
-                day.setDate(rs.getString("creation_date"));
-                day.setTotalCal(rs.getInt("totalCal"));
+            resultSet.next();
+            if(resultSet.isAfterLast()){
+                resultSet.close();
+                return true;
             }
-            rs.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
+    @Override
+    public Day getCurrentDay(int userId, String today) {
+        String sql = "SELECT * From day WHERE userId = "+userId+" AND date = \'"+today+"\';";
+        Day day = new Day();
+        ResultSet resultSet = DatabaseManager.getResultSet(sql);
+        try {
+            resultSet.next();
+            day.setId(resultSet.getInt("dayId"));
+            day.setUserId(resultSet.getInt("userId"));
+            day.setTotalCal(resultSet.getInt("totalCal"));
+            day.setDate(resultSet.getString("date"));
+            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

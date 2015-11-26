@@ -28,7 +28,7 @@ public class TableMigration {
             "CREATE TABLE day"+
                     "(dayId INTEGER PRIMARY KEY,"+
                     "userId INTEGER,"+
-                    "creation_date TEXT,"+
+                    "date TEXT,"+
                     "totalCal INTEGER,"+
                     "FOREIGN KEY (userId) references USER(userId));";
 

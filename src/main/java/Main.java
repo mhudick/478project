@@ -16,26 +16,23 @@ public class Main extends Application {
     public void start(Stage primaryStage)throws Exception {
 
         //load app screens
-        UserManager userManager = new UserManager();
-        ScreenManager appScreenManager = new ScreenManager();
-        appScreenManager.setUserManager(userManager);
 
-        //appScreenManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
-        appScreenManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
-        appScreenManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
+        AppManager appManager = new AppManager();
 
-
+        //appManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
+        appManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
+        appManager.loadScreen(Screen.CREATE_USER, Screen.CREATE_USER.getResourcePath());
 
         //Check if user already exist
         if(getUserCount() == 0){
-            appScreenManager.show(Screen.CREATE_USER);
+            appManager.show(Screen.CREATE_USER);
         }
         else{
-            appScreenManager.show(Screen.USER_LOG_IN);
+            appManager.show(Screen.USER_LOG_IN);
         }
 
         //Setup application stage
-        Scene scene = new Scene(appScreenManager,APP_WIDTH,APP_HEIGHT);
+        Scene scene = new Scene(appManager,APP_WIDTH,APP_HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Calorie Counter");
         primaryStage.show();

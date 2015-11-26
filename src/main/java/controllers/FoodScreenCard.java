@@ -13,20 +13,19 @@ import util.NumFieldFx;
 /**
  * Created by Phil on 11/24/2015.
  */
-public class FoodDataSubScreen extends VBox implements UserControl{
+public class FoodScreenCard extends VBox implements SessionControl {
 
-    UserManager userManager;
-
-    Food food;
+    private SessionManager sessionManager;
+    private Food food;
 
     @FXML
-    Label nameLabel, calLabel;
+    private Label nameLabel, calLabel;
     @FXML
-    NumFieldFx gramTextField;
+    private NumFieldFx gramTextField;
 
 
-    public FoodDataSubScreen(Food food){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_data_card.fxml"));
+    public FoodScreenCard(Food food){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_screen_card.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
 
@@ -57,7 +56,7 @@ public class FoodDataSubScreen extends VBox implements UserControl{
     @FXML
     public void handleEatButton(ActionEvent event){
         System.out.println("Eat Button Clicked.");
-        userManager.addCaloriesToDay(Integer.parseInt(calLabel.getText()));
+        sessionManager.addCaloriesToDay(Integer.parseInt(calLabel.getText()));
     }
 
     public int calculateCalories(){
@@ -70,8 +69,8 @@ public class FoodDataSubScreen extends VBox implements UserControl{
     }
 
     @Override
-    public void setUserManager(UserManager userManager) {
-        this.userManager = userManager;
-        System.out.println(userManager.getCurrentDay().toString());
+    public void setSessionManager(SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
+        System.out.println(sessionManager.getCurrentDay().toString());
     }
 }

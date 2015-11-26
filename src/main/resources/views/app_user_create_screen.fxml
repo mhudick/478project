@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" spacing="50.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserCreateScreen">
+<?import util.NumFieldFx?>
+<VBox alignment="CENTER" spacing="50.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AppCreateUserScreen">
     <children>
         <Label text="User Info">
             <font>
@@ -19,14 +20,14 @@
                 <Label text="Current Weight:" GridPane.rowIndex="1" />
                 <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <TextField fx:id="currentTextField" prefWidth="50.0" />
+                        <NumFieldFx fx:id="currentTextField" prefWidth="50.0" />
                         <Label text="lbs." />
                     </children>
                 </HBox>
 
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="goalTextField" prefWidth="50.0" />
+                  <NumFieldFx fx:id="goalTextField" prefWidth="50.0" />
                   <Label text="Lbs." />
                </children>
                 </HBox>

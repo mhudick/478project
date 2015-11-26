@@ -7,11 +7,11 @@ package controllers;
 
 public enum Screen {
 
-    CREATE_USER("/views/user_create.fxml"),
-    HOME("/views/home.fxml"),
-    FOODS("/views/foods.fxml"),
-    USER_LOG_IN("/views/user_log_in.fxml"),
-    USER_SUMMARY("/views/user_summary.fxml");
+    CREATE_USER("/views/app_user_create_screen.fxml"),
+    HOME("/views/home_screen.fxml"),
+    FOODS("/views/food_screen.fxml"),
+    USER_LOG_IN("/views/app_login_screen.fxml"),
+    USER_SUMMARY("/views/summary_screen.fxml");
 
     private String resourcePath;
 
