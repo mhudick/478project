@@ -19,8 +19,8 @@ public class UserDataImpl implements UserData{
     public User getUser(int userId) {
         String sql = "SELECT * FROM user WHERE userId = "+userId;
         User user = new User();
-        ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
+            ResultSet rs = DatabaseManager.getResultSet(sql);
             rs.next();
             user.setUserId(rs.getInt("userId"));
             user.setName(rs.getString("name"));
@@ -40,8 +40,8 @@ public class UserDataImpl implements UserData{
         String sql = "SELECT * FROM user";
         User user;
         HashMap<String,User> userMap = new HashMap<>();
-        ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
+            ResultSet rs = DatabaseManager.getResultSet(sql);
             rs.next();
             while(!rs.isAfterLast()){//Making HashMap from ResultSet.
                 user = new User();
@@ -65,8 +65,8 @@ public class UserDataImpl implements UserData{
     public ObservableList<String> getUserNames() {
         String sql = "SELECT name FROM user";
         ObservableList<String> userNames = FXCollections.observableArrayList();
-        ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
+            ResultSet rs = DatabaseManager.getResultSet(sql);
             rs.next();
             while (!rs.isAfterLast()){
                 userNames.add(rs.getString("name"));
@@ -80,27 +80,42 @@ public class UserDataImpl implements UserData{
     }
 
     @Override
-    public Boolean saveUser(User user) {
+    public boolean saveUser(User user) {
         String sql = "INSERT OR REPLACE INTO user(userId, name, dailyCalorieLimit, weightCurrent, weightStart, weightGoal)"+
                     "VALUES("+user.getUserId()+",\'"+user.getName()+"\', "+user.getDailyCalorieLimit()+", "+user.getWeightCurrent()+", "+
                     user.getWeightStart()+", "+user.getWeightGoal()+");";
-        DatabaseManager.executeStatment(sql);
+        try {
+            DatabaseManager.executeStatment(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
     @Override
-    public Boolean saveNewUser(User user) {
+    public boolean saveNewUser(User user) {
         String sql = "INSERT INTO user(name, dailyCalorieLimit, weightCurrent, weightStart, weightGoal)"+
                 "VALUES(\'"+user.getName()+"\', "+user.getDailyCalorieLimit()+", "+user.getWeightCurrent()+", "+
                 user.getWeightStart()+", "+user.getWeightGoal()+");";
-        DatabaseManager.executeStatment(sql);
-        return null;
+        try {
+            DatabaseManager.executeStatment(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public Boolean deleteUser(int id) {
+    public boolean deleteUser(int id) {
         String sql = "DELETE FROM user WHERE id = "+id;
-        DatabaseManager.executeStatment(sql);
+        try {
+            DatabaseManager.executeStatment(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 }

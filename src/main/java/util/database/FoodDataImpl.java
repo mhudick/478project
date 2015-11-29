@@ -16,17 +16,27 @@ import java.util.List;
 public class FoodDataImpl implements FoodData{
 
     @Override
-    public Boolean saveFood(Food food) {
+    public boolean saveFood(Food food) {
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, fg, kCal) values(\'" +
                 food.getNdbno()+"\',\'"+food.getName()+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
-        DatabaseManager.executeStatment(sql);
+        try {
+            DatabaseManager.executeStatment(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
     @Override
-    public Boolean deleteFood(String ndbno) {
+    public boolean deleteFood(String ndbno) {
         String foodSql = "DELETE FROM food WHERE ndbno = \'"+ndbno+"\';";
-        DatabaseManager.executeStatment(foodSql);
+        try {
+            DatabaseManager.executeStatment(foodSql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 
@@ -34,8 +44,8 @@ public class FoodDataImpl implements FoodData{
     public HashMap<String, Food> getFoodMap() {
         String sql = "SELECT * FROM food;";
         HashMap<String, Food> foodMap = new HashMap<>();
-        ResultSet resultSet = DatabaseManager.getResultSet(sql);
         try {
+            ResultSet resultSet = DatabaseManager.getResultSet(sql);
             resultSet.next();
             while(!resultSet.isAfterLast()){
                 Food food = new Food();
@@ -57,8 +67,8 @@ public class FoodDataImpl implements FoodData{
     public ObservableList<String> getFoodNameList() {
         String sql = "SELECT name FROM food";
         ObservableList<String> foodNames = FXCollections.observableArrayList();
-        ResultSet rs = DatabaseManager.getResultSet(sql);
         try {
+            ResultSet rs = DatabaseManager.getResultSet(sql);
             rs.next();
             while (!rs.isAfterLast()){
                 foodNames.add(rs.getString("name"));

@@ -12,4 +12,5 @@ public interface DayData {
     boolean deleteDay(int id);
     boolean isNewDay(int userId);
     Day getCurrentDay(int userId, String today);
+    Day getDay(int id);
 }

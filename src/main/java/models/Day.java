@@ -15,12 +15,8 @@ public class Day {
     private int id, totalCal, userId;
 
     private String date;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-    private List<String> calEntries = new ArrayList<>();
 
     public Day(){
-        System.out.println("Day Constructor.");
 
     }
 
@@ -43,16 +39,32 @@ public class Day {
         return totalCal;
     }
 
-    public void setTotalCal(int totalCal) {
-        this.totalCal = totalCal;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setTotalCal(int totalCal) {
+        this.totalCal = totalCal;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if (other == null)
+            return false;
+        if (other == this)
+            return true;
+        if (!(other instanceof Day))
+            return false;
+        Day otherDay = (Day)other;
+        if(this.id == otherDay.getId()){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
