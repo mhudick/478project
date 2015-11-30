@@ -49,6 +49,7 @@ public class SearchScreen extends VBox implements SessionControl, HomeControl{
     }
 
     public void getSearchResults(String query){
+        searchListView.getItems().clear();
         listMap = webAccess.searchForFood(query);
         ObservableList<String> listData = FXCollections.observableArrayList();
         Iterator it = listMap.entrySet().iterator();

@@ -20,17 +20,18 @@ public class WebAccessImpl implements WebAccess{
     //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
 
-    private HashMap<String,String> itemMap = new HashMap<>();
+
 
     //This methods handles searching for the foods it returns the Search response as an object.
     @Override
     public HashMap<String,String> searchForFood(String term) {
         term = term.replaceAll(" ","+");
+        HashMap<String,String> itemMap = new HashMap<>();
         System.out.println(term);
         String jsonResult = null;
         try {
             //This is where the url gets sent with the parameters to search for. It comes back as a Json string
-            jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=r&max=60&offset=0&api_key=" + API_KEY);
+            jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=r&max=40&offset=0&api_key=" + API_KEY);
         } catch (Exception e) {
             System.out.println("Could not find file");
             itemMap.put("Please be more specific with you search.","");
