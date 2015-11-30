@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import util.NumFieldFx;
 import util.database.UserData;
 import util.database.UserDataImpl;
 
@@ -19,7 +20,10 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
 
     @FXML
-    private TextField nameTextField, startWeightTextField, calLimitTextField, goalWeightTextField;
+    private TextField nameTextField;
+
+    @FXML
+    private NumFieldFx startWeightTextField, calLimitTextField, goalWeightTextField;
 
     public ProfileScreen(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/profile_screen.fxml"));

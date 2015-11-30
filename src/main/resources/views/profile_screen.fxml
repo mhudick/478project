@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.HBox?>
+<?import util.NumFieldFx?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <children>
@@ -43,19 +44,19 @@
                     <TextField fx:id="nameTextField" maxWidth="180.0" GridPane.columnIndex="1" />
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <children>
-                            <TextField fx:id="startWeightTextField" maxWidth="60.0" />
+                            <NumFieldFx fx:id="startWeightTextField" maxWidth="60.0" />
                             <Label text="lbs." />
                         </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                         <children>
-                            <TextField fx:id="goalWeightTextField" maxWidth="60.0" />
+                            <NumFieldFx fx:id="goalWeightTextField" maxWidth="60.0" />
                             <Label text="lbs." />
                         </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <children>
-                            <TextField fx:id="calLimitTextField" maxWidth="100.0" />
+                            <NumFieldFx fx:id="calLimitTextField" maxWidth="100.0" />
                             <Label text="kCal" />
                         </children>
                     </HBox>
