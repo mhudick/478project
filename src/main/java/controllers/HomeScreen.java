@@ -41,6 +41,7 @@ public class HomeScreen extends GridPane implements AppControl {
     private FoodScreen foodScreen;
     private WeighInScreen weighInScreen;
     private ProfileScreen profileScreen;
+    private HistoryScreen historyScreen;
 
 
     public HomeScreen(){
@@ -90,10 +91,17 @@ public class HomeScreen extends GridPane implements AppControl {
             case "Weigh-In":
                 contentStackPane.getChildren().add(0, weighInScreen);
                 break;
+            case "History":
+                historyScreen.setTables();
+                contentStackPane.getChildren().add(0, historyScreen);
+                break;
             case "Edit Profile":
+                profileScreen.setTextFields();
                 contentStackPane.getChildren().add(0, profileScreen);
                 break;
             case "Change User":
+                appManager.unloadScreen(Screen.USER_LOG_IN);
+                appManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
                 appManager.show(Screen.USER_LOG_IN);
                 break;
             default:
@@ -105,7 +113,7 @@ public class HomeScreen extends GridPane implements AppControl {
 
     public void loadMenuChoiceBox(){
         //TODO create contentView enum and use it to populate the menuChoiceBox
-        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search", "Edit Profile","Change User");
+        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search", "History", "Edit Profile","Change User");
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
     }
@@ -130,6 +138,7 @@ public class HomeScreen extends GridPane implements AppControl {
         foodScreen = new FoodScreen();
         weighInScreen = new WeighInScreen();
         profileScreen = new ProfileScreen();
+        historyScreen = new HistoryScreen();
     }
     public void setupHomeSession(){
         summaryScreen.setHomeScreen(homeScreen);
@@ -138,8 +147,10 @@ public class HomeScreen extends GridPane implements AppControl {
         searchScreen.setSessionManager(sessionManager);
         foodScreen.setSessionManager(sessionManager);
         weighInScreen.setHomeScreen(homeScreen);
+        weighInScreen.setSessionManager(sessionManager);
         profileScreen.setSessionManager(sessionManager);
         profileScreen.setHomeScreen(homeScreen);
+        historyScreen.setSessionManager(sessionManager);
     }
     @Override
     public void setAppManager(AppManager appManager){

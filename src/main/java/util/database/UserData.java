@@ -14,5 +14,5 @@ public interface UserData {
     ObservableList<String> getUserNames();
     boolean saveUser(User user);
     boolean saveNewUser(User user);
-    boolean deleteUser(int id);
+    boolean deleteUser(int userId);
 }

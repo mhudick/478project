@@ -108,8 +108,8 @@ public class UserDataImpl implements UserData{
     }
 
     @Override
-    public boolean deleteUser(int id) {
-        String sql = "DELETE FROM user WHERE id = "+id;
+    public boolean deleteUser(int userId) {
+        String sql = "DELETE FROM user WHERE userId = "+userId;
         try {
             DatabaseManager.executeStatment(sql);
         } catch (SQLException e) {

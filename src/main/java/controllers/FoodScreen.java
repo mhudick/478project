@@ -6,6 +6,7 @@
 package controllers;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ListView;
@@ -24,6 +25,7 @@ public class FoodScreen extends VBox implements SessionControl {
     private SessionManager sessionManager;
     private FoodData foodData = new FoodDataImpl();
     private HashMap<String, Food> foodMap = new HashMap<>();
+
     @FXML
     private ListView<String> foodListView;
     @FXML
@@ -54,6 +56,19 @@ public class FoodScreen extends VBox implements SessionControl {
         foodPane.getChildren().add(0, foodScreenCard);
     }
 
+    @FXML
+    public void handleDeleteButton(ActionEvent event){
+        if(foodListView.getSelectionModel().getSelectedItem() != null){
+            Food selectedFood = foodMap.get(foodListView.getSelectionModel().getSelectedItem());
+            foodData.deleteFood(selectedFood.getNdbno());
+            System.out.println(selectedFood.getName()+" deleted.");
+            setFoodListView();
+            foodPane.getChildren().remove(0);
+        }else{
+            System.out.println("Nothing selected");
+        }
+    }
+
     public void setFoodListView(){
         foodListView.setItems(foodData.getFoodNameList());
         foodMap = foodData.getFoodMap();
@@ -63,7 +78,6 @@ public class FoodScreen extends VBox implements SessionControl {
     public void initialize(){
         setFoodListView();
     }
-
 
     @Override
     public void setSessionManager(SessionManager sessionManager) {

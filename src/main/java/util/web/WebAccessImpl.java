@@ -32,9 +32,9 @@ public class WebAccessImpl implements WebAccess{
             //This is where the url gets sent with the parameters to search for. It comes back as a Json string
             jsonResult = sendGet("http://api.nal.usda.gov/ndb/search/?format=json&q=" + term + "&sort=r&max=60&offset=0&api_key=" + API_KEY);
         } catch (Exception e) {
-            System.out.println("CAUGHT!!!");
-            //new MessageBox("Could not find file");
-            e.printStackTrace();
+            System.out.println("Could not find file");
+            itemMap.put("Please be more specific with you search.","");
+            return itemMap;
         }
         Gson gson = new Gson();//This object handles converting Json to POJOs.
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);//JsonObject is easier to create the object with
@@ -63,7 +63,7 @@ public class WebAccessImpl implements WebAccess{
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
         jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);//Get ride of outer data that we do not need.
 
-        Food food = gson.fromJson(jsonObject.get("food"),Food.class);//Converts JsonObject to Food object
+        Food food = gson.fromJson(jsonObject.get("food"), Food.class);//Converts JsonObject to Food object
         food.setkCalFromList();
         return food;
     }

@@ -19,7 +19,7 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
 
     @FXML
-    TextField nameTextField, startTextField, limitTextField, goalTextField;
+    private TextField nameTextField, startWeightTextField, calLimitTextField, goalWeightTextField;
 
     public ProfileScreen(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/profile_screen.fxml"));
@@ -35,6 +35,11 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
     @FXML
     public void handleSaveButton(ActionEvent event){
+        sessionManager.getUser().setName(nameTextField.getText());
+        sessionManager.getUser().setWeightStart(Double.parseDouble(startWeightTextField.getText()));
+        sessionManager.getUser().setWeightGoal(Double.parseDouble(goalWeightTextField.getText()));
+        sessionManager.getUser().setDailyCalorieLimit(Integer.parseInt(calLimitTextField.getText()));
+        userData.saveUser(sessionManager.getUser());
         homeScreen.getMenuChoiceBox().setValue("Home");
     }
 
@@ -42,6 +47,14 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
     public void handleCancelButton(ActionEvent event){
         homeScreen.getMenuChoiceBox().setValue("Home");
     }
+
+    public void setTextFields(){
+        nameTextField.setText(sessionManager.getUser().getName());
+        startWeightTextField.setText(String.valueOf(sessionManager.getUser().getWeightStart()));
+        goalWeightTextField.setText(String.valueOf(sessionManager.getUser().getWeightGoal()));
+        calLimitTextField.setText(String.valueOf(sessionManager.getUser().getDailyCalorieLimit()));
+    }
+
     @Override
     public void setHomeScreen(HomeScreen homeScreen) {
         this.homeScreen=homeScreen;

@@ -63,6 +63,7 @@ public class SummaryScreen extends VBox implements SessionControl, HomeControl {
         limitLabel.setText(String.valueOf(sessionManager.getUser().getDailyCalorieLimit()));
         availableLabel.setText(sessionManager.getCaloriesAvailable());
         totalLabel.setText(String.valueOf(sessionManager.getCurrentDay().getTotalCal()));
+        dateLabel.setText(sessionManager.getCurrentDay().getDate());
     }
 
     @Override

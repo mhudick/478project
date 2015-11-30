@@ -18,7 +18,7 @@ public class FoodDataImpl implements FoodData{
     @Override
     public boolean saveFood(Food food) {
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, fg, kCal) values(\'" +
-                food.getNdbno()+"\',\'"+food.getName()+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
+                food.getNdbno()+"\',\'"+formatName(food.getName())+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
         try {
             DatabaseManager.executeStatment(sql);
         } catch (SQLException e) {
@@ -79,5 +79,9 @@ public class FoodDataImpl implements FoodData{
             e.printStackTrace();
         }
         return foodNames;
+    }
+    private String formatName(String name){
+        name = name.replace('\'', '`');
+        return name;
     }
 }

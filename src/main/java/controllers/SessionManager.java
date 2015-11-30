@@ -4,20 +4,24 @@ import models.Day;
 import models.User;
 import util.database.DayData;
 import util.database.DayDataImpl;
-import util.database.UserData;
-import util.database.UserDataImpl;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 
 /**
  * Created by Phil on 11/3/2015.
  */
 public class SessionManager {
+
+    private String today;
     private User currentUser;
     private Day currentDay;
     private DayData dayData = new DayDataImpl();
-    private UserData userData = new UserDataImpl();
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    public SessionManager(){
+        today = simpleDateFormat.format(Calendar.getInstance().getTime());
+    }
 
     public User getUser() {
         return currentUser;
@@ -27,16 +31,15 @@ public class SessionManager {
         this.currentUser = currentUser;
         setCurrentDay();
     }
+    public Day getCurrentDay() {
+        return currentDay;
+    }
+
     private void setCurrentDay(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = simpleDateFormat.format(Calendar.getInstance().getTime());
-        if(dayData.isNewDay(currentUser.getUserId())){
-            Day day = new Day();
-            day.setDate(today);
-            day.setUserId(currentUser.getUserId());
-            dayData.saveNewDay(day);
+        if(dayData.isNewDay(currentUser.getUserId(),today)){
+            dayData.createNewDay(currentUser.getUserId(),today);
         }
-        currentDay = dayData.getCurrentDay(currentUser.getUserId(), today);
+        currentDay = dayData.getCurrentDay(currentUser.getUserId(),today);
     }
 
     public String getCaloriesAvailable(){
@@ -44,13 +47,9 @@ public class SessionManager {
     }
 
     public void addCaloriesToDay(int kCal){
-        System.out.println("Adding calories");
+        System.out.println("Adding "+kCal+" calories to currentDay");
         currentDay.setTotalCal(currentDay.getTotalCal()+kCal);
-        System.out.println(currentDay.getTotalCal());
         dayData.saveDay(currentDay);
     }
 
-    public Day getCurrentDay() {
-        return currentDay;
-    }
 }

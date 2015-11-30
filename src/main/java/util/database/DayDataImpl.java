@@ -1,5 +1,7 @@
 package util.database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import models.Day;
 import models.User;
 
@@ -23,52 +25,57 @@ public class DayDataImpl implements DayData {
             DatabaseManager.executeStatment(sql);
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Failed to save Day");
             return false;
         }
+        System.out.println("SaveDay completed");
         return true;
     }
 
     @Override
-    public boolean saveNewDay(Day day) {
-        String sql = "INSERT INTO day(userId, date, totalCal) "+
-                "VALUES("+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";
+    public boolean createNewDay(int userId, String today) {
+        String sql = "INSERT INTO day(userId, date) VALUES("+userId+",\'"+today+"\');";
         try {
             DatabaseManager.executeStatment(sql);
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("createNewDay failed");
             return false;
         }
+        System.out.println("createNewDay completed");
         return true;
     }
 
     @Override
-    public boolean deleteDay(int id) {
-        String sql = "DELETE FROM day WHERE dayId = "+id+";";
+    public boolean deleteDay(int dayId) {
+        String sql = "DELETE FROM day WHERE dayId = "+dayId+";";
         try {
             DatabaseManager.executeStatment(sql);
+            System.out.println("Day id: "+dayId+" deleted");
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Day id: " + dayId + " failed to deleted");
             return false;
         }
         return true;
     }
 
     @Override
-    public boolean isNewDay(int userId) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String today = simpleDateFormat.format(Calendar.getInstance().getTime());
+    public boolean isNewDay(int userId, String today) {
         String sql = "SELECT * From day WHERE userId = "+userId+" AND date = \'"+today+"\';";
         try {
             ResultSet resultSet = DatabaseManager.getResultSet(sql);
             resultSet.next();
             if(resultSet.isAfterLast()){
                 resultSet.close();
+                System.out.println("It is a new day.");
                 return true;
             }
             resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("It is not a new day.");
         return false;
     }
 
@@ -86,26 +93,33 @@ public class DayDataImpl implements DayData {
             day.setDate(resultSet.getString("date"));
             resultSet.close();
         } catch (SQLException e) {
+            System.out.println("getCurrentDay failed.");
             e.printStackTrace();
         }
+        System.out.println("getCurrentDay Completed.");
         return day;
     }
 
     @Override
-    public Day getDay(int id) {
-        String sql = "SELECT * From day";
-        Day day = new Day();
+    public ObservableList<Day> getDayList(int userId) {
+        String sql = "SELECT * FROM day WHERE userId = "+userId+";";
+        ObservableList<Day> dayList = FXCollections.observableArrayList();
         try {
             ResultSet resultSet = DatabaseManager.getResultSet(sql);
             resultSet.next();
-            day.setId(resultSet.getInt("dayId"));
-            day.setUserId(resultSet.getInt("userId"));
-            day.setDate(resultSet.getString("date"));
-            day.setTotalCal(resultSet.getInt("totalCal"));
+            while(!resultSet.isAfterLast()){
+                Day day = new Day();
+                day.setId(resultSet.getInt("dayId"));
+                day.setUserId(resultSet.getInt("userId"));
+                day.setDate(resultSet.getString("date"));
+                day.setTotalCal(resultSet.getInt("totalCal"));
+                dayList.add(day);
+                resultSet.next();
+            }
             resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return day;
+        return dayList;
     }
 }

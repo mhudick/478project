@@ -9,12 +9,10 @@ import java.util.Date;
 public class WeighIn {
     int WeighId, userId;
     double weight;
-    Date date;
+    String date;
 
     public WeighIn(){
-        System.out.println("WeighIn Constructor.");
-        date = Calendar.getInstance().getTime();
-        System.out.println("Date set to: " + date);
+
     }
 
     public int getWeighId() {
@@ -33,11 +31,11 @@ public class WeighIn {
         this.userId = userId;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

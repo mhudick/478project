@@ -43,11 +43,6 @@ public class TestDayDataImpl {
         assertTrue(dayData.saveDay(day1));
     }
 
-    //Requirement: 0.6.2
-    @Test
-    public void testGetDay() {
-        assertEquals(this.day1,dayData.getDay(day1.getId()));
-    }
 
     //Requirement: 0.6.3
     @Test
@@ -64,7 +59,6 @@ public class TestDayDataImpl {
     //Requirement: 0.6.5
     @Test
     public void testIsNewDay(){
-        assertTrue(dayData.isNewDay(day2.getUserId()));
-        assertFalse(dayData.isNewDay(day1.getUserId()));
+
     }
 }

@@ -12,13 +12,38 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.RowConstraints?>
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
-    <VBox alignment="CENTER" spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER"  spacing="30.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <children>
-            <Label fx:id="nameLabel" text="Name Targ">
-                <font>
-                    <Font size="18.0" />
-                </font>
-            </Label>
+            <HBox alignment="CENTER" spacing="8.0">
+                <children>
+                    <Label text="Name: ">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="nameLabel" text="NameTarg">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets right="20.0" />
+                        </HBox.margin>
+                    </Label>
+                    <Label text="Date:">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="20.0" />
+                        </HBox.margin>
+                    </Label>
+                    <Label fx:id="dateLabel" text="DateTarg">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
             <GridPane hgap="16.0" vgap="8.0">
                 <columnConstraints>
                     <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
@@ -33,12 +58,12 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <children>
-                    <Label text="Current weight:" GridPane.rowIndex="1">
+                    <Label text="Current weight:" GridPane.rowIndex="3">
                         <font>
                             <Font size="16.0" />
                         </font>
                     </Label>
-                    <Label text="Starting Weight:" GridPane.rowIndex="3">
+                    <Label text="Starting Weight:" GridPane.rowIndex="1">
                         <font>
                             <Font size="16.0" />
                         </font>
@@ -48,12 +73,7 @@
                             <Font size="16.0" />
                         </font>
                     </Label>
-                    <Label text="Last Weigh In:" GridPane.rowIndex="4">
-                        <font>
-                            <Font size="16.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="currentLabel" text="CWTarg" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label fx:id="currentLabel" text="CWTarg" GridPane.columnIndex="1" GridPane.rowIndex="3">
                         <font>
                             <Font size="14.0" />
                         </font>
@@ -63,12 +83,7 @@
                             <Font size="14.0" />
                         </font>
                     </Label>
-                    <Label fx:id="startLabel" text="SWTarg" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </Label>
-                    <Label fx:id="dateLabel" text="Date Targ" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <Label fx:id="startLabel" text="SWTarg" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
                             <Font size="14.0" />
                         </font>
@@ -87,7 +102,7 @@
                     </HBox>
                     <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <children>
-                            <Button mnemonicParsing="false" text="Edit Profile" onAction="#handleEditButton"/>
+                            <Button text="Edit Profile" onAction="#handleEditButton"/>
                         </children>
                     </HBox>
                     <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">

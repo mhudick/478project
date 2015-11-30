@@ -62,10 +62,25 @@ public class AppLoginScreen implements AppControl {
      */
     @FXML
     public void handleSelectUserButton(ActionEvent actionEvent){
-        System.out.println("Select button clicked!");
-        appManager.getSessionManager().setCurrentUser(userHashMap.get(getSelectedName()));
-        appManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());//Load Home Screen into appManager
-        appManager.show(Screen.HOME);
+        if(userListView.getSelectionModel().getSelectedItem() != null){
+            System.out.println("Select button clicked!");
+            appManager.getSessionManager().setCurrentUser(userHashMap.get(getSelectedName()));
+            appManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());//Load Home Screen into appManager
+            appManager.show(Screen.HOME);
+        }else {
+            System.out.println("Nothing selected");
+        }
+    }
+
+    @FXML
+    public void handleDeleteUserButton(ActionEvent event){
+        if (userListView.getSelectionModel().getSelectedItem() != null){
+            System.out.println("Deleting user: " + userHashMap.get(getSelectedName()).getName());
+            userData.deleteUser(userHashMap.get(getSelectedName()).getUserId());
+            userListView.setItems(userData.getUserNames());
+        }else {
+            System.out.println("Nothing selected");
+        }
     }
 
     @Override
@@ -73,7 +88,7 @@ public class AppLoginScreen implements AppControl {
         this.appManager = appManager;
     }
 
-    public String getSelectedName(){
+    private String getSelectedName(){
        return userListView.getSelectionModel().getSelectedItem();
     }
 }

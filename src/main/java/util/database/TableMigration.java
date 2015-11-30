@@ -36,7 +36,7 @@ public class TableMigration {
             "CREATE TABLE weigh_in"+
                     "(weighId INTEGER PRIMARY KEY,"+
                     "userId INTEGER,"+
-                    "date DATE,"+
+                    "date TEXT,"+
                     "weight NUMBER,"+
                     "FOREIGN KEY(userId) REFERENCES day(userId));";
 
