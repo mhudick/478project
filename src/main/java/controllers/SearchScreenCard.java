@@ -6,7 +6,10 @@
 package controllers;
 
 import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -20,7 +23,7 @@ public class SearchScreenCard extends VBox{
     //fields
     private Food food;
     @FXML
-    private Label nameLabel, calLabel;
+    private Label nameLabel, calLabel, messageLabel;
 
     //constructor(s)
     public SearchScreenCard(Food food){
@@ -53,7 +56,13 @@ public class SearchScreenCard extends VBox{
 
     @FXML
     public void handleSaveButton(ActionEvent event){
-        foodData.saveFood(food);
-        System.out.println("Food Saved");
+        if(foodData.saveFood(food)){
+            //Print to screen food saved
+            messageLabel.setText("Food saved successfully.");
+        }else{
+            //Print to screen save failed.
+            messageLabel.setText("Food could not be saved.");
+        }
+        System.out.println("Food Save Clicked");
     }
 }

@@ -69,6 +69,7 @@ public class HomeScreen extends GridPane implements AppControl {
         System.out.println("Search button clicked!");
         menuChoiceBox.setValue("Search");
         searchScreen.getSearchResults(searchTextField.getText());
+        searchTextField.setText("");
     }
 
     public void handleMenuChoiceBox(ActionEvent actionEvent){

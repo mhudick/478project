@@ -107,7 +107,7 @@
                     </HBox>
                     <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                         <children>
-                            <Button fx:id="weighButton" text="Lets Weigh In" onAction="#handleWeighButton"/>
+                            <Button fx:id="weighButton" text="Let's Weigh-In" onAction="#handleWeighButton"/>
                         </children>
                     </HBox>
                 </children>

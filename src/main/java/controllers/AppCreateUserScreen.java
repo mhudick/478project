@@ -12,6 +12,7 @@ package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import models.User;
 import util.NumFieldFx;
@@ -24,6 +25,9 @@ public class AppCreateUserScreen implements AppControl {
     private AppManager appManager;//Reference to AppManager
 
     @FXML
+    private Label messageLabel;
+
+    @FXML
     private NumFieldFx goalTextField, currentTextField;
 
     @FXML
@@ -33,28 +37,37 @@ public class AppCreateUserScreen implements AppControl {
     public void handleCreateButton(ActionEvent actionEvent){
         System.out.println("Create button clicked!");
         saveNewUser();
-        appManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
-        appManager.show(Screen.USER_LOG_IN);
+
     }
     @FXML
     public void handleBackButton(ActionEvent actionEvent){
         System.out.println("Back button clicked!");
+        clearTextFields();
         appManager.show(Screen.USER_LOG_IN);
     }
 
     public void saveNewUser(){
-        User user = new User();
-        user.setName(nameTextField.getText());
-        user.setWeightGoal(Double.parseDouble(goalTextField.getText()));
-        user.setWeightCurrent(Double.parseDouble(currentTextField.getText()));
-        user.setWeightStart(user.getWeightCurrent());
-        userData.saveNewUser(user);
-        clearTextFields();
+        if(!nameTextField.getText().equals("") && !goalTextField.getText().equals("") && !currentTextField.getText().equals("")){
+            User user = new User();
+            user.setName(nameTextField.getText());
+            user.setWeightGoal(Double.parseDouble(goalTextField.getText()));
+            user.setWeightCurrent(Double.parseDouble(currentTextField.getText()));
+            user.setWeightStart(user.getWeightCurrent());
+            userData.saveNewUser(user);
+            clearTextFields();
+            appManager.loadScreen(Screen.USER_LOG_IN, Screen.USER_LOG_IN.getResourcePath());
+            appManager.show(Screen.USER_LOG_IN);
+        }else {
+            //print message to user
+            messageLabel.setText("Please fill out all fields before continuing.");
+        }
+
     }
     public void clearTextFields(){
         nameTextField.setText("");
         goalTextField.setText("");
         currentTextField.setText("");
+        messageLabel.setText("");
     }
     @Override
     public void setAppManager(AppManager appManager){

@@ -19,7 +19,7 @@ public class FoodScreenCard extends VBox implements SessionControl {
     private Food food;
 
     @FXML
-    private Label nameLabel, calLabel;
+    private Label nameLabel, calLabel, messageLabel;
     @FXML
     private NumFieldFx gramTextField;
 
@@ -57,6 +57,7 @@ public class FoodScreenCard extends VBox implements SessionControl {
     public void handleEatButton(ActionEvent event){
         System.out.println("Eat Button Clicked.");
         sessionManager.addCaloriesToDay(Integer.parseInt(calLabel.getText()));
+        messageLabel.setText("Calories added to daily total.");
     }
 
     public int calculateCalories(){

@@ -108,13 +108,12 @@ public class HistoryScreen extends VBox implements SessionControl {
     }
 
     public void setTables(){
+        dayTable.getItems().clear();
         dayList = dayData.getDayList(sessionManager.getUser().getUserId());
         weighInList = weighInData.getListOfWeighIns(sessionManager.getUser().getUserId());
-
         wDate.setCellValueFactory(new PropertyValueFactory<WeighIn, String>("date"));
         wWeight.setCellValueFactory(new PropertyValueFactory<WeighIn, String>("weight"));
         weighInTable.setItems(weighInList);
-
         dDate.setCellValueFactory(new PropertyValueFactory<Day, String>("date"));
         dCal.setCellValueFactory(new PropertyValueFactory<Day, String>("totalCal"));
         dayTable.setItems(dayList);

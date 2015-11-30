@@ -12,9 +12,9 @@
 <fx:root type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
     <VBox alignment="TOP_CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
         <children>
-            <Label text="Lets Weigh In!">
+            <Label text="Let's Weigh-In!">
                 <font>
-                    <Font size="36.0" />
+                    <Font size="32.0" />
                 </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="50.0" spacing="15.0">

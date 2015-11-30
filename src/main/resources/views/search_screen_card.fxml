@@ -34,12 +34,13 @@
                     <Font size="18.0" />
                 </font>
             </Label>
-            <Button layoutX="208.0" layoutY="149.0" mnemonicParsing="false" text="Save" onAction="#handleSaveButton"/>
+            <Button layoutX="235.0" layoutY="161.0" mnemonicParsing="false" text="Save" onAction="#handleSaveButton"/>
             <Label layoutX="118.0" layoutY="79.0" text="100">
                 <font>
                     <Font size="18.0" />
                 </font>
             </Label>
+            <Label fx:id="messageLabel" layoutX="50.0" layoutY="165.0" />
         </children>
     </AnchorPane>
 </fx:root>
