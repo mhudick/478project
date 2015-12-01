@@ -16,6 +16,11 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Food{
+
+    /**
+     * Food objects contain multiple fields of data
+     * (Requirement 3.1.0)
+     */
     private String ndbno, name, fg;
     private double kCal;//Per 100 grams
 
@@ -29,6 +34,10 @@ public class Food{
         this.ndbno = ndbno;
     }
 
+    /**
+     * Food objects have a name
+     * (Requirement 3.1.1)
+     */
     public String getName() {
         return name;
     }
@@ -49,6 +58,10 @@ public class Food{
         return kCal;
     }
 
+    /**
+     * Food objects have calories/mass value
+     * (Requirement 3.1.2)
+     */
     public void setkCal(double kCal){
         this.kCal = kCal;
     }

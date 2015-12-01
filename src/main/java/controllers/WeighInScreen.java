@@ -52,6 +52,10 @@ public class WeighInScreen extends VBox implements HomeControl, SessionControl {
         dateLabel.setText(sessionManager.getCurrentDay().getDate());
     }
 
+    /**
+     * User should be able to update their current weight
+     * (Requirement 2.2.0)
+     */
     @FXML
     public void handleWeighInButton(ActionEvent event){
         weighInData.saveNewWeighIn(sessionManager.getUser().getUserId(), Integer.parseInt(weightField.getText()),sessionManager.getCurrentDay().getDate());

@@ -28,9 +28,21 @@ public class DatabaseManager {
     private DatabaseManager(){
     }
 
+    /**
+     * Application checks for database when launched
+     * (Requirement 1.1.0)
+     */
     //Checks for database and creates one if it does not exist
     public static void checkForDatabase(){
+        /**
+         * Application creates database if one does not exist
+         * (Requirement 1.1.1)
+         */
         if(!new File(DB_NAME+".db").exists()){
+            /**
+             * Application sets tables for the database
+             * (Requirement 1.1.2)
+             */
             executeBatch(TableMigration.getTables());
             System.out.println("Created database successfully");
         }else{
@@ -38,6 +50,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * Application can execute a Sql statement
+     * (Requirement 1.2.0)
+     */
     //Executes a sql update string
     public static boolean executeStatement(String sql){
         Statement statement;
@@ -54,6 +70,10 @@ public class DatabaseManager {
         return true;
     }
 
+    /**
+     * Application can execute a list of Sql statements
+     * (Requirement 1.2.1)
+     */
     //Executes a List of sql statements
     public static boolean executeBatch(List<String> sqlList){
         Statement statement;
@@ -74,6 +94,10 @@ public class DatabaseManager {
         return true;
     }
 
+    /**
+     * Application can query database and receive a result set.
+     * (Requirement 1.3.0)
+     */
     //Returns the result set of a sql query
     public static ResultSet getResultSet(String sql){
         ResultSet rs;

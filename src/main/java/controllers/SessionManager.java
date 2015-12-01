@@ -53,6 +53,10 @@ public class SessionManager {
         return String.valueOf((currentUser.getDailyCalorieLimit()-currentDay.getTotalCal()));
     }
 
+    /**
+     * Eating food should update the user's daily calorie total
+     * (Requirement 2.6.1)
+     */
     public void addCaloriesToDay(int kCal){
         System.out.println("Adding "+kCal+" calories to currentDay");
         currentDay.setTotalCal(currentDay.getTotalCal()+kCal);

@@ -90,6 +90,10 @@ public class UserDataImpl implements UserData{
         return userMap;
     }
 
+    /**
+     * A list of user names can be loaded from the database
+     * (Requirement 2.4.0)
+     */
     @Override
     public ObservableList<String> getUserNames() {
         String sql = "SELECT name FROM user";

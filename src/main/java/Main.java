@@ -49,7 +49,11 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //If database does not exist it gets created.
+
+        /**
+         * Local database will exist and keep track of user data.
+         * (Requirement 1.0.0)
+         */
         DatabaseManager.checkForDatabase();
 
         launch(args);

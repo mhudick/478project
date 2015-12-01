@@ -61,6 +61,10 @@ public class FoodScreenCard extends VBox implements SessionControl {
         });
     }
 
+    /**
+     * User should be able to keep track of food eaten.
+     * (Requirement 2.6.0)
+     */
     @FXML
     public void handleEatButton(ActionEvent event){
         System.out.println("Eat Button Clicked.");
@@ -68,6 +72,10 @@ public class FoodScreenCard extends VBox implements SessionControl {
         messageLabel.setText("Calories added to daily total.");
     }
 
+    /**
+     * User inputs mass and gets the kiloCalorie conversion value
+     * (Requirement 3.6.0)
+     */
     public int calculateCalories(){
         double answer = 0;
         if(!gramTextField.getText().equals("")){

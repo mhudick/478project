@@ -56,9 +56,9 @@ public class AppLoginScreen implements AppControl {
         appManager.show(Screen.CREATE_USER);
     }
 
-    /*
-    Selects a user from the list and passes it to the AppManager's
-    sessionManager. Then loads the homeScreen.
+    /**
+     * User may select their username from a list of all user names
+     * (Requirement 2.5.0)
      */
     @FXML
     public void handleSelectUserButton(ActionEvent actionEvent){
@@ -72,6 +72,10 @@ public class AppLoginScreen implements AppControl {
         }
     }
 
+    /**
+     * User may delete their profile data
+     * (Requirement 2.3.0)
+     */
     @FXML
     public void handleDeleteUserButton(ActionEvent event){
         if (userListView.getSelectionModel().getSelectedItem() != null){

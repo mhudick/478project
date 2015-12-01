@@ -12,6 +12,11 @@ package models;
  */
 
 public class User {
+
+    /**
+     * User profiles should contain multiple fields of data
+     * (Requirement 2.1.0)
+     */
     private int UserId, dailyCalorieLimit;
     private String name;
     double weightCurrent, weightStart, weightGoal;
@@ -19,6 +24,7 @@ public class User {
     public User(){
         dailyCalorieLimit = 2000;
     }
+
 
     public int getUserId() {
         return UserId;
@@ -28,14 +34,10 @@ public class User {
         this.UserId = userId;
     }
 
-    public int getDailyCalorieLimit() {
-        return dailyCalorieLimit;
-    }
-
-    public void setDailyCalorieLimit(int dailyCalorieLimit) {
-        this.dailyCalorieLimit = dailyCalorieLimit;
-    }
-
+    /**
+     * User should have a name
+     * (Requirement 2.1.1)
+     */
     public String getName() {
         return name;
     }
@@ -44,6 +46,22 @@ public class User {
         this.name = name;
     }
 
+    /**
+     * User should have a calorie limit
+     * (Requirement 2.1.5)
+     */
+    public int getDailyCalorieLimit() {
+        return dailyCalorieLimit;
+    }
+
+    public void setDailyCalorieLimit(int dailyCalorieLimit) {
+        this.dailyCalorieLimit = dailyCalorieLimit;
+    }
+
+    /**
+     * User should have a goal weight
+     * (Requirement 2.1.4)
+     */
     public double getWeightCurrent() {
         return weightCurrent;
     }
@@ -52,6 +70,10 @@ public class User {
         this.weightCurrent = weightCurrent;
     }
 
+    /**
+     * User should have a starting weight
+     * (Requirement 2.1.2)
+     */
     public double getWeightStart() {
         return weightStart;
     }
@@ -60,6 +82,10 @@ public class User {
         this.weightStart = weightStart;
     }
 
+    /**
+     * User should have a goal weight
+     * (Requirement 2.1.3)
+     */
     public double getWeightGoal() {
         return weightGoal;
     }

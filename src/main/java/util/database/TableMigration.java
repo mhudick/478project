@@ -16,6 +16,11 @@ import java.util.List;
 
 public class TableMigration {
     //Constant for sql that creates the tables.
+
+    /**
+     * Multiple users can exist
+     * (Requirement 2.0.0)
+     */
     private static final String USER_TABLE =
             "CREATE TABLE user"+
                     "(userId INTEGER PRIMARY KEY,"+
@@ -25,6 +30,10 @@ public class TableMigration {
                     "weightStart NUMBER,"+
                     "weightGoal NUMBER);";
 
+    /**
+     * Multiple Food objects can exist
+     * (Requirement 3.0.0)
+     */
     private static String FOOD_TABLE =
             "CREATE TABLE food("+
                     "ndbno TEXT PRIMARY KEY,"+
@@ -32,6 +41,10 @@ public class TableMigration {
                     "fg TEXT NOT NULL,"+
                     "kCal NUMBER);";
 
+    /**
+     * Day objects can keep track of daily calorie counts for each user
+     * (Requirement 5.0.0)
+     */
     private static final String DAY_TABLE =
             "CREATE TABLE day"+
                     "(dayId INTEGER PRIMARY KEY,"+
@@ -40,6 +53,10 @@ public class TableMigration {
                     "totalCal INTEGER,"+
                     "FOREIGN KEY (userId) references USER(userId));";
 
+    /**
+     * Weigh-in objects can keep track of weigh-in events of the user
+     * (Requirement 4.0.0)
+     */
     private static final String WEIGH_IN_TABLE =
             "CREATE TABLE weigh_in"+
                     "(weighId INTEGER PRIMARY KEY,"+

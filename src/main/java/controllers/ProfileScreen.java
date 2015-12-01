@@ -48,16 +48,37 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
         }
     }
 
+    /**
+     * User may edit their profile data
+     * (Requirement 2.2.0)
+     */
     @FXML
     public void handleSaveButton(ActionEvent event){
         if(!nameTextField.getText().equals("") && !startWeightTextField.getText().equals("") &&
                 !goalWeightTextField.getText().equals("") && !calLimitTextField.getText().equals("")){
 
+            /**
+             * User should be able to set their name
+             * (Requirement 2.2.1)
+             */
             sessionManager.getUser().setName(nameTextField.getText());
+            /**
+             * User should be able to set their starting weight
+             * (Requirement 2.2.3)
+             */
             sessionManager.getUser().setWeightStart(Double.parseDouble(startWeightTextField.getText()));
+            /**
+             * User should be able to set their goal weight
+             * (Requirement 2.2.4)
+             */
             sessionManager.getUser().setWeightGoal(Double.parseDouble(goalWeightTextField.getText()));
+            /**
+             * User should be able to set their daily calorie allowance
+             * (Requirement 2.2.5)
+             */
             sessionManager.getUser().setDailyCalorieLimit(Integer.parseInt(calLimitTextField.getText()));
             userData.saveUser(sessionManager.getUser());
+            messageLabel.setText("");
             homeScreen.getMenuChoiceBox().setValue("Home");
         }else{
             //print message to user
@@ -67,6 +88,7 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
     @FXML
     public void handleCancelButton(ActionEvent event){
+        messageLabel.setText("");
         homeScreen.getMenuChoiceBox().setValue("Home");
     }
 

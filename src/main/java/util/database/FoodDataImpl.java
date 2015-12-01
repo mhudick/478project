@@ -20,6 +20,10 @@ import java.util.HashMap;
 
 public class FoodDataImpl implements FoodData{
 
+    /**
+     * Food data can be saved to the local database
+     * (Requirement 3.2.0)
+     */
     @Override
     public boolean saveFood(Food food) {
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, fg, kCal) values(\'" +
@@ -27,12 +31,20 @@ public class FoodDataImpl implements FoodData{
         return DatabaseManager.executeStatement(sql);
     }
 
+    /**
+     * Food data can be deleted from the local database
+     * (Requirement 3.4.0)
+     */
     @Override
     public boolean deleteFood(String ndbno) {
         String foodSql = "DELETE FROM food WHERE ndbno = \'"+ndbno+"\';";
         return DatabaseManager.executeStatement(foodSql);
     }
 
+    /**
+     * Food data can be retrieved from the local database
+     * (Requirement 3.3.0)
+     */
     @Override
     public HashMap<String, Food> getFoodMap() {
         String sql = "SELECT * FROM food;";
@@ -57,6 +69,10 @@ public class FoodDataImpl implements FoodData{
         return foodMap;
     }
 
+    /**
+     * A list of food names can be loaded from the database
+     * (Requirement 3.5.0)
+     */
     @Override
     public ObservableList<String> getFoodNameList() {
         String sql = "SELECT name FROM food";
