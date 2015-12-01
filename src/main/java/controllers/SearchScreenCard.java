@@ -55,6 +55,10 @@ public class SearchScreenCard extends VBox{
         });
     }
 
+    /**
+     * Food retrieved from search can be saved to local database
+     * (Requirement 6.4.0)
+     */
     @FXML
     public void handleSaveButton(ActionEvent event){
         if(foodData.saveFood(food)){

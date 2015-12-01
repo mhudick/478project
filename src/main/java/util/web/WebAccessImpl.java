@@ -28,6 +28,10 @@ public class WebAccessImpl implements WebAccess{
     //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
 
+    /**
+     * The USDA Nutrient Database should be searched for list of foods
+     * (Requirement 6.1.0)
+     */
     //This methods handles searching for the foods it returns the Search response as an object.
     @Override
     public HashMap<String,String> searchForFood(String term) {
@@ -57,6 +61,10 @@ public class WebAccessImpl implements WebAccess{
         return itemMap;
     }
 
+    /**
+     * The USDA Nutrient Database can return a food object
+     * (Requirement 6.2.0)
+     */
     //This is the method used to retrieve a Food object from the webserver.
     @Override
     public Food getFood(String ndbno){

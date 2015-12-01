@@ -49,6 +49,11 @@ public class SearchScreen extends VBox{
         }
     }
 
+    /**
+     * User can enter a search query into a text field and retrieve a list
+     * of foods that relate to the their query.
+     * (Requirement 6.0.0)
+     */
     public void getSearchResults(String query){
         searchListView.getItems().clear();
         listMap = webAccess.searchForFood(query);
@@ -62,6 +67,10 @@ public class SearchScreen extends VBox{
         searchListView.setItems(listData);
     }
 
+    /**
+     * Selecting a food item from list displays the details of selected item
+     * (Requirement 6.3.0)
+     */
     @FXML
     public void handleMouseClick(MouseEvent arg0){
         System.out.println("clicked on " + searchListView.getSelectionModel().getSelectedItem().toString());

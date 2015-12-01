@@ -19,6 +19,10 @@ import java.sql.SQLException;
 
 public class DayDataImpl implements DayData {
 
+    /**
+     * Day objects can be saved to the database
+     * (Requirement 5.1.0)
+     */
     @Override
     public boolean saveDay(Day day) {
         String sql = "INSERT OR REPLACE INTO day(dayId, userId, date, totalCal) "+
@@ -32,6 +36,10 @@ public class DayDataImpl implements DayData {
         return DatabaseManager.executeStatement(sql);
     }
 
+    /**
+     * Day objects can be deleted from the database
+     * (Requirement 5.3.0)
+     */
     @Override
     public boolean deleteDay(int dayId) {
         String sql = "DELETE FROM day WHERE dayId = "+dayId+";";
@@ -57,7 +65,10 @@ public class DayDataImpl implements DayData {
         return false;
     }
 
-
+    /**
+     * Day objects can be retrieved from the database
+     * (Requirement 5.2.0)
+     */
     @Override
     public Day getCurrentDay(int userId, String today) {
         String sql = "SELECT * From day WHERE userId = "+userId + " AND date = \'" + today +"\';";

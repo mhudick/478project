@@ -57,15 +57,52 @@ public class SummaryScreen extends VBox implements SessionControl, HomeControl {
         this.sessionManager = sessionManager;
     }
 
+    /**
+     * Each user should be presented with their weight goals
+     * (Requirement 7.0.0)
+     *
+     * Each user should be presented with their daily goals
+     * (Requirement 8.0.0)
+     */
     public void setLabels(){
         nameLabel.setText(sessionManager.getUser().getName());
-        currentLabel.setText(String.valueOf(sessionManager.getUser().getWeightCurrent())+" lbs.");
-        goalLabel.setText(String.valueOf(sessionManager.getUser().getWeightGoal())+" lbs.");
-        startLabel.setText(String.valueOf(sessionManager.getUser().getWeightStart())+" lbs.");
-        limitLabel.setText(String.valueOf(sessionManager.getUser().getDailyCalorieLimit()));
-        availableLabel.setText(sessionManager.getCaloriesAvailable());
-        totalLabel.setText(String.valueOf(sessionManager.getCurrentDay().getTotalCal()));
         dateLabel.setText(sessionManager.getCurrentDay().getDate());
+
+        /**
+         * Weight goals should display the user’s current weight
+         * (Requirement 7.1.0)
+         */
+        currentLabel.setText(String.valueOf(sessionManager.getUser().getWeightCurrent())+" lbs.");
+
+        /**
+         * Weight goals should display the user’s goal weight
+         * (Requirement 7.2.0)
+         */
+        goalLabel.setText(String.valueOf(sessionManager.getUser().getWeightGoal())+" lbs.");
+
+        /**
+         * Weight goals should display the user’s starting weight
+         * (Requirement 7.3.0)
+         */
+        startLabel.setText(String.valueOf(sessionManager.getUser().getWeightStart())+" lbs.");
+
+        /**
+         * Daily goals should display the user’s daily calorie limit
+         * (Requirement 8.1.0)
+         */
+        limitLabel.setText(String.valueOf(sessionManager.getUser().getDailyCalorieLimit()));
+
+        /**
+         * Daily goals should display the user’s remaining calories for the day
+         * (Requirement 8.2.0)
+         */
+        availableLabel.setText(sessionManager.getCaloriesAvailable());
+
+        /**
+         * Daily goals should display the user’s total calorie consumption for the day
+         * (Requirement 8.3.0)
+         */
+        totalLabel.setText(String.valueOf(sessionManager.getCurrentDay().getTotalCal()));
     }
 
     @Override

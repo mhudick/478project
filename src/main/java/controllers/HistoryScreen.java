@@ -123,7 +123,19 @@ public class HistoryScreen extends VBox implements SessionControl {
         dDate.setCellValueFactory(new PropertyValueFactory<Day, String>("date"));
         dCal.setCellValueFactory(new PropertyValueFactory<Day, String>("totalCal"));
         //set list to the tableViews
+
+        /**
+         * User can view history of daily calorie totals and their dates
+         * (Requirement 5.4.0)
+         */
+        weighInTable.getItems().clear();
         weighInTable.setItems(weighInList);
+
+        /**
+         * User can view history of weigh-in events and their dates
+         * (Requirement 4.4.0)
+         */
+        dayTable.getItems().clear();
         dayTable.setItems(dayList);
     }
 

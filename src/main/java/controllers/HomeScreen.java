@@ -75,6 +75,10 @@ public class HomeScreen extends GridPane implements AppControl {
         contentStackPane.getChildren().clear();
         String selectedContent = menuChoiceBox.getValue().toString();
 
+        /**
+         * A navigation menu should allow the user access to all screens
+         * (Requirement 9.0.0)
+         */
         switch(selectedContent){
             case "Home":
                 summaryScreen.setLabels();

@@ -19,18 +19,30 @@ import java.sql.SQLException;
 
 public class WeighInImpl implements WeighInData{
 
+    /**
+     *  Weigh-in objects can be saved to the database
+     * (Requirement 4.1.0)
+     */
     @Override
     public boolean saveNewWeighIn(int userId, int weight, String date) {
         String sql = "INSERT INTO weigh_in(userId, weight, date) VALUES("+userId+","+weight+",\'"+date+"\');";
         return DatabaseManager.executeStatement(sql);
     }
 
+    /**
+     *  Weigh-in objects can be deleted from the database
+     * (Requirement 4.3.0)
+     */
     @Override
     public boolean deleteWeighIn(int weighId) {
         String sql = "DELETE FROM weigh_in WHERE weighId = "+weighId+";";
         return DatabaseManager.executeStatement(sql);
     }
 
+    /**
+     *  Weigh-in objects can be retrieved from the database
+     * (Requirement 4.2.0)
+     */
     @Override
     public ObservableList<WeighIn> getListOfWeighIns(int userId) {
         String sql = "SELECT * FROM weigh_in WHERE userId = "+userId+";";
