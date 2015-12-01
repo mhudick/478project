@@ -1,8 +1,17 @@
 package models;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
 /**
- * Created by Philip on 9/25/2015.
+ * This Class is the data model for the SearchItem object. The initial query
+ * of the USDA database returns a list of possible foods. The SearchItem
+ * represents a single item in that list. This object is not saved to the
+ * local database.
  */
+
 public class SearchItem {
     private String ndbno;
     private String name;

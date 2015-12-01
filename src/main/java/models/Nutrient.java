@@ -1,15 +1,20 @@
 package models;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
 /**
- * Created by Philip on 9/30/2015.
+ * This Class is the data model for the Nutrient object. The nutrient object
+ * is used to collect the calorie information from the json that is returned
+ * during the web search. This object is not saved to the local database.
  */
+
 public class Nutrient {
     private String name, unit;
     private double value;
 
-    public Nutrient(){
-
-    }
     public String getName() {
         return name;
     }
@@ -33,5 +38,4 @@ public class Nutrient {
     public void setValue(double value) {
         this.value = value;
     }
-
 }

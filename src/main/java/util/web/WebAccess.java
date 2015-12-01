@@ -1,18 +1,18 @@
 package util.web;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import models.Food;
-import models.SearchItem;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+/* Developer: Philip Churchill
+** Date: 2015.10.18
+** Configuration Version: 1.0.0
+*/
 
 /**
- * Created by Philip on 10/18/2015.
+ * This interface provides a clear was to insure that the necessary methods are implement
+ * for the WebAccessImpl Class.
  */
+
+import models.Food;
+import java.util.HashMap;
+
 public interface WebAccess {
     HashMap<String,String> searchForFood(String term);
     Food getFood(String ndbno);

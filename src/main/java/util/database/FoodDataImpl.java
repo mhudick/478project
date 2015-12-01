@@ -1,18 +1,23 @@
 package util.database;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class implements the interface for the FoodData Class. The main
+ * functionality of this class is meant to save and retrieve information
+ * on the database specifically for the Food object.
+ */
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Food;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-/**
- * Created by Philip on 10/17/2015.
- */
 public class FoodDataImpl implements FoodData{
 
     @Override

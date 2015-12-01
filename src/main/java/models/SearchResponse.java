@@ -1,12 +1,20 @@
 package models;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This Class is the data model for the SearchResponse object. This object is used
+ * to capture the data returned from the USDA database. It contains a list of the
+ * SearchItems. This object is not saved to the local database.
+ */
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Philip on 10/6/2015.
- */
 public class SearchResponse {
     private String q,group, sort;
     private List<SearchItem> item = new ArrayList<>();

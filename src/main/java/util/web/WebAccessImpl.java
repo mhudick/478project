@@ -1,7 +1,16 @@
 package util.web;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
 /**
- * Created by Philip on 9/24/2015.
+ * This class implements the interface for the WebAccess Class. The main
+ * functionality of this class is meant to query the USDA database and
+ * return the search results a POJOs(Plain ol java objects). This is done
+ * using Gson, which takes in the json result and converts it into a
+ * POJOs.
  */
 
 import models.Food;
@@ -15,12 +24,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
 
-
 public class WebAccessImpl implements WebAccess{
     //API Key as constant
     private static final String API_KEY = "dSfyYD6mmXK7hybh0Vvoj6VGrH28ZTVrscMvuOE2";
-
-
 
     //This methods handles searching for the foods it returns the Search response as an object.
     @Override

@@ -1,14 +1,22 @@
 package util.database;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.28
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * The DatabaseManager in the main class that interacts with the database.
+ * It has a few simple methods; checkForDataBase, executeStatement,
+ * executeBatch, and getResultSet.
+ */
+
 import java.io.File;
 import java.sql.*;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Phil on 9/28/2015.
- */
 public class DatabaseManager {
     //Constant for database file name.
     private static final String DB_NAME = "MyData";

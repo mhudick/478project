@@ -1,3 +1,14 @@
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This is the Main Class of the application. It does the initial setup
+ * of the GUI and checks for the database. If the database is not found
+ * a new one is created.
+ */
+
 import controllers.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,7 +27,6 @@ public class Main extends Application {
     public void start(Stage primaryStage)throws Exception {
 
         //load app screens
-
         AppManager appManager = new AppManager();
 
         //appManager.loadScreen(Screen.HOME, Screen.HOME.getResourcePath());
@@ -39,7 +49,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        //If database does not exist it get created.
+        //If database does not exist it gets created.
         DatabaseManager.checkForDatabase();
 
         launch(args);

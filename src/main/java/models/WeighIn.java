@@ -1,19 +1,20 @@
 package models;
 
-import java.util.Calendar;
-import java.util.Date;
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
 
 /**
- * Created by Philip on 10/22/2015.
+ * This Class is the data model for the WeighIn object. The WeighIn object
+ * is used to represent a weigh-in event, where the user can keep track of
+ * their current weight as they reach their goals.
  */
+
 public class WeighIn {
     int WeighId, userId;
     double weight;
     String date;
-
-    public WeighIn(){
-
-    }
 
     public int getWeighId() {
         return WeighId;
@@ -46,6 +47,4 @@ public class WeighIn {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-
-
 }

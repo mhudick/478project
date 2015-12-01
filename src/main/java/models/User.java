@@ -1,10 +1,16 @@
 package models;
 
-import javax.jws.soap.SOAPBinding;
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
 
 /**
- * Created by Phil on 9/28/2015.
+ * This Class is the data model for the User object. The user object
+ * contains 6 fields. UserId, dailyCalorieLimit, name, weightCurrent,
+ * weightStart, and weightGoal.
  */
+
 public class User {
     private int UserId, dailyCalorieLimit;
     private String name;

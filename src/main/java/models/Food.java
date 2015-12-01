@@ -1,13 +1,20 @@
 package models;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This Class is the data model for the Food object. It keeps track
+ * of the ndbno(Nutritional Database key), the name, the food group,
+ * and the kCalories which is measured in 100 grams.
+ */
+
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by Philip on 9/30/2015.
- */
 public class Food{
     private String ndbno, name, fg;
     private double kCal;//Per 100 grams
@@ -45,6 +52,7 @@ public class Food{
     public void setkCal(double kCal){
         this.kCal = kCal;
     }
+
     public void setkCalFromList() {
         Iterator<Nutrient> iterator = nutrients.iterator();
         while (iterator.hasNext()){

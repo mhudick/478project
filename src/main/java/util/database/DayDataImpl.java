@@ -1,26 +1,28 @@
 package util.database;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class implements the interface for the DayData Class. The main
+ * functionality of this class is meant to save and retrieve information
+ * on the database specifically for the Day object.
+ */
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Day;
-import models.User;
-
-import javax.swing.plaf.synth.SynthStyle;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-
-/**
- * Created by Phil on 11/24/2015.
- */
 public class DayDataImpl implements DayData {
 
     @Override
     public boolean saveDay(Day day) {
         String sql = "INSERT OR REPLACE INTO day(dayId, userId, date, totalCal) "+
-                "VALUES("+day.getId()+","+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";;
+                "VALUES("+day.getUserId()+","+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";;
         try {
             DatabaseManager.executeStatment(sql);
         } catch (SQLException e) {
@@ -82,12 +84,12 @@ public class DayDataImpl implements DayData {
 
     @Override
     public Day getCurrentDay(int userId, String today) {
-        String sql = "SELECT * From day WHERE userId = "+userId+" AND date = \'"+today+"\';";
+        String sql = "SELECT * From day WHERE userId = "+userId + " AND date = \'" + today +"\';";
         Day day = new Day();
         try {
             ResultSet resultSet = DatabaseManager.getResultSet(sql);
             resultSet.next();
-            day.setId(resultSet.getInt("dayId"));
+            day.setUserId(resultSet.getInt("dayId"));
             day.setUserId(resultSet.getInt("userId"));
             day.setTotalCal(resultSet.getInt("totalCal"));
             day.setDate(resultSet.getString("date"));
@@ -109,7 +111,7 @@ public class DayDataImpl implements DayData {
             resultSet.next();
             while(!resultSet.isAfterLast()){
                 Day day = new Day();
-                day.setId(resultSet.getInt("dayId"));
+                day.setUserId(resultSet.getInt("dayId"));
                 day.setUserId(resultSet.getInt("userId"));
                 day.setDate(resultSet.getString("date"));
                 day.setTotalCal(resultSet.getInt("totalCal"));

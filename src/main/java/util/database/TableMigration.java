@@ -1,11 +1,19 @@
 package util.database;
 
+/* Developer: Philip Churchill
+** Date: 2015.10.11
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class sole purpose is to create the sql statements as a list of
+ * strings that are used to create the tables during the initial creation
+ * of the database
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Philip on 10/11/2015.
- */
 public class TableMigration {
     //Constant for sql that creates the tables.
     private static final String USER_TABLE =

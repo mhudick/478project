@@ -1,18 +1,23 @@
 package util.database;
 
+/* Developer: Philip Churchill
+** Date: 2015.9.25
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class implements the interface for the WeighInData Class. The main
+ * functionality of this class is meant to save and retrieve information
+ * on the database specifically for the WeighIn object.
+ */
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.WeighIn;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-/**
- * Created by Phil on 11/24/2015.
- */
 public class WeighInImpl implements WeighInData{
-
 
     @Override
     public boolean saveNewWeighIn(int userId, int weight, String date) {

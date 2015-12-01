@@ -1,24 +1,20 @@
 package models;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+/* Developer: Philip Churchill
+** Date: 2015.11.01
+** Configuration Version: 1.0.0
+*/
 
 /**
- * Created by Philip on 10/17/2015.
+ * This Class is the data model for the Day object. It will keep track
+ * of 4 fields.
  */
+
 public class Day {
 
-    private int id, totalCal, userId;
+    private int dayId, totalCal, userId;
 
     private String date;
-
-    public Day(){
-
-    }
 
     public String getDate(){
         return date;
@@ -40,12 +36,12 @@ public class Day {
         return totalCal;
     }
 
-    public int getId() {
-        return id;
+    public int getDayId() {
+        return dayId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDayId(int dayId) {
+        this.dayId = dayId;
     }
 
     public void setTotalCal(int totalCal) {
@@ -61,7 +57,7 @@ public class Day {
         if (!(other instanceof Day))
             return false;
         Day otherDay = (Day)other;
-        if(this.id == otherDay.getId()){
+        if(this.dayId == otherDay.getDayId()){
             return true;
         }else {
             return false;
@@ -71,7 +67,7 @@ public class Day {
     @Override
     public String toString() {
         return "Day{" +
-                "id=" + id +
+                "id=" + dayId +
                 ", totalCal=" + totalCal +
                 ", userId=" + userId +
                 ", date=" + date +
