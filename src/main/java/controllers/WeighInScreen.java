@@ -14,6 +14,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import util.NumFieldFx;
 import util.database.UserData;
@@ -29,6 +30,9 @@ public class WeighInScreen extends VBox implements HomeControl, SessionControl {
     private UserData userData = new UserDataImpl();
 
     @FXML
+    private Label dateLabel;
+
+    @FXML
     private NumFieldFx weightField;
 
     public WeighInScreen(){
@@ -42,6 +46,10 @@ public class WeighInScreen extends VBox implements HomeControl, SessionControl {
         catch(Exception e){
             System.out.println(e.toString());
         }
+    }
+
+    public void setLabel(){
+        dateLabel.setText(sessionManager.getCurrentDay().getDate());
     }
 
     @FXML

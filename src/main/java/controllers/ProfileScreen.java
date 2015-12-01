@@ -14,6 +14,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import util.NumFieldFx;
@@ -26,6 +27,8 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
     private HomeScreen  homeScreen;
     private UserData userData = new UserDataImpl();
 
+    @FXML
+    private Label messageLabel;
 
     @FXML
     private TextField nameTextField;
@@ -47,12 +50,19 @@ public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
     @FXML
     public void handleSaveButton(ActionEvent event){
-        sessionManager.getUser().setName(nameTextField.getText());
-        sessionManager.getUser().setWeightStart(Double.parseDouble(startWeightTextField.getText()));
-        sessionManager.getUser().setWeightGoal(Double.parseDouble(goalWeightTextField.getText()));
-        sessionManager.getUser().setDailyCalorieLimit(Integer.parseInt(calLimitTextField.getText()));
-        userData.saveUser(sessionManager.getUser());
-        homeScreen.getMenuChoiceBox().setValue("Home");
+        if(!nameTextField.getText().equals("") && !startWeightTextField.getText().equals("") &&
+                !goalWeightTextField.getText().equals("") && !calLimitTextField.getText().equals("")){
+
+            sessionManager.getUser().setName(nameTextField.getText());
+            sessionManager.getUser().setWeightStart(Double.parseDouble(startWeightTextField.getText()));
+            sessionManager.getUser().setWeightGoal(Double.parseDouble(goalWeightTextField.getText()));
+            sessionManager.getUser().setDailyCalorieLimit(Integer.parseInt(calLimitTextField.getText()));
+            userData.saveUser(sessionManager.getUser());
+            homeScreen.getMenuChoiceBox().setValue("Home");
+        }else{
+            //print message to user
+            messageLabel.setText("Please fill out all fields.");
+        }
     }
 
     @FXML

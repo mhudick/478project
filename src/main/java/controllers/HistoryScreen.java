@@ -34,14 +34,13 @@ import util.database.WeighInImpl;
 public class HistoryScreen extends VBox implements SessionControl {
 
     private SessionManager sessionManager;
-
     private WeighInData weighInData = new WeighInImpl();
     private DayData dayData = new DayDataImpl();
+    private ObservableList<Day> dayList;
+    private ObservableList<WeighIn> weighInList;
 
     @FXML
     private Label messageLabel;
-
-    private ObservableList<Day> dayList;
 
     @FXML
     private TableView<Day> dayTable;
@@ -55,9 +54,6 @@ public class HistoryScreen extends VBox implements SessionControl {
     @FXML
     private TableColumn<WeighIn, String> wDate, wWeight;
 
-    private ObservableList<WeighIn> weighInList;
-
-
     public HistoryScreen(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/history_screen.fxml"));
         fxmlLoader.setRoot(this);
@@ -70,10 +66,9 @@ public class HistoryScreen extends VBox implements SessionControl {
         }
     }
 
-
-
     @FXML
     public void handleDeleteWeightButton(ActionEvent event){
+        //Checks for a selection first
         if(weighInTable.getSelectionModel().getSelectedItem() != null){
             WeighIn selectedWeighIn = weighInTable.getSelectionModel().getSelectedItem();
             weighInData.deleteWeighIn(selectedWeighIn.getWeighId());
@@ -83,12 +78,17 @@ public class HistoryScreen extends VBox implements SessionControl {
 
     @FXML
     public void handleDeleteDayButton(ActionEvent event){
-        if(dayTable.getSelectionModel().getSelectedItem() != null){
-            Day selectedDay = dayTable.getSelectionModel().getSelectedItem();
+        Day selectedDay = dayTable.getSelectionModel().getSelectedItem();
+        //Checks for selection
+        if(selectedDay != null){
+            //if selected day is not the current day.
             if(!selectedDay.equals(sessionManager.getCurrentDay())){
+                //delete current day
                 dayData.deleteDay(selectedDay.getUserId());
             }else {
+                //Selected day is same as current day.
                 messageLabel.setText("Cannot delete current day.");
+                //Time to erase message after 2 seconds needed a thread.
                 Task<Void> sleeper = new Task<Void>() {
                     @Override
                     protected Void call() throws Exception {
@@ -107,25 +107,28 @@ public class HistoryScreen extends VBox implements SessionControl {
                 });
                 new Thread(sleeper).start();
             }
+            //reset the tables.
             setTables();
         }
     }
 
     public void setTables(){
-        dayTable.getItems().clear();
+        //Get observable list from database
         dayList = dayData.getDayList(sessionManager.getUser().getUserId());
         weighInList = weighInData.getListOfWeighIns(sessionManager.getUser().getUserId());
+        //set column values for weight table.
         wDate.setCellValueFactory(new PropertyValueFactory<WeighIn, String>("date"));
         wWeight.setCellValueFactory(new PropertyValueFactory<WeighIn, String>("weight"));
-        weighInTable.setItems(weighInList);
+        //set column values for day table
         dDate.setCellValueFactory(new PropertyValueFactory<Day, String>("date"));
         dCal.setCellValueFactory(new PropertyValueFactory<Day, String>("totalCal"));
+        //set list to the tableViews
+        weighInTable.setItems(weighInList);
         dayTable.setItems(dayList);
     }
 
     @Override
     public void setSessionManager(SessionManager sessionManager) {
         this.sessionManager = sessionManager;
-        System.out.println(sessionManager.getCurrentDay().getDate());
     }
 }

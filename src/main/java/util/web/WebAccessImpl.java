@@ -69,7 +69,6 @@ public class WebAccessImpl implements WebAccess{
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(jsonResult,JsonObject.class);
         jsonObject = gson.fromJson(jsonObject.get("report"),JsonObject.class);//Get ride of outer data that we do not need.
-
         Food food = gson.fromJson(jsonObject.get("food"), Food.class);//Converts JsonObject to Food object
         food.setkCalFromList();
         return food;

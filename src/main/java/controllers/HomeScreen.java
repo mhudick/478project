@@ -11,7 +11,6 @@ package controllers;
  * will maintain a reference to the HomeScreen.
  */
 
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,16 +24,11 @@ import javafx.scene.Node;
 
 public class HomeScreen extends GridPane implements AppControl {
 
+    //Objects used to maintain references.
     private AppManager appManager;
     private SessionManager sessionManager;
     private HomeScreen homeScreen;
-
-
     private Node previousContent;
-    //private AppManager homeViewManager;
-    @FXML private ChoiceBox menuChoiceBox;
-    @FXML private TextField searchTextField;
-    @FXML private StackPane contentStackPane;
 
     //These are the controllers for each screen in the contentStackPane.
     private SummaryScreen summaryScreen;
@@ -44,20 +38,21 @@ public class HomeScreen extends GridPane implements AppControl {
     private ProfileScreen profileScreen;
     private HistoryScreen historyScreen;
 
+    //FXML Controls
+    @FXML private ChoiceBox menuChoiceBox;
+    @FXML private TextField searchTextField;
+    @FXML private StackPane contentStackPane;
 
     public HomeScreen(){
-        System.out.println("HomeScreen Constructor");
         this.homeScreen = this;
     }
 
     @FXML
     private void initialize(){
-        System.out.println("HomeScreen initialized.");
         //This is needed
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Run later");
                 sessionManager = appManager.getSessionManager();
                 loadScreenControllers();
                 setupHomeSession();
@@ -66,6 +61,7 @@ public class HomeScreen extends GridPane implements AppControl {
         });
     }
 
+    @FXML
     public void handleSearchButton(ActionEvent actionEvent){
         System.out.println("Search button clicked!");
         menuChoiceBox.setValue("Search");
@@ -73,11 +69,12 @@ public class HomeScreen extends GridPane implements AppControl {
         searchTextField.setText("");
     }
 
+    @FXML
     public void handleMenuChoiceBox(ActionEvent actionEvent){
         System.out.println(menuChoiceBox.getValue().toString() + " was selected.");
-        removeContent();
-        contentStackPane.getChildren().removeAll();
+        contentStackPane.getChildren().clear();
         String selectedContent = menuChoiceBox.getValue().toString();
+
         switch(selectedContent){
             case "Home":
                 summaryScreen.setLabels();
@@ -91,6 +88,7 @@ public class HomeScreen extends GridPane implements AppControl {
                 contentStackPane.getChildren().add(0, foodScreen);
                 break;
             case "Weigh-In":
+                weighInScreen.setLabel();
                 contentStackPane.getChildren().add(0, weighInScreen);
                 break;
             case "History":
@@ -114,20 +112,11 @@ public class HomeScreen extends GridPane implements AppControl {
     }
 
     public void loadMenuChoiceBox(){
-        //TODO create contentView enum and use it to populate the menuChoiceBox
-        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search", "History", "Edit Profile","Change User");
+        ObservableList<String> list = FXCollections.observableArrayList("Home", "Foods", "Weigh-In", "Search",
+                                                                        "History", "Edit Profile","Change User");
+
         menuChoiceBox.setItems(list);
         menuChoiceBox.setValue("Home");
-    }
-
-    public void removeContent(){
-        if(contentStackPane.getChildren().size() != 0){
-            setPreviousContent((Node) contentStackPane.getChildren().remove(0));
-        }
-    }
-
-    public void setPreviousContent(Node previousContent){
-        this.previousContent = previousContent;
     }
 
     public ChoiceBox getMenuChoiceBox(){
@@ -142,11 +131,10 @@ public class HomeScreen extends GridPane implements AppControl {
         profileScreen = new ProfileScreen();
         historyScreen = new HistoryScreen();
     }
+
     public void setupHomeSession(){
         summaryScreen.setHomeScreen(homeScreen);
         summaryScreen.setSessionManager(sessionManager);
-        searchScreen.setHomeScreen(homeScreen);
-        searchScreen.setSessionManager(sessionManager);
         foodScreen.setSessionManager(sessionManager);
         weighInScreen.setHomeScreen(homeScreen);
         weighInScreen.setSessionManager(sessionManager);
@@ -154,6 +142,7 @@ public class HomeScreen extends GridPane implements AppControl {
         profileScreen.setHomeScreen(homeScreen);
         historyScreen.setSessionManager(sessionManager);
     }
+
     @Override
     public void setAppManager(AppManager appManager){
         this.appManager = appManager;

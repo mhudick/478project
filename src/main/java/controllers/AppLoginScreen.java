@@ -34,14 +34,14 @@ public class AppLoginScreen implements AppControl {
     //List of user names to add to Screen
     private ObservableList<String> nameList;
 
+    @FXML
+    private ListView<String> userListView;
+
     //Constructor
     public AppLoginScreen(){
         userHashMap = userData.getUserMap();
         nameList = userData.getUserNames();
     }
-
-    @FXML
-    private ListView<String> userListView;
 
     @FXML
     public void initialize(){

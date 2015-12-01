@@ -21,22 +21,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import models.Food;
-import util.database.FoodData;
-import util.database.FoodDataImpl;
 import util.web.WebAccess;
 import util.web.WebAccessImpl;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class SearchScreen extends VBox implements SessionControl, HomeControl{
+public class SearchScreen extends VBox{
 
     private WebAccess webAccess = new WebAccessImpl();
-    private FoodData foodData = new FoodDataImpl();
     private HashMap<String,String> listMap;
-
-    private HomeScreen homeScreen;
-    private SessionManager sessionManager;
 
     @FXML
     ListView<String> searchListView;
@@ -44,7 +38,6 @@ public class SearchScreen extends VBox implements SessionControl, HomeControl{
     Pane foodPane;
 
     public SearchScreen(){
-        System.out.println("Recipe Constructor");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/search_screen.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
@@ -77,15 +70,5 @@ public class SearchScreen extends VBox implements SessionControl, HomeControl{
             foodPane.getChildren().remove(0);
         }
         foodPane.getChildren().add(0, new SearchScreenCard(food));
-    }
-
-    @Override
-    public void setSessionManager(SessionManager sessionManager) {
-        this.sessionManager = sessionManager;
-    }
-
-    @Override
-    public void setHomeScreen(HomeScreen homeScreen) {
-        this.homeScreen = homeScreen;
     }
 }

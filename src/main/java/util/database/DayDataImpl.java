@@ -23,37 +23,19 @@ public class DayDataImpl implements DayData {
     public boolean saveDay(Day day) {
         String sql = "INSERT OR REPLACE INTO day(dayId, userId, date, totalCal) "+
                 "VALUES("+day.getUserId()+","+day.getUserId()+",\'"+day.getDate()+"\',"+day.getTotalCal()+");";;
-        if (DatabaseManager.executeStatement(sql)){
-            System.out.println("SaveDay completed");
-            return true;
-        }else {
-            System.out.println("Failed to save Day");
-            return false;
-        }
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override
     public boolean createNewDay(int userId, String today) {
         String sql = "INSERT INTO day(userId, date) VALUES("+userId+",\'"+today+"\');";
-        if(DatabaseManager.executeStatement(sql)){
-            System.out.println("createNewDay completed");
-            return true;
-        }else{
-            System.out.println("createNewDay failed");
-            return false;
-        }
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override
     public boolean deleteDay(int dayId) {
         String sql = "DELETE FROM day WHERE dayId = "+dayId+";";
-        if(DatabaseManager.executeStatement(sql)){
-            System.out.println("Day id: " + dayId + " deleted");
-            return true;
-        }else{
-            System.out.println("Day id: " + dayId + " failed to deleted");
-            return false;
-        }
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override

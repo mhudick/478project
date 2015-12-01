@@ -32,7 +32,6 @@ public class FoodScreenCard extends VBox implements SessionControl {
     @FXML
     private NumFieldFx gramTextField;
 
-
     public FoodScreenCard(Food food){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/food_screen_card.fxml"));
         fxmlLoader.setRoot(this);
@@ -49,15 +48,15 @@ public class FoodScreenCard extends VBox implements SessionControl {
 
     @FXML
     public void initialize(){
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                System.out.println("Run later");
                 nameLabel.setText(food.getName());
             }
         });
+
         gramTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("textfield changed from " + oldValue + " to " + newValue);
             calLabel.setText(String.valueOf(calculateCalories()));
         });
     }
@@ -70,9 +69,8 @@ public class FoodScreenCard extends VBox implements SessionControl {
     }
 
     public int calculateCalories(){
-        System.out.println(food.getkCal());
         double answer = 0;
-        if(!gramTextField.getText().equalsIgnoreCase("")){
+        if(!gramTextField.getText().equals("")){
             answer = ((food.getkCal()/100)*Integer.parseInt(gramTextField.getText()));
         }
         return (int) Math.round(answer);

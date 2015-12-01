@@ -21,6 +21,7 @@ public class SummaryScreen extends VBox implements SessionControl, HomeControl {
 
     private SessionManager sessionManager;
     private HomeScreen homeScreen;
+
     @FXML
     private Label nameLabel,currentLabel, goalLabel,startLabel, dateLabel, limitLabel, availableLabel, totalLabel;
 

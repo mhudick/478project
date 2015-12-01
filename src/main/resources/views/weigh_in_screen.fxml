@@ -24,7 +24,7 @@
                             <Font size="14.0" />
                         </font>
                     </Label>
-                    <Label text="dateTarget">
+                    <Label fx:id="dateLabel" text="dateTarget">
                         <font>
                             <Font size="14.0" />
                         </font>

@@ -12,7 +12,6 @@ package controllers;
  * food.
  */
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -50,6 +49,11 @@ public class FoodScreen extends VBox implements SessionControl {
     }
 
     @FXML
+    public void initialize(){
+        setFoodListView();
+    }
+
+    @FXML
     public void handleMouseClick(MouseEvent arg0){
         System.out.println("clicked on " + foodListView.getSelectionModel().getSelectedItem().toString());
         Food food = foodMap.get(foodListView.getSelectionModel().getSelectedItem().toString());
@@ -77,11 +81,6 @@ public class FoodScreen extends VBox implements SessionControl {
     public void setFoodListView(){
         foodListView.setItems(foodData.getFoodNameList());
         foodMap = foodData.getFoodMap();
-    }
-
-    @FXML
-    public void initialize(){
-        setFoodListView();
     }
 
     @Override

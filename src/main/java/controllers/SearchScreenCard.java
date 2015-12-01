@@ -23,6 +23,7 @@ import util.database.FoodData;
 import util.database.FoodDataImpl;
 
 public class SearchScreenCard extends VBox{
+
     private FoodData foodData = new FoodDataImpl();
     //fields
     private Food food;
@@ -43,11 +44,8 @@ public class SearchScreenCard extends VBox{
         this.food = food;
     }
 
-
     @FXML
     public void initialize(){
-        System.out.println("SearchScreenCard initialized");
-
         Platform.runLater(new Runnable() {
             @Override
             public void run() {

@@ -54,6 +54,10 @@ public class AppManager extends StackPane{
         }
     }
 
+    public void unloadScreen(Screen screen){
+        screens.remove(screen);
+    }
+
     public boolean show(Screen screen){
         if(screens.get(screen) != null){
             //screen was previously loaded and found in screens HashMap
@@ -82,19 +86,6 @@ public class AppManager extends StackPane{
 
     public Node getPreviousScreen(){
         return previousScreen;
-    }
-
-    public boolean hasScreen(Screen screen){
-        if(screens.get(screen) != null){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public void unloadScreen(Screen screen){
-        screens.remove(screen);
     }
 
     public SessionManager getSessionManager(){

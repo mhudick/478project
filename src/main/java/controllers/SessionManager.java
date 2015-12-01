@@ -23,7 +23,7 @@ public class SessionManager {
     private User currentUser;
     private Day currentDay;
     private DayData dayData = new DayDataImpl();
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public SessionManager(){
         today = simpleDateFormat.format(Calendar.getInstance().getTime());
@@ -37,6 +37,7 @@ public class SessionManager {
         this.currentUser = currentUser;
         setCurrentDay();
     }
+
     public Day getCurrentDay() {
         return currentDay;
     }
@@ -57,5 +58,4 @@ public class SessionManager {
         currentDay.setTotalCal(currentDay.getTotalCal()+kCal);
         dayData.saveDay(currentDay);
     }
-
 }
