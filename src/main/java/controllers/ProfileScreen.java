@@ -1,5 +1,16 @@
 package controllers;
 
+/* Developer: Philip Churchill
+** Date: 2015.1.15
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This Class is the controller for the profile screen. It allows the user to view and edit
+ * information stored in the user class. The user will be able to modify starting weight,
+ * goal weight, calorie limit, and name.
+ */
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +20,6 @@ import util.NumFieldFx;
 import util.database.UserData;
 import util.database.UserDataImpl;
 
-/**
- * Created by Philip on 11/24/2015.
- */
 public class ProfileScreen extends VBox implements SessionControl, HomeControl {
 
     private SessionManager sessionManager;

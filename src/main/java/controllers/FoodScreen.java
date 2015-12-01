@@ -1,9 +1,16 @@
+package controllers;
+
 /* Developer: Mark Donile
 ** Date: 2015.10.31
 ** Configuration Version: 1.0.0
 */
 
-package controllers;
+/**
+ * This is the controller for the Food screen. I will contain a listview of the
+ * foods that are stored to the local database. From here the user can select a
+ * food from the list. Once selected, the FoodCard is created for the selected
+ * food.
+ */
 
 
 import javafx.event.ActionEvent;
@@ -16,9 +23,7 @@ import javafx.scene.layout.VBox;
 import models.Food;
 import util.database.FoodData;
 import util.database.FoodDataImpl;
-
 import java.util.HashMap;
-
 
 public class FoodScreen extends VBox implements SessionControl {
 

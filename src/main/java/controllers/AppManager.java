@@ -1,16 +1,15 @@
-/** Developer: Mark Donile
+package controllers;
+
+/* Developer: Mark Donile
 ** Date: 2015.10.31
 ** Configuration Version: 1.0.0
 */
 
-/*
-This Class is in charge of managing the screens during the login
-process. When a user is selected and logs in, the AppManager's
-SessionManager currentUser becomes set. It is then able to be
-retrieved by the HomeScreen Class.
+/**
+ * This Class is in charge of managing the screens during the login process.
+ * When a user is selected and logs in, the SessionManager's currentUser
+ * becomes set. It is then able to be retrieved by the HomeScreen Class.
  */
-
-package controllers;
 
 import javafx.scene.Node;
 import javafx.scene.Parent;

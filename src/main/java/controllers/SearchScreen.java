@@ -1,5 +1,17 @@
 package controllers;
 
+/* Developer: Philip Churchill
+** Date: 2015.11.5
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class is the controller for the SearchScreen. It provides a listView that
+ * is populated with the search results returned from the USDA's Nutritional database.
+ * When the user selects a food item from the list, the searchScreenCard is created and
+ * displays basic info about the item selected.
+ */
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,19 +25,16 @@ import util.database.FoodData;
 import util.database.FoodDataImpl;
 import util.web.WebAccess;
 import util.web.WebAccessImpl;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by Philip on 11/5/2015.
- */
 public class SearchScreen extends VBox implements SessionControl, HomeControl{
 
     private WebAccess webAccess = new WebAccessImpl();
     private FoodData foodData = new FoodDataImpl();
     private HashMap<String,String> listMap;
+
     private HomeScreen homeScreen;
     private SessionManager sessionManager;
 
@@ -33,7 +42,6 @@ public class SearchScreen extends VBox implements SessionControl, HomeControl{
     ListView<String> searchListView;
     @FXML
     Pane foodPane;
-
 
     public SearchScreen(){
         System.out.println("Recipe Constructor");

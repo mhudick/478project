@@ -1,15 +1,15 @@
-/** Developer: Mark Donile
+package controllers;
+
+/* Developer: Mark Donile
 ** Date: 2015.10.31
 ** Configuration Version: 1.0.0
 */
 
-/*
-This Class is the controller for the login screen. It contains a listView
-of users found in the local database. From her the user can either select
-a user from the list and login or create a new user.
+/**
+ * This Class is the controller for the login screen. It contains a listView
+ * of users found in the local database. From here the user can create a new
+ * profile, delete a user profile, and login.
  */
-
-package controllers;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,5 +1,16 @@
 package controllers;
 
+/* Developer: Philip Churchill
+** Date: 2015.11.01
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This is the controller for managing the user's weigh-ins. It presents the user with the date
+ * and a textField to enter the user weight for the weigh-in.
+ * Once the weigh-in button is clicked the weigh-in data is saved to the database.
+ */
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +21,6 @@ import util.database.UserDataImpl;
 import util.database.WeighInData;
 import util.database.WeighInImpl;
 
-/**
- * Created by Phil on 11/24/2015.
- */
 public class WeighInScreen extends VBox implements HomeControl, SessionControl {
 
     private HomeScreen homeScreen;

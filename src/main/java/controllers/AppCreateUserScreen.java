@@ -1,14 +1,15 @@
-/** Developer: Mark Donile
-*   Date: 2015.10.31
-*   Configuration Version: 1.0.0
+package controllers;
+
+/* Developer: Mark Donile
+** Date: 2015.10.31
+** Configuration Version: 1.0.0
 */
 
-/*
-This class is the controller for the create user screen. It contains fields
-for the user to fill out. Once complete the user can either click button to
-create a new user or cancel to go back to login screen.
+/**
+ This class is the controller for the create user screen. It contains fields
+ for the user to fill out. Once complete the user can either click button to
+ create a new user or cancel to go back to login screen.
  */
-package controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ import util.database.UserDataImpl;
 public class AppCreateUserScreen implements AppControl {
 
     private UserData userData = new UserDataImpl();//User data access object
+
     private AppManager appManager;//Reference to AppManager
 
     @FXML
@@ -39,6 +41,7 @@ public class AppCreateUserScreen implements AppControl {
         saveNewUser();
 
     }
+
     @FXML
     public void handleBackButton(ActionEvent actionEvent){
         System.out.println("Back button clicked!");

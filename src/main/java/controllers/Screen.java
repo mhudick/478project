@@ -1,9 +1,14 @@
+package controllers;
+
 /* Developer: Mark Donile
 ** Date: 2015.10.31
 ** Configuration Version: 1.0.0
 */
 
-package controllers;
+/**
+ * This is the enumerator class for the screen names, and provides the resource
+ * path for the FXML files that are used.
+ */
 
 public enum Screen {
 

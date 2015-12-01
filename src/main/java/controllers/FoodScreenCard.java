@@ -1,5 +1,18 @@
 package controllers;
 
+/* Developer: Philip Churchill
+** Date: 2015.11.05
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This class is the controller for the FoodCard that is presented when the
+ * user selects a food object from the list. It will display the name and
+ * provide a calorie conversion based on the amount in grams inputted by
+ * the user. A button will allow the user to add the calorie amount to the
+ * daily total.
+ */
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +22,6 @@ import javafx.scene.layout.VBox;
 import models.Food;
 import util.NumFieldFx;
 
-
-/**
- * Created by Phil on 11/24/2015.
- */
 public class FoodScreenCard extends VBox implements SessionControl {
 
     private SessionManager sessionManager;

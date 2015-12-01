@@ -1,5 +1,15 @@
 package controllers;
 
+/* Developer: Philip Churchill
+** Date: 2015.11.5
+** Configuration Version: 1.0.0
+*/
+
+/**
+ * This is the controller that keep tracks of the current data models in use by the
+ * application. It maintains a the CurrentUser, and currentDay.
+ */
+
 import models.Day;
 import models.User;
 import util.database.DayData;
@@ -7,10 +17,6 @@ import util.database.DayDataImpl;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
-/**
- * Created by Phil on 11/3/2015.
- */
 public class SessionManager {
 
     private String today;

@@ -1,15 +1,16 @@
-/** Developer: Mark Donile
-*   Date: 2015.10.31
-*   Configuration Version: 1.0.0
+package controllers;
+
+/* Developer: Mark Donile
+** Date: 2015.10.31
+** Configuration Version: 1.0.0
 */
 
-/*
-This class is the home screen that contains a stackPane. The other screen are
-then switched in and out of view by this Controller. Each sub-screen will maintain
-a reference to the Home screen.
+/**
+ * This class is the homeScreen that contains a stackPane. The other screens
+ * are then switched in and out of view by this Controller. Each sub-screen
+ * will maintain a reference to the HomeScreen.
  */
 
-package controllers;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

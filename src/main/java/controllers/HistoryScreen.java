@@ -1,11 +1,17 @@
-/* Developer: Mark Donile
-** Date: 2015.10.31
+package controllers;
+
+/* Developer: Philip Churchill
+** Date: 2015.11.05
 ** Configuration Version: 1.0.0
 */
 
-package controllers;
+/**
+ * This class is the controller for the history screen. It will present
+ * the user with a history of weigh-ins and daily calorie totals. Other
+ * functionality will allow the user to remove daily and weigh-in entries
+ * from the local database.
+ */
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -24,8 +30,6 @@ import util.database.DayData;
 import util.database.DayDataImpl;
 import util.database.WeighInData;
 import util.database.WeighInImpl;
-
-
 
 public class HistoryScreen extends VBox implements SessionControl {
 

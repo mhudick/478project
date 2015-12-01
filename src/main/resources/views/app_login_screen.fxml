@@ -17,7 +17,7 @@
         </ListView>
         <VBox layoutX="265.0" layoutY="232.0" spacing="20.0">
             <children>
-                <Button fx:id="selectUserButton" prefWidth="80.0" text="Log in" onAction="#handleSelectUserButton"/>
+                <Button fx:id="selectUserButton" prefWidth="80.0" text="Login" onAction="#handleSelectUserButton"/>
                 <Button fx:id="createUserButton" prefWidth="80.0" text="Create User" onAction="#handleCreateUserButton"/>
                 <Button fx:id="deleteUserButton" prefWidth="80.0" text="Delete User" onAction="#handleDeleteUserButton"/>
             </children>

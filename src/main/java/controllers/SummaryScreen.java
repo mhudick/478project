@@ -1,9 +1,15 @@
+package controllers;
+
 /* Developer: Mark Donile
 ** Date: 2015.10.31
 ** Configuration Version: 1.0.0
 */
 
-package controllers;
+/**
+ * This is the controller for the main summary screen that is presented to the
+ * user upon logging in. It provides a summary of the user's profile and daily
+ * calorie goals.
+ */
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,11 +34,6 @@ public class SummaryScreen extends VBox implements SessionControl, HomeControl {
         catch(Exception e){
             System.out.println(e.toString());
         }
-    }
-
-    @FXML
-    public void initialize(){
-
     }
 
     @FXML
