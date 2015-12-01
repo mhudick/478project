@@ -22,27 +22,13 @@ public class WeighInImpl implements WeighInData{
     @Override
     public boolean saveNewWeighIn(int userId, int weight, String date) {
         String sql = "INSERT INTO weigh_in(userId, weight, date) VALUES("+userId+","+weight+",\'"+date+"\');";
-        try {
-            DatabaseManager.executeStatment(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Save weigh in failed.");
-            return false;
-        }
-        System.out.println("Save weigh in complete.");
-        return true;
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override
     public boolean deleteWeighIn(int weighId) {
         String sql = "DELETE FROM weigh_in WHERE weighId = "+weighId+";";
-        try {
-            DatabaseManager.executeStatment(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override

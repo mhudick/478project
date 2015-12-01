@@ -23,26 +23,14 @@ public class FoodDataImpl implements FoodData{
     @Override
     public boolean saveFood(Food food) {
         String sql = "INSERT OR REPLACE INTO FOOD(ndbno, name, fg, kCal) values(\'" +
-                food.getNdbno()+"\',\'"+formatName(food.getName())+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
-        try {
-            DatabaseManager.executeStatment(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+                food.getNdbno()+"\',\'"+food.getName().replace('\'', '`')+"\',\'"+food.getFg()+"\',"+food.getkCal()+");";
+        return DatabaseManager.executeStatement(sql);
     }
 
     @Override
     public boolean deleteFood(String ndbno) {
         String foodSql = "DELETE FROM food WHERE ndbno = \'"+ndbno+"\';";
-        try {
-            DatabaseManager.executeStatment(foodSql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+        return DatabaseManager.executeStatement(foodSql);
     }
 
     @Override
@@ -64,6 +52,7 @@ public class FoodDataImpl implements FoodData{
             resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return foodMap;
     }
@@ -82,11 +71,8 @@ public class FoodDataImpl implements FoodData{
             rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return foodNames;
-    }
-    private String formatName(String name){
-        name = name.replace('\'', '`');
-        return name;
     }
 }

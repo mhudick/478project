@@ -29,50 +29,62 @@ public class DatabaseManager {
     }
 
     //Checks for database and creates one if it does not exist
-    public static boolean checkForDatabase(){
+    public static void checkForDatabase(){
         if(!new File(DB_NAME+".db").exists()){
-            try {
-                executeBatch(TableMigration.getTables());
-                System.out.println("Created database successfully");
-                return true;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
+            executeBatch(TableMigration.getTables());
+            System.out.println("Created database successfully");
+        }else{
+            System.out.print("Database already exist.");
+        }
+    }
+
+    //Executes a sql update string
+    public static boolean executeStatement(String sql){
+        Statement statement;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+            statement = conn.createStatement();
+            statement.executeUpdate(sql);
+            conn.close();
+            conn = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
         return true;
     }
 
-    //Executes a sql update string
-    public static void executeStatment(String sql) throws SQLException {
-        Statement statement;
-        conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
-        statement = conn.createStatement();
-        statement.executeUpdate(sql);
-        conn.close();
-        conn = null;
-    }
-
     //Executes a List of sql statements
-    public static void executeBatch(List<String> sqlList) throws SQLException {
+    public static boolean executeBatch(List<String> sqlList){
         Statement statement;
         Iterator<String> iterator = sqlList.iterator();
-        conn = DriverManager.getConnection("jdbc:sqlite:"+DB_NAME+".db");
-        statement = conn.createStatement();
-        while(iterator.hasNext()){
-            statement.addBatch(iterator.next());
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+            statement = conn.createStatement();
+            while(iterator.hasNext()){
+                statement.addBatch(iterator.next());
+            }
+            statement.executeBatch();
+            conn.close();
+            conn = null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
-        statement.executeBatch();
-        conn.close();
-        conn = null;
+        return true;
     }
 
     //Returns the result set of a sql query
-    public static ResultSet getResultSet(String sql) throws SQLException {
+    public static ResultSet getResultSet(String sql){
         ResultSet rs;
-        conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
-        Statement statement = conn.createStatement();
-        rs = statement.executeQuery(sql);
-        return rs;
+        try {
+            conn = DriverManager.getConnection("jdbc:sqlite:" + DB_NAME + ".db");
+            Statement statement = conn.createStatement();
+            rs = statement.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

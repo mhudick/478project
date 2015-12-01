@@ -24,12 +24,12 @@ public class TestDayDataImpl {
         String today = simpleDateFormat.format(Calendar.getInstance().getTime());
 
         day1.setDate(today);
-        day1.setId(1);
+        day1.setUserId(1);
         day1.setTotalCal(1500);
         day1.setUserId(1);
 
         day2.setDate("2015-11-21");
-        day2.setId(2);
+        day2.setUserId(2);
         day2.setTotalCal(1000);
         day2.setUserId(1);
 
@@ -47,7 +47,7 @@ public class TestDayDataImpl {
     //Requirement: 0.6.3
     @Test
     public void testDeleteDay(){
-        assertTrue(dayData.deleteDay(day2.getId()));
+        assertTrue(dayData.deleteDay(day2.getUserId()));
     }
 
     //Requirement: 0.6.4

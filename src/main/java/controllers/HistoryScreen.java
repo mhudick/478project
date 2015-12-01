@@ -86,7 +86,7 @@ public class HistoryScreen extends VBox implements SessionControl {
         if(dayTable.getSelectionModel().getSelectedItem() != null){
             Day selectedDay = dayTable.getSelectionModel().getSelectedItem();
             if(!selectedDay.equals(sessionManager.getCurrentDay())){
-                dayData.deleteDay(selectedDay.getId());
+                dayData.deleteDay(selectedDay.getUserId());
             }else {
                 messageLabel.setText("Cannot delete current day.");
                 Task<Void> sleeper = new Task<Void>() {
