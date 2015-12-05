@@ -13,6 +13,7 @@ import static org.junit.Assert.*;
  */
 public class UserTest {
     private User user = new User();
+    private User user2 = new User();
 
     @Before
     public void initUser(){
@@ -22,6 +23,12 @@ public class UserTest {
         user.setWeightCurrent(235.5);
         user.setWeightGoal(200.01);
         user.setWeightStart(900.6);
+        user2.setDailyCalorieLimit(1000);
+        user2.setName("user");
+        user2.setUserId(1);
+        user2.setWeightCurrent(235.5);
+        user2.setWeightGoal(200.01);
+        user2.setWeightStart(900.6);
     }
 
     @Test
@@ -47,5 +54,10 @@ public class UserTest {
         assertEquals(1235.5, user.getWeightCurrent(), 0);
         assertEquals(1200.01, user.getWeightGoal(), 0);
         assertEquals(1900.6, user.getWeightStart(), 0);
+    }
+    @Test
+    public void multipleUsers(){
+        assertNotNull(user);
+        assertNotNull(user2);
     }
 }

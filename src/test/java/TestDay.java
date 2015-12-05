@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 public class TestDay {
 
     private Day day = new Day();
+    private Day day2 = new Day();
 
     @Before
     public void initDay(){
@@ -21,6 +22,10 @@ public class TestDay {
         day.setDayId(1);
         day.setTotalCal(1000);
         day.setUserId(1);
+        day2.setDate("12/09/2000");
+        day2.setDayId(1);
+        day2.setTotalCal(1000);
+        day2.setUserId(1);
     }
     @Test
     public void getDayTest(){
@@ -39,6 +44,12 @@ public class TestDay {
         assertEquals(11, day.getDayId(), 0);
         assertEquals(11000, day.getTotalCal(),0);
         assertEquals(11, day.getUserId(), 0);
+    }
+
+    @Test
+    public void multpleDats(){
+        assertNotNull(day);
+        assertNotNull(day2);
     }
 
 

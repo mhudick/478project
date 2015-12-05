@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  */
 public class FoodTest {
     private Food food1 = new Food();
+    private Food food2 = new Food();
 
     @Before
     public void initFood(){
@@ -21,7 +22,10 @@ public class FoodTest {
         food1.setName("Tato");
         food1.setNdbno("123");
         food1.setkCal(100);
-       // food1.setNutrientList();
+        food2.setFg("food2");
+        food2.setName("Tato2");
+        food2.setNdbno("1233");
+        food2.setkCal(100);
     }
     @Test
     public void getFoods(){
@@ -40,6 +44,11 @@ public class FoodTest {
         assertEquals("Tato1",food1.getName());
         assertEquals("1231", food1.getNdbno());
         assertEquals(101, food1.getkCal(), 0);
+    }
+    @Test
+    public void multipleFoods(){
+        assertNotNull(food1);
+        assertNotNull(food2);
     }
     @Test
     public void toStringTest(){
