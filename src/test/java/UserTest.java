@@ -22,7 +22,6 @@ public class UserTest {
         user.setWeightCurrent(235.5);
         user.setWeightGoal(200.01);
         user.setWeightStart(900.6);
-
     }
 
     @Test
@@ -33,5 +32,20 @@ public class UserTest {
         assertEquals(235.5, user.getWeightCurrent(), 0);
         assertEquals(200.01, user.getWeightGoal(), 0);
         assertEquals(900.6, user.getWeightStart(), 0);
+    }
+    @Test
+    public void modifyUser(){
+        user.setDailyCalorieLimit(11000);
+        user.setName("user1");
+        user.setUserId(11);
+        user.setWeightCurrent(1235.5);
+        user.setWeightGoal(1200.01);
+        user.setWeightStart(1900.6);
+        assertEquals(11000, user.getDailyCalorieLimit(), 0);
+        assertEquals("user1", user.getName());
+        assertEquals(11, user.getUserId(), 0);
+        assertEquals(1235.5, user.getWeightCurrent(), 0);
+        assertEquals(1200.01, user.getWeightGoal(), 0);
+        assertEquals(1900.6, user.getWeightStart(), 0);
     }
 }

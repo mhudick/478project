@@ -16,21 +16,23 @@ public class SearchResponseTest {
     private SearchResponse response = new SearchResponse();
     @Before
     public void initSearchResponse(){
-       // String[] a = {"1","2","3"};
-       // ArrayList<String> b = new ArrayList<String>();
-       // for ( String str : a ) {
-       //    b.add(str);
-       // }
-
         response.setGroup("string");
         response.setQ("Q");
         response.setSort("sort");
-       // response.setItem(b);
     }
     @Test
     public void getSearchResponseTest(){
         assertEquals("string", response.getGroup());
         assertEquals("Q",response.getQ());
         assertEquals("sort",response.getSort());
+    }
+    @Test
+    public void modifyResponse(){
+        response.setGroup("string1");
+        response.setQ("Q1");
+        response.setSort("sort1");
+        assertEquals("string1", response.getGroup());
+        assertEquals("Q1",response.getQ());
+        assertEquals("sort1",response.getSort());
     }
 }

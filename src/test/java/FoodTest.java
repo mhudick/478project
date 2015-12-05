@@ -31,6 +31,17 @@ public class FoodTest {
         assertEquals(100, food1.getkCal(), 0);
     }
     @Test
+    public void modifyFoods(){
+        food1.setFg("food1");
+        food1.setName("Tato1");
+        food1.setNdbno("1231");
+        food1.setkCal(101);
+        assertEquals("food1",food1.getFg());
+        assertEquals("Tato1",food1.getName());
+        assertEquals("1231", food1.getNdbno());
+        assertEquals(101, food1.getkCal(), 0);
+    }
+    @Test
     public void toStringTest(){
         assertEquals("Ndbno: "+food1.getNdbno()+"\n"+"Name: "+food1.getName()+"\n"+"Group: "+food1.getFg()+"\n"+"kCal: "+food1.getkCal()+"/100g\n", food1.toString());
     }

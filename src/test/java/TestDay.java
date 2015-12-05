@@ -29,6 +29,17 @@ public class TestDay {
         assertEquals(1000, day.getTotalCal(),0);
         assertEquals(1, day.getUserId(), 0);
     }
+    @Test
+    public void modifyDay(){
+        day.setDate("12/11/2000");
+        day.setDayId(11);
+        day.setTotalCal(11000);
+        day.setUserId(11);
+        assertEquals("12/11/2000", day.getDate());
+        assertEquals(11, day.getDayId(), 0);
+        assertEquals(11000, day.getTotalCal(),0);
+        assertEquals(11, day.getUserId(), 0);
+    }
 
 
 

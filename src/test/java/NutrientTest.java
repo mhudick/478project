@@ -26,4 +26,13 @@ public class NutrientTest {
         assertEquals("string",nutrient.getUnit());
         assertEquals(1,nutrient.getValue(), 0);
     }
+    @Test
+    public void modifyNutrient(){
+        nutrient.setName("nut1");
+        nutrient.setUnit("string1");
+        nutrient.setValue(2);
+        assertEquals("nut1",nutrient.getName());
+        assertEquals("string1",nutrient.getUnit());
+        assertEquals(2,nutrient.getValue(), 0);
+    }
 }

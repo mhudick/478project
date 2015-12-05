@@ -30,4 +30,15 @@ public class WeighInTest {
         assertEquals(1, weight.getWeighId(), 0);
         assertEquals(200, weight.getWeight(), 0);
     }
+    @Test
+    public void modifyWeightIn(){
+        weight.setDate("12/11/2000");
+        weight.setUserId(11);
+        weight.setWeighId(11);
+        weight.setWeight(2001);
+        assertEquals("12/11/2000", weight.getDate());
+        assertEquals(11, weight.getUserId(), 0);
+        assertEquals(11, weight.getWeighId(), 0);
+        assertEquals(2001, weight.getWeight(), 0);
+    }
 }

@@ -26,4 +26,13 @@ public class SeachItemTest {
       assertEquals("tato",item.getName());
       assertEquals("1",item.getNdbno());
     }
+    @Test
+    public void modifySearchItem(){
+        item.setGroup("food1");
+        item.setName("tato1");
+        item.setNdbno("12");
+        assertEquals("food1", item.getGroup());
+        assertEquals("tato1",item.getName());
+        assertEquals("12",item.getNdbno());
+    }
 }
